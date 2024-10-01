@@ -1,0 +1,67 @@
+.contact-list-container {
+  padding: 20px;
+  background-color: #ffffff; /* White background */
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  margin: 20px;
+}
+
+h2 {
+  color: #ff6f00; /* Orange color */
+  margin-bottom: 20px;
+  font-family: 'Arial', sans-serif;
+}
+
+.actions {
+  margin-bottom: 20px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.filter-field {
+  min-width: 200px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.MuiTableCell-root {
+  border: 1px solid #dddddd;
+}
+
+.MuiTableCell-head {
+  background-color: #ff6f00;
+  color: white;
+  font-weight: bold;
+}
+
+.MuiTableCell-body {
+  padding: 16px;
+}
+
+.MuiTableRow-root:hover {
+  background-color: #f1f1f1;
+}
+
+@media (max-width: 600px) {
+  .actions {
+    flex-direction: column;
+  }
+  .filter-field {
+    width: 100%;
+  }
+}
+
+.add-button {
+  background-color: #ff9800;
+  color: white;
+  transition: background-color 0.3s;
+}
+
+.add-button:hover {
+  background-color: #ff5722;
+}

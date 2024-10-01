@@ -1,0 +1,30 @@
+.task-manager {
+  padding: 20px;
+}
+
+.task-manager input {
+  padding: 10px;
+  margin-right: 10px;
+}
+
+.task-manager button {
+  padding: 10px;
+  background-color: orange;
+  border: none;
+  cursor: pointer;
+}
+
+.task-manager ul {
+  list-style: none;
+  padding: 0;
+}
+
+.task-manager li {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.task-manager li.completed {
+  text-decoration: line-through;
+}

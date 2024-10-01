@@ -1,0 +1,26 @@
+.campaign-manager {
+  padding: 20px;
+}
+
+.campaign-manager input {
+  padding: 10px;
+  margin-right: 10px;
+}
+
+.campaign-manager button {
+  padding: 10px;
+  background-color: orange;
+  border: none;
+  cursor: pointer;
+}
+
+.campaign-manager ul {
+  list-style: none;
+  padding: 0;
+}
+
+.campaign-manager li {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}

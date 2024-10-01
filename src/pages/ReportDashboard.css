@@ -1,0 +1,28 @@
+.report-dashboard {
+  padding: 20px;
+}
+
+.report-cards {
+  display: flex;
+  gap: 15px;
+}
+
+.report-card {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  flex: 1;
+}
+
+.report-card h3 {
+  color: #333;
+}
+
+.report-card p {
+  font-size: 14px;
+}
+
+.report-card span {
+  font-weight: bold;
+}
