@@ -1,5 +1,8 @@
 .task-manager {
   padding: 20px;
+  margin-left: 250px; /* Prevent overlap with sidebar */
+  margin-top: 60px; /* Prevent overlap with header */
+  box-sizing: border-box; /* Include padding in width calculations */
 }
 
 .task-manager input {
@@ -27,4 +30,39 @@
 
 .task-manager li.completed {
   text-decoration: line-through;
+}
+
+/* Media Query for Responsiveness */
+@media screen and (max-width: 768px) {
+  .sidebar {
+    width: 100px; /* Shrink sidebar */
+    overflow-x: hidden; /* Hide overflow */
+  }
+
+  .task-manager {
+    margin-left: 100px; /* Adjust content margin */
+    padding: 10px; /* Adjust padding for smaller screens */
+  }
+
+  .header {
+    left: 100px; /* Adjust header to match smaller sidebar */
+  }
+
+  .task-manager input {
+    width: calc(100% - 20px); /* Make input field full width */
+  }
+
+  .task-manager button {
+    width: 100%; /* Make button full width */
+    margin-top: 10px; /* Add margin for spacing */
+  }
+
+  .task-manager li {
+    flex-direction: column; /* Stack items vertically on small screens */
+    align-items: flex-start; /* Align items to start */
+  }
+
+  .task-manager li.completed {
+    width: 100%; /* Ensure completed tasks take full width */
+  }
 }

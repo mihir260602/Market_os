@@ -1,0 +1,115 @@
+/* Sidenav container */
+.sidenav {
+    width: 250px;
+    height: 100%;
+    position: fixed;
+    background-color: #ff5722;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    overflow-y: auto;
+}
+
+.sidenav a {
+    color: white;
+    display: block;
+    margin: 15px 0;
+    text-decoration: none;
+}
+
+.sidenav a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Main content area */
+.main-content {
+    margin-left: 270px;
+    padding: 20px;
+    overflow-x: auto;
+}
+
+.card-container {
+    padding: 20px;
+    margin: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+/* Header styling */
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.header-container h6 {
+    color: #ff5722;
+}
+
+/* Table container styling */
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+    text-align: left;
+}
+
+.styled-table th {
+    background-color: #ff5722;
+    color: white;
+}
+
+.table-row:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Button styles */
+.edit-btn,
+.delete-btn {
+    border: none;
+    padding: 8px 12px;
+    margin: 0 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.edit-btn {
+    background-color: #4caf50;
+    color: white;
+}
+
+.delete-btn {
+    background-color: #f44336;
+    color: white;
+}
+
+/* Pagination Controls */
+.pagination-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.pagination-controls button {
+    margin: 0 10px;
+}
+
+/* Modal styles */
+.dialog {
+    padding: 20px;
+}

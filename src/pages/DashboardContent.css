@@ -1,0 +1,176 @@
+/* Overall Dashboard Container */
+.dashboard-container {
+    margin-top:30px;
+    margin-left: 270px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    transition: all 0.3s ease;
+  }
+  
+  @media (max-width: 768px) {
+    .dashboard-container {
+      margin-left: 0;
+      padding: 15px;
+    }
+  }
+  
+  /* Dashboard Heading */
+  .dashboard-heading {
+    font-weight: bold;
+    color: orange;
+    margin-top: 0;
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 2.5rem;
+  }
+  
+  @media (max-width: 600px) {
+    .dashboard-heading {
+      font-size: 2rem;
+    }
+  }
+  
+  /* Key Metrics Section */
+  .key-metrics {
+    margin-bottom: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  
+  .metric-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 20px;
+    width: 100%;
+    max-width: 350px;
+  }
+  
+  .metric-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  .metric-title {
+    font-weight: bold;
+    color: orange;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+    text-align: center;
+  }
+  
+  .metric-card .MuiTypography-h6 {
+    text-align: center;
+    font-size: 1.25rem;
+  }
+  
+  /* Responsive Metrics Grid */
+  @media (max-width: 768px) {
+    .metric-card {
+      max-width: 100%;
+    }
+  }
+  
+  /* Data Visualizations Section */
+  .data-visualizations {
+    margin-top: 40px;
+  }
+  
+  .chart-heading {
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 2rem;
+    color: #333;
+  }
+  
+  .charts-grid {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  
+  .chart-container {
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    height: 400px;
+  }
+  
+  @media (max-width: 600px) {
+    .chart-container {
+      height: 300px;
+    }
+  }
+  
+  /* Recent Campaigns Table */
+  .recent-campaigns-heading {
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 2rem;
+    color: #333;
+  }
+  
+  .table-container {
+    margin: 20px 0;
+    overflow-x: auto;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+  }
+  
+  th,
+  td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: rgba(75, 192, 192, 0.8);
+    color: white;
+    font-weight: bold;
+  }
+  
+  tr:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+  
+  /* Responsive Table */
+  @media (max-width: 600px) {
+    table,
+    th,
+    td {
+      font-size: 0.9rem;
+    }
+  }
+  
+  /* Media Queries for Small Screens */
+  @media (max-width: 480px) {
+    .dashboard-container {
+      padding: 5px;
+    }
+  
+    .metric-title {
+      font-size: 1.2rem;
+    }
+  
+    .chart-heading,
+    .recent-campaigns-heading {
+      font-size: 1.5rem;
+    }
+  }

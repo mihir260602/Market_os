@@ -1,0 +1,57 @@
+.lead-scoring-container {
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    margin: 20px 0;
+    margin-left: 250px;
+    /* Prevent overlap with sidebar */
+    margin-top: 60px;
+    /* Prevent overlap with header */
+    box-sizing: border-box;
+    /* Include padding in width calculations */
+}
+
+.lead-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    /* Default margin */
+}
+
+.lead-card h6 {
+    margin-top: 0;
+}
+
+.lead-card .MuiSlider-root {
+    margin-bottom: 20px;
+}
+
+/* Media Query for Responsiveness */
+@media screen and (max-width: 768px) {
+    .sidebar {
+        width: 100px;
+        /* Shrink sidebar */
+        overflow-x: hidden;
+        /* Hide overflow */
+    }
+
+    .lead-scoring-container {
+        margin-left: 100px;
+        /* Adjust content margin */
+        padding: 10px;
+        /* Adjust padding for smaller screens */
+    }
+
+    .header {
+        left: 100px;
+        /* Adjust header to match smaller sidebar */
+    }
+
+    .lead-card {
+        margin-bottom: 10px;
+        /* Adjust margin for cards */
+        width: 100%;
+        /* Make lead cards full width */
+    }
+}

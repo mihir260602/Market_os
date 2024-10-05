@@ -1,0 +1,386 @@
+import React, { useState } from "react";
+import "./Dashboard.css";
+import { FaBell } from "react-icons/fa";
+import { BsChevronDown } from "react-icons/bs";
+import {
+  LineChart,
+  Line,
+  PieChart,
+  Pie,
+  BarChart,
+  Bar,
+  Legend,
+  Tooltip,
+  ResponsiveContainer,
+  Cell,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+} from "recharts";
+// Example data for the charts
+const leadData = [
+  { name: "Jan", leads: 400 },
+  { name: "Feb", leads: 300 },
+  { name: "Mar", leads: 500 },
+  { name: "Apr", leads: 200 },
+  { name: "May", leads: 700 },
+  { name: "Jun", leads: 100 },
+];
+
+const pieData = [
+  { name: "Converted", value: 300 },
+  { name: "In Progress", value: 700 },
+];
+
+const barData = [
+  { name: "Email 1", sent: 400, opened: 240 },
+  { name: "Email 2", sent: 300, opened: 139 },
+  { name: "Email 3", sent: 200, opened: 980 },
+  { name: "Email 4", sent: 278, opened: 390 },
+  { name: "Email 5", sent: 189, opened: 480 },
+];
+
+const heatMapData = [
+  [90, 70, 50, 80],
+  [60, 30, 40, 70],
+  [50, 90, 60, 40],
+  [80, 60, 30, 50],
+];
+
+const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#FF5858"];
+<img
+src="data:image/png;base64,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"
+alt="Company Logo"
+/>
+const Sidebar = () => {
+  return (
+    <div className="sidebar">
+      <div className="logo">
+        <img
+          src="data:image/png;base64,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"
+          alt="Company Logo"
+        />
+      </div>
+      <ul className="sidebar-links">
+        <li>Campaigns</li>
+        <li>Contacts & Leads</li>
+        <li>Analytics</li>
+        <li>Reports</li>
+        <li>Tools</li>
+      </ul>
+      <hr className="sidebar-divider" /> {/* Horizontal divider */}
+      <div className="quick-action-panel">
+        <h4>Quick Action Panel</h4>
+        <ul className="sidebar-links">
+          <li>Create Compaigns</li>
+          <li>Create Page</li>
+          <li>Create Form</li>
+          <li>Add Contact</li>
+        </ul>
+      </div>
+    </div>
+  );
+};
+
+const Header = () => {
+  const [notifications] = useState(5);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen);
+  };
+
+  return (
+    <div className="header">
+      <div className="header-title">Insights</div>
+      <div className="search-bar">
+        <input type="text" placeholder="Search..." />
+      </div>
+      <div className="header-right">
+        <div className="notifications">
+          <FaBell size={24} title="Notifications" />
+          {notifications > 0 && (
+            <span className="notification-count">{notifications}</span>
+          )}
+        </div>
+        <div className="user-profile" onClick={toggleDropdown}>
+          <img
+            src="data:image/jpeg;base64,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" // Path to user's avatar
+            alt="User Avatar"
+            className="avatar"
+          />
+          {/* <img alt="User Avatar" className="avatar" /> */}
+          <span className="username">Neeraj Kumar </span>
+          <BsChevronDown className="dropdown-icon" />
+          {dropdownOpen && (
+            <div className="dropdown-menu">
+              <div className="dropdown-item">Profile</div>
+              <div className="dropdown-item">Settings</div>
+              <div className="dropdown-item">Logout</div>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+
+const Layout = () => {
+  return (
+    <div className="app">
+      <Sidebar />
+      <div className="main-content">
+        <Header />
+        <div className="analytics-section">
+          <div className="analytics-partition">
+            <h2>Website Analytics</h2>
+          </div>
+          <div className="analytics-container">
+            <div className="analytics-card">
+              {/* <div className="card-icon">📈</div> */}
+              <div className="card-content">
+                <h3>Total Views</h3>
+                <p>50</p>
+              </div>
+            </div>
+            <div className="analytics-card">
+              {/* <div className="card-icon"></div> */}
+              <div className="card-content">
+                <h3>Traffic</h3>
+                <p>1,200</p>
+              </div>
+            </div>
+            <div className="analytics-card">
+              {/* <div className="card-icon">💵</div> */}
+              <div className="card-content">
+                <h3>Bounce Rate</h3>
+                <p>34</p>
+              </div>
+            </div>
+            <div className="analytics-card">
+              {/* <div className="card-icon">👁️</div> */}
+              <div className="card-content">
+                <h3>Extra</h3>
+                <p>8,300</p>
+              </div>
+            </div>
+            <div className="analytics-card">
+              {/* <div className="card-icon">👁️</div> */}
+              <div className="card-content">
+                <h3>Analytics Views</h3>
+                <p>8,300</p>
+              </div>
+            </div>
+
+            <div className="analytics-card">
+              {/* <div className="card-icon">👁️</div> */}
+              <div className="card-content">
+                <h3>Analytics Views</h3>
+                <p>8,300</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Line and Pie Chart Widgets */}
+        <div className="widgets-container">
+        <div className="bar-chart-widget">
+          <div className="line-chart-widget">
+            <h3>Lead Generation Over Time</h3>
+            <ResponsiveContainer width="100%" height={300}>
+              <LineChart data={leadData}>
+                <Line
+                  type="monotone"
+                  dataKey="leads"
+                  stroke="#8884d8"
+                  strokeWidth={2}
+                />
+                <Tooltip />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+          </div>
+          <div className="bar-chart-widget">
+          <div className="pie-chart-widget">
+            <h3>Lead Conversion Breakdown</h3>
+            <ResponsiveContainer width="100%" height={300}>
+              <PieChart>
+                <Pie
+                  data={pieData}
+                  cx="50%"
+                  cy="50%"
+                  label={({ name, percent }) =>
+                    `${name} ${(percent * 100).toFixed(0)}%`
+                  }
+                  outerRadius={80}
+                  fill="#8884d8"
+                  dataKey="value"
+                  animationDuration={800}
+                >
+                  {pieData.map((entry, index) => (
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={COLORS[index % COLORS.length]}
+                      onMouseEnter={() =>
+                        console.log(`Hovered over: ${entry.name}`)
+                      }
+                    />
+                  ))}
+                </Pie>
+                <Tooltip
+                  formatter={(value) => new Intl.NumberFormat().format(value)}
+                />
+                <Legend
+                  layout="vertical"
+                  verticalAlign="middle"
+                  align="right"
+                  iconType="circle"
+                  wrapperStyle={{
+                    paddingLeft: "20px",
+                  }}
+                />
+              </PieChart>
+            </ResponsiveContainer>
+          </div>
+          </div>
+        </div>
+
+        <div className="analytics-section">
+          <div className="analytics-partition">
+            <h2>Email Compaign Analytics</h2>
+          </div>
+          <div className="analytics-container">
+            <div className="analytics-card">
+              {/* <div className="card-icon">📈</div> */}
+              <div className="card-content">
+                <h3>Total Campaigns</h3>
+                <p>50</p>
+              </div>
+            </div>
+            <div className="analytics-card">
+              {/* <div className="card-icon">📈</div> */}
+              <div className="card-content">
+                <h3>Click-Through-Rate</h3>
+                <p>50</p>
+              </div>
+            </div>
+            <div className="analytics-card">
+              {/* <div className="card-icon"></div> */}
+              <div className="card-content">
+                <h3>New Contacts</h3>
+                <p>1,200</p>
+              </div>
+            </div>
+            <div className="analytics-card">
+              {/* <div className="card-icon">💵</div> */}
+              <div className="card-content">
+                <h3>Revenue</h3>
+                <p>$3,500</p>
+              </div>
+            </div>
+            <div className="analytics-card">
+              {/* <div className="card-icon">👁️</div> */}
+              <div className="card-content">
+                <h3>Analytics Views</h3>
+                <p>8,300</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="bar-chart-widget">
+          <h3>Email Campaigns</h3>
+          <ResponsiveContainer width="100%" height={300}>
+            <BarChart data={barData}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="name" />
+              <YAxis />
+              <Tooltip />
+              <Bar dataKey="sent" fill="#82ca9d" />
+              <Bar dataKey="opened" fill="#8884d8" />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+
+        <div className="analytics-section">
+          <div className="analytics-partition">
+            <h2>Lead Engagement</h2>
+          </div>
+          <div className="analytics-container">
+            <div className="analytics-card">
+              {/* <div className="card-icon">📈</div> */}
+              <div className="card-content">
+                <h3>Engagement Score</h3>
+                <p>50</p>
+              </div>
+            </div>
+            <div className="analytics-card">
+              {/* <div className="card-icon"></div> */}
+              <div className="card-content">
+                <h3>Leads Generated</h3>
+                <p>1,200</p>
+              </div>
+            </div>
+            <div className="analytics-card">
+              {/* <div className="card-icon">💵</div> */}
+              <div className="card-content">
+                <h3>Total Leads </h3>
+                <p>500</p>
+              </div>
+            </div>
+            <div className="analytics-card">
+              {/* <div className="card-icon">💵</div> */}
+              <div className="card-content">
+                <h3>Lead Activity </h3>
+                <p>50%</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="lead-engagement-widget">
+          {/* <!-- Top Performing Leads Table --> */}
+          <div class="top-leads-table">
+            <h4>Top Performing Leads</h4>
+            <table>
+              <thead>
+                <tr>
+                  <th>Lead Name</th>
+                  <th>Company</th>
+                  <th>Engagement Score</th>
+                  <th>Activity Level</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>John Doe</td>
+                  <td>ABC Corp</td>
+                  <td>95%</td>
+                  <td>High</td>
+                </tr>
+                <tr>
+                  <td>Jane Smith</td>
+                  <td>XYZ Inc.</td>
+                  <td>92%</td>
+                  <td>Medium</td>
+                </tr>
+                <tr>
+                  <td>Michael Lee</td>
+                  <td>GlobalTech</td>
+                  <td>89%</td>
+                  <td>High</td>
+                </tr>
+                <tr>
+                  <td>Emily Davis</td>
+                  <td>MarketEdge</td>
+                  <td>87%</td>
+                  <td>Low</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+export default Layout;

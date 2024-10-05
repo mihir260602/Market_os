@@ -1,0 +1,110 @@
+import React, { useState } from 'react';
+import './Blog.css';
+
+const blogData = [
+    {
+        title: 'Latest Advancements in AI Technology',
+        description: 'Explore the cutting-edge innovations.',
+        date: 'September 15, 2024',
+        author: 'Sarah Connor',
+        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwBMS6rImcXdkTs68Pxt_4mgeHm4aYwDaiOw&sge',
+        category: 'Technology',
+      },
+      {
+        title: 'Latest Advancements in AI Technology',
+        description: 'Explore the cutting-edge innovations.',
+        date: 'September 15, 2024',
+        author: 'Sarah Connor',
+        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwBMS6rImcXdkTs68Pxt_4mgeHm4aYwDaiOw&sge',
+        category: 'Technology',
+      },
+      {
+        title: 'Latest Advancements in AI Technology',
+        description: 'Explore the cutting-edge innovations.',
+        date: 'September 15, 2024',
+        author: 'Sarah Connor',
+        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwBMS6rImcXdkTs68Pxt_4mgeHm4aYwDaiOw&sge',
+        category: 'Technology',
+      },
+  {
+    title: 'The Future of AI in Business',
+    description: 'How AI is transforming modern industries.',
+    date: 'October 1, 2024',
+    author: 'Jane Doe',
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwBMS6rImcXdkTs68Pxt_4mgeHm4aYwDaiOw&s',
+    category: 'Business',
+  },
+  {
+    title: 'Top Content Strategies for 2024',
+    description: 'Stay ahead with these content marketing trends.',
+    date: 'September 28, 2024',
+    author: 'John Smith',
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwBMS6rImcXdkTs68Pxt_4mgeHm4aYwDaiOw&s',
+    category: 'Content',
+  },
+  {
+    title: 'Latest Advancements in AI Technology',
+    description: 'Explore the cutting-edge innovations.',
+    date: 'September 15, 2024',
+    author: 'Sarah Connor',
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwBMS6rImcXdkTs68Pxt_4mgeHm4aYwDaiOw&sge',
+    category: 'Technology',
+  },
+  // Add more blog objects
+];
+
+const Blog = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const blogsPerPage = 3;
+  const totalPages = Math.ceil(blogData.length / blogsPerPage);
+
+  const currentBlogs = blogData.slice(
+    (currentPage - 1) * blogsPerPage,
+    currentPage * blogsPerPage
+  );
+
+  const nextPage = () => {
+    setCurrentPage((prevPage) => (prevPage === totalPages ? 1 : prevPage + 1));
+  };
+
+  const prevPage = () => {
+    setCurrentPage((prevPage) => (prevPage === 1 ? totalPages : prevPage - 1));
+  };
+
+  return (
+    <div className="blog-section">
+      <h2 className="blog-heading">Latest from Our Blog</h2>
+      <div className="blog-carousel">
+        {currentBlogs.map((blog, index) => (
+          <div className="blog-card" key={index}>
+            <img src={blog.image} alt={blog.title} className="blog-image" />
+            <div className="blog-details">
+              <h3 className="blog-title">{blog.title}</h3>
+              <p className="blog-description">{blog.description}</p>
+              <div className="blog-meta">
+                <span className="blog-date">{blog.date}</span>
+                <span className="blog-author">{blog.author}</span>
+              </div>
+              <div className="blog-category">
+                <span>{blog.category}</span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="pagination">
+        <button className="page-button prev" onClick={prevPage}>
+          Prev
+        </button>
+        <span className="page-info">
+          Page {currentPage} of {totalPages}
+        </span>
+        <button className="page-button next" onClick={nextPage}>
+          Next
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default Blog;

@@ -1,0 +1,251 @@
+/* General container styling */
+.audience-segmentation {
+    font-family: "Arial", sans-serif;
+    background-color: #ffffff;
+    padding: 20px;
+    /* max-width: 1394px; */
+    /* width: 100%; */
+    margin: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    margin-left: 250px; /* Add margin-left for sidebar space */
+  }
+  
+  .audience-segmentation:hover {
+    transform: scale(1.01);
+  }
+  
+  /* Title and subtitle styles */
+  h1 {
+    color: #ff9800;
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 2.2rem;
+  }
+  
+  h2 {
+    color: #ff9800;
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+  }
+  
+  /* Key Metrics Section */
+  .key-metrics {
+    display: flex;
+    justify-content: space-around; /* Space out the metrics evenly */
+    align-items: center; /* Align vertically */
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    margin-bottom: 40px;
+    text-align: center;
+  }
+  
+  .metric-item {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    margin: 10px; /* Add margin for spacing between items */
+    flex: 1 1 calc(30% - 20px); /* Flex items to take up 30% of the width with gap */
+    min-width: 250px; /* Ensure a minimum size for smaller screens */
+  }
+  
+  .metric-item h3 {
+    color: #ff9800;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+  
+  .metric-item p {
+    font-size: 1.5rem;
+    color: #333;
+  }
+  
+  @media (max-width: 768px) {
+    .audience-segmentation {
+      margin-left: 0; /* Reset margin for smaller screens */
+    }
+  
+    .key-metrics {
+      flex-direction: column; /* Stack the items vertically on smaller screens */
+      align-items: center; /* Center align for better aesthetics */
+    }
+  
+    .metric-item {
+      flex-basis: 80%; /* Make metric items take more space */
+    }
+  }
+  
+  /* Data Visualizations Section */
+  .data-visualizations {
+    margin-bottom: 40px;
+  }
+  
+  .charts-grid {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .chart-item {
+    flex: 1 1 calc(45% - 20px); /* Flex items to take up 45% of the width */
+    min-width: 300px;
+    padding: 20px;
+    background: #f7f7f7;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .chart-item:hover {
+    transform: scale(1.02);
+  }
+  
+  .chart-item h3 {
+    margin-bottom: 10px;
+  }
+  
+  /* Segmentation Criteria Form */
+  .segmentation-criteria {
+    margin-bottom: 40px;
+  }
+  
+  .segmentation-criteria form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: space-between;
+  }
+  
+  .segmentation-criteria label {
+    flex: 1 1 calc(50% - 20px);
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  .segmentation-criteria input,
+  .segmentation-criteria select,
+  .segmentation-criteria button {
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .segmentation-criteria input:focus,
+  .segmentation-criteria select:focus,
+  .segmentation-criteria button:focus {
+    outline: none;
+    border-color: #ff9800;
+  }
+  
+  .segmentation-criteria button {
+    background-color: #ff9800;
+    margin-top: 16px;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    width: 100%;
+  }
+  
+  .segmentation-criteria button:hover {
+    background-color: #e68a00;
+    transform: translateY(-2px);
+  }
+  
+  /* Recent Activity Section */
+  .recent-segment-activity {
+    font-family: "Arial", sans-serif;
+    background-color: #fff;
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .recent-segment-activity-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  .recent-segment-activity-header h2 {
+    font-size: 2rem;
+    color: #007bff; /* Primary color for title */
+    margin-bottom: 10px;
+  }
+  
+  .recent-segment-activity-header p {
+    font-size: 1.2rem;
+    color: #666;
+    font-style: italic; /* Subtitle with an italic style */
+  }
+  
+  .segment-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: space-between;
+  }
+  
+  .segment-item {
+    background-color: #f4f4f4;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    flex: 1 1 calc(30% - 30px); /* Flex items to take up 30% of the width */
+    min-width: 280px;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .segment-item:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  }
+  
+  .segment-item h3 {
+    font-size: 1.5rem;
+    color: orange;
+    margin-bottom: 15px;
+  }
+  
+  .segment-item p {
+    font-size: 1rem;
+    color: #333;
+    line-height: 1.6;
+  }
+  
+  .segment-item .activity-meta {
+    font-size: 0.9rem;
+    color: #999;
+    margin-top: 10px;
+  }
+  
+  @media (max-width: 992px) {
+    .segment-item {
+      flex: 1 1 calc(45% - 30px); /* Adjust item size for medium screens */
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .audience-segmentation {
+      margin-left: 0; /* Reset margin for smaller screens */
+    }
+  
+    .segment-list {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .segment-item {
+      flex-basis: 100%; /* Full width on small screens */
+    }
+  
+    .chart-item {
+      flex-basis: 100%; /* Full width for charts on small screens */
+    }
+  }
+  

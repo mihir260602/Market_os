@@ -1,28 +1,99 @@
+/* Report Dashboard Container */
 .report-dashboard {
   padding: 20px;
+  background-color: #f4f4f4;
+  border-radius: 8px;
+  max-width: calc(100% - 250px); /* Adjust the width minus the sidebar width */
+  margin-left: 250px;/* Maximum width to keep layout clean on large screens */
 }
 
+/* Report Cards Container */
 .report-cards {
   display: flex;
-  gap: 15px;
+  flex-wrap: wrap;
+  gap: 20px; /* Space between the cards */
+  justify-content: space-between; /*Align cards evenly with space */
 }
 
+/* Individual Report Card */
 .report-card {
-  background-color: #fff;
-  padding: 15px;
+  background-color: #ffffff;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  flex: 1;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  flex: 1 1 250px; /* Cards grow or shrink based on available space */
+  min-width: 250px; /* Minimum width for cards */
+  /* max-width: 100%; Prevent cards from exceeding container width */
+  /* box-sizing: border-box; Ensure padding is included in card width */
 }
 
+/* Heading for Report Cards */
 .report-card h3 {
-  color: #333;
+  margin-top: 0; /* Remove top margin */
+  font-size: 1.5rem; /* Adjust font size for heading */
+  color: #333; /* Dark gray for better readability */
 }
 
+/* Paragraph in Report Cards */
 .report-card p {
-  font-size: 14px;
+  margin: 5px 0; /* Small margin for spacing */
+  color: #666; /* Gray color for text */
+  font-size: 1rem; /* Adjust font size for readability */
 }
 
-.report-card span {
-  font-weight: bold;
+/* Responsive behavior for small screens */
+@media (max-width: 900px) {
+  .report-cards {
+    justify-content: center; /* Center cards on smaller screens */
+  }
+  .report-card {
+    flex: 1 1 100%; /* Cards take full width on smaller screens */
+    margin-bottom: 20px; /* Add margin between cards on stack */
+  }
+}
+
+@media (max-width: 600px) {
+  .report-card {
+    padding: 15px; /* Reduce padding on small screens */
+  }
+
+  .report-card h3 {
+    font-size: 1.2rem; /* Adjust heading size for small screens */
+  }
+
+  .report-card p {
+    font-size: 0.9rem; /* Adjust paragraph font size */
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100px; /* Shrink the sidebar width */
+  }
+  
+  .report-dashboard {
+    margin-left: 100px; /* Adjust content margin */
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar {
+    display: none; /* Hide sidebar on smaller screens */
+  }
+  
+  .report-dashboard {
+    margin-left: 0; /* Content takes full width */
+    padding: 10px;
+  }
+}
+
+
+.chart-container {
+  width: 100%;
+  overflow-x: auto; /* Add horizontal scroll for large graphs */
+  margin-bottom: 20px;
+}
+
+.chart {
+  max-width: 100%;
 }

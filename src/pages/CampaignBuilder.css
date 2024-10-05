@@ -1,0 +1,205 @@
+/* Reset some default styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  /* min-width: 100px; */
+}
+
+body {
+  font-family: "Poppins", sans-serif; /* Modern Google Font */
+  background-color: #f3f4f6; /* Soft gray background */
+  color: #333; /* Dark text for readability */
+}
+
+/* Campaign Builder */
+.campaign-builder {
+  /* width: 150%; */
+  padding: 50px;
+  margin-left: 295px !important;
+  border-radius: 20px; /* Slightly more rounded */
+  background-color: #ffffff; /* White background */
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1); /* Softer shadow for depth */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition effects */
+}
+
+.campaign-builder:hover {
+  transform: translateY(-5px); /* Slight lift on hover */
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}
+
+/* Header */
+.campaign-builder-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20px;
+  border-bottom: 3px solid #ff5722; /* Bright orange accent */
+}
+
+.header-title {
+  font-size: 1.8em; /* Larger title size */
+  font-weight: 700; /* Bold title */
+  color: #ff5722; /* Title color */
+}
+
+.header-buttons {
+  display: flex;
+  gap: 20px; /* Spacing between buttons */
+}
+
+/* Navigation Button */
+.nav-button {
+  padding: 12px 25px; /* Generous padding */
+  background-color: #ff5722; /* Bright orange */
+  color: white;
+  border: none;
+  border-radius: 30px; /* Rounded buttons */
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s ease, transform 0.2s ease,
+    box-shadow 0.2s ease;
+  font-weight: 600; /* Semi-bold text */
+}
+
+.nav-button:hover {
+  background-color: #e64a19; /* Darker shade on hover */
+  transform: translateY(-2px); /* Lift effect */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Shadow on hover */
+}
+
+/* Builder Container */
+.builder-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px; /* More spacing for separation */
+}
+
+/* Email Builder and Personalization Options */
+.email-builder,
+.personalization-options {
+  width: 48%;
+  padding: 30px; /* Comfortable padding */
+  border: 1px solid #ddd; /* Light border */
+  border-radius: 10px;
+  background-color: #ffffff; /* White for cleanliness */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Separation shadow */
+  transition: box-shadow 0.3s; /* Smooth shadow transition */
+}
+
+.email-builder:hover,
+.personalization-options:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+}
+
+/* Personalization Preview */
+.personalization-preview {
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #ffffff; /* Consistent background */
+  margin-top: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+  max-height: 300px;
+  overflow-y: auto; /* Scroll if content exceeds */
+}
+
+/* Preview Pane */
+.preview-pane {
+  max-height: 300px;
+  overflow-y: auto;
+  border: 1px solid #ccc; /* Light border */
+  padding: 20px; /* Comfortable padding */
+  margin-top: 15px; /* Spacing above */
+  background-color: #ffffff; /* Clean background */
+}
+
+/* Template Gallery */
+.template-gallery {
+  margin-top: 30px; /* Space above gallery */
+  padding: 20px;
+  border: 1px solid #ddd; /* Light border */
+  border-radius: 10px; /* Rounded corners */
+  background-color: #ffffff; /* Consistent gallery background */
+}
+
+.templates {
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping */
+  gap: 20px; /* Spacing between templates */
+}
+
+/* Individual Template */
+.template {
+  width: 30%; /* Template size */
+  padding: 15px; /* Comfortable padding */
+  border: 1px solid #ddd; /* Light border */
+  border-radius: 10px; /* Rounded corners */
+  background-color: #f9f9f9; /* Slightly lighter background */
+  cursor: pointer; /* Pointer on hover */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+}
+
+.template:hover {
+  transform: translateY(-5px); /* Lift effect */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* Shadow on hover */
+}
+
+/* Modal Styles */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8); /* Dark background for modals */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; /* High z-index to overlay */
+}
+
+.modal-content {
+  background-color: #ffffff; /* White background */
+  padding: 40px; /* Comfortable padding */
+  border-radius: 12px; /* Rounded corners */
+  text-align: center;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1); /* Soft shadow */
+}
+
+/* Modal Button */
+.modal-button {
+  margin: 10px;
+  padding: 12px 25px; /* Generous padding */
+  background-color: #ff5722; /* Primary color */
+  color: white;
+  border: none;
+  border-radius: 30px; /* Rounded buttons */
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease,
+    box-shadow 0.2s ease;
+  font-weight: bold; /* Bold text */
+}
+
+.modal-button:hover {
+  background-color: #e64a19; /* Darker shade on hover */
+  transform: translateY(-2px); /* Lift effect */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* Shadow on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .builder-container {
+    flex-direction: column; /* Stack on smaller screens */
+  }
+
+  .email-builder,
+  .personalization-options {
+    width: 100%; /* Full width on small screens */
+    margin-bottom: 20px; /* Add margin below */
+  }
+
+  .template {
+    width: 100%; /* Full width for templates on small screens */
+  }
+}

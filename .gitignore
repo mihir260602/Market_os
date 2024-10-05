@@ -1,8 +1,12 @@
 # Node modules
 node_modules/
 
-# Other files and folders to ignore
+# Build and distribution directories
 dist/
 build/
+
+# Environment variables
 .env
+
+# macOS specific system files
 .DS_Store

@@ -1,0 +1,297 @@
+body {
+    margin: 0;
+    font-family: "Arial", sans-serif;
+    background-color: #f4f7f9;
+  }
+  
+  .campaign-overview {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 16px;
+    margin: 40px auto;
+    max-width: 1500px;
+    margin-left: 250px;
+    transition: transform 0.3s;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .campaign-heading {
+    color: #ff6f00;
+    margin-bottom: 30px;
+    font-size: 2.8em;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: bold;
+  }
+  
+  .key-metrics {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+    padding: 0 20px;
+  }
+  
+  .metric-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 30px;
+    margin: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    flex: 1 1 calc(33.333% - 40px); /* Three metrics per row with spacing */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    min-width: 250px;
+  }
+  
+  .metric-card i {
+    font-size: 3em;
+    color: #ff6f00;
+    margin-bottom: 15px;
+    transition: color 0.3s ease;
+  }
+  
+  .metric-card:hover i {
+    color: #007bff; /* Change icon color on hover */
+  }
+  
+  .metric-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  }
+  
+  .metric-value {
+    font-size: 2.2em;
+    color: #007bff;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  
+  .metric-title {
+    font-size: 1.6em;
+    margin-bottom: 5px;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  .metric-description {
+    font-size: 1em;
+    color: #888;
+  }
+  
+  @media (max-width: 768px) {
+    .metric-card {
+      flex: 1 1 100%; /* Stack metrics on small screens */
+    }
+  }
+  
+  .data-visualizations {
+    margin-top: 50px;
+  }
+  
+  .chart-heading {
+    font-weight: bold;
+    font-size: 2.2em;
+    margin-bottom: 20px;
+    text-align: left; /* Aligning chart headings to the left */
+    color: #ff6f00;
+    padding-left: 20px; /* Adding padding for alignment */
+  }
+  
+  .charts-grid {
+    display: block; /* Stacking the charts vertically */
+    gap: 40px; /* Increase the space between the charts */
+  }
+  
+  .chart-container {
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    width: 100%; /* Full width for charts */
+    height: 450px;
+    margin-bottom: 40px; /* Space between chart containers */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  
+  @media (max-width: 768px) {
+    .chart-container {
+      width: 100%; /* Full width on smaller screens */
+      margin-bottom: 30px; /* Adjust spacing for smaller screens */
+    }
+  }
+  
+  /* Filter Options */
+  /* Filter Options */
+  .filter-options {
+    margin: 20px 0;
+    padding: 25px;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    background-color: #fdfdfd;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .filter-heading {
+    font-size: 2.2em;
+    color: #ff5722;
+    margin-bottom: 25px;
+    text-align: center;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  
+  .filter-inputs {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .filter-input,
+  .filter-select {
+    padding: 14px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1.1em;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    flex: 1 1 calc(25% - 20px);
+  }
+  
+  .filter-input:focus,
+  .filter-select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+    outline: none;
+  }
+  
+  .filter-button {
+    padding: 14px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1em;
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space for the icon */
+  }
+  
+  .filter-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-4px);
+  }
+  
+  .filter-button i {
+    font-size: 1.3em; /* Icon size */
+  }
+  
+  @media (max-width: 768px) {
+    .filter-input,
+    .filter-select,
+    .filter-button {
+      flex: 1 1 100%;
+    }
+  }
+  
+  /* Campaign Status List */
+  .campaign-status {
+    margin-top: 40px;
+    padding: 25px;
+    border-radius: 15px;
+    background-color: #ffffff;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .campaign-status-heading {
+    font-size: 2em;
+    margin-bottom: 25px;
+    color: #333;
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  .campaign-status-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .campaign-item {
+    width: 100%;
+    padding: 15px 20px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    text-align: center;
+    border-radius: 12px;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .campaign-item i {
+    margin-right: 10px;
+    font-size: 1.3em; /* Icon size */
+    color: #555;
+  }
+  
+  .campaign-item:hover {
+    background-color: #f8f8f8;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .active {
+    background-color: #d4edda; /* Light green for active */
+    color: green;
+  }
+  
+  .paused {
+    background-color: #fff3cd; /* Light orange for paused */
+    color: orange;
+  }
+  
+  .completed {
+    background-color: #d1ecf1; /* Light blue for completed */
+    color: blue;
+  }
+  
+  .deleted {
+    background-color: #f8d7da; /* Light red for deleted */
+    color: red;
+  }
+  
+  @media (max-width: 768px) {
+    .campaign-status-list {
+      width: 100%;
+    }
+  
+    .campaign-item {
+      padding: 12px;
+    }
+  }

@@ -1,0 +1,194 @@
+/* Sidenav container */
+.sidenav {
+    width: 250px;
+    height: 100%;
+    position: fixed;
+    background-color: #ff5722;
+    /* Orange background */
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    overflow-y: auto;
+}
+
+.sidenav a {
+    color: white;
+    display: block;
+    margin: 15px 0;
+    text-decoration: none;
+}
+
+.sidenav a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Main content area */
+.main-content {
+    margin-left: 270px;
+    /* Width of the sidenav + some margin */
+    padding: 20px;
+    overflow-x: auto;
+}
+
+.card-container {
+    padding: 20px;
+    margin: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    /* Transparency */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow */
+    border-radius: 10px;
+}
+
+/* Header styling */
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.header-container h6 {
+    color: #ff5722;
+    /* Orange theme */
+}
+
+/* Table container styling */
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+    text-align: left;
+}
+
+.styled-table th {
+    background-color: #ff5722;
+    /* Orange header */
+    color: white;
+}
+
+.styled-table td {
+    background-color: white;
+    color: #333;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Hover effect */
+.styled-table tr:hover {
+    background-color: rgba(255, 87, 34, 0.1);
+    /* Light orange hover */
+}
+
+.table-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.edit-btn {
+    background-color: #ff5722;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.delete-btn {
+    background-color: transparent;
+    border: 2px solid #ff5722;
+    color: #ff5722;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.edit-btn:hover,
+.delete-btn:hover {
+    background-color: rgba(255, 87, 34, 0.1);
+    color: #ff5722;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Hover shadow */
+}
+
+/* Modal styling */
+.modal-container {
+    background-color: white;
+    padding: 30px;
+    width: 300px;
+    margin: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    position: fixed;
+    z-index: 1000;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.modal-confirm {
+    background-color: #ff5722;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.modal-cancel {
+    background-color: transparent;
+    border: 2px solid #ff5722;
+    color: #ff5722;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.pagination-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+}
+
+.pagination-controls button {
+    margin: 0 8px;
+}
+
+.pagination-controls Typography {
+    font-size: 16px;
+}
+
+@media (max-width: 768px) {
+    .sidenav {
+        width: 100%;
+        position: relative;
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+
+    .table-container {
+        overflow-x: auto;
+    }
+
+    .modal-container {
+        width: 80%;
+    }
+}

@@ -1,0 +1,498 @@
+/* General Styles */
+
+
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.homepage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+
+/* Hero Section */
+.hero {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  background-image: url('https://img.freepik.com/free-vector/abstract-realistic-particle-background_23-2148409681.jpg?uid=R166381745&ga=GA1.1.216503604.1725175554&semt=ais_hybrid');
+  background-size: cover;
+  background-position: center;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+}
+
+section {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.hero-content {
+  background-color: rgba(0, 0, 0, 0);
+  padding: 60px 30px;
+  border-radius: 12px;
+  max-width: 800px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  margin: 0 auto;
+}
+
+.hero-content h2 {
+  font-size: 32px;
+  color: rgb(123, 62, 62);
+  margin-bottom: 15px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.hero-content p {
+  font-size: 20px;
+  color: rgb(123, 62, 62);
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+/* CTA Section */
+.cta-section {
+  width: 100%;
+  padding: 60px 0;
+  background-color: #f9f9f9;
+  text-align: center;
+  border-top: 2px solid #e67e22;
+  box-sizing: border-box;
+}
+
+.cta-section h2 {
+  font-size: 2.5em;
+  color: #333;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.cta-section p {
+  font-size: 1.2em;
+  color: #555;
+  margin-bottom: 30px;
+}
+
+.cta-btn {
+  background-color: #ff7f50;
+  color: white;
+  border: none;
+  padding: 15px 35px;
+  border-radius: 30px;
+  font-size: 1.2em;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(255, 127, 80, 0.5);
+  position: relative;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.cta-btn:hover {
+  background-color: #e67e22;
+  transform: translateY(-3px) scale(1.05);
+  animation: glow 0.8s infinite alternate;
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: 0 4px 15px rgba(255, 127, 80, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 30px rgba(255, 127, 80, 1);
+  }
+}
+
+/* Expertise Section */
+.expertise-section {
+  width: 100%;
+  padding: 50px 0;
+  background-color: #f9f9f9;
+}
+
+.expertise-section h2 {
+  font-size: 2.5em;
+  margin-bottom: 40px;
+  color: #333;
+  text-align: center;
+}
+
+.expertise-cards {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.expertise-card {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 25px;
+  width: 280px;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+/* .expertise-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+} */
+
+.expertise-card-image {
+  width: 80%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.expertise-card-title {
+  color: #FF5733;
+  margin-bottom: 10px;
+  font-size: 1.6em;
+  text-align: center;
+}
+
+.expertise-card-description {
+  color: #555;
+  font-size: 1em;
+}
+
+/* Expertise Showcase Section */
+.expertise-showcase {
+  width: 100%;
+  padding: 60px 0;
+  background-color: #f9f9f9;
+}
+
+.expertise-heading {
+  font-size: 2.5em;
+  margin-bottom: 40px;
+  color: #333;
+  text-align: center;
+}
+
+.expertise-cards-container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.expertise-card-item {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 25px;
+  width: 300px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  text-align: left;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.expertise-card-title {
+  color: #FF5733;
+  margin-bottom: 15px;
+  font-size: 1.8em;
+  font-weight: bold;
+}
+
+.expertise-card-details {
+  color: #555;
+  font-size: 1em;
+}
+
+.card-partition {
+  border-bottom: 2px solid #dcdcdc;
+  margin: 10px 0;
+}
+
+/* Projects Showcase Section */
+.projects-showcase {
+  padding: 30px 20px;
+  background-color: orange;
+  text-align: center;
+}
+
+.projects-heading {
+  font-size: 2em;
+  margin-bottom: 40px;
+  color: white;
+}
+
+.projects-cards-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 20px;
+}
+
+.project-item {
+  background-color: transparent;
+  padding: 20px;
+  text-align: center;
+}
+
+.project-title {
+  font-size: 1.5em;
+  margin: 10px 0;
+  color: #333;
+}
+
+/* Footer */
+/* .footer {
+  width: 100%;
+  background-color: orange;
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+  position: relative;
+  bottom: 0;
+}
+
+.footer p {
+  margin: 0;
+} */
+
+/* Responsive Design */
+
+/* Hero Section */
+@media (max-width: 768px) {
+  .hero {
+    height: auto;
+    padding: 40px 20px;
+  }
+
+  .hero-content h2 {
+    font-size: 24px;
+  }
+
+  .hero-content p {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-content {
+    padding: 40px 15px;
+  }
+  
+  .hero-content h2 {
+    font-size: 20px;
+  }
+
+  .hero-content p {
+    font-size: 14px;
+  }
+}
+
+/* CTA Section */
+@media (max-width: 768px) {
+  .cta-section h2 {
+    font-size: 2em;
+  }
+
+  .cta-btn {
+    padding: 12px 25px;
+    font-size: 1em;
+  }
+}
+
+@media (max-width: 480px) {
+  .cta-btn {
+    padding: 10px 20px;
+    font-size: 0.9em;
+  }
+}
+
+/* Expertise Section */
+@media (max-width: 768px) {
+  .expertise-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .expertise-card {
+    width: 90%;
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .expertise-card-title {
+    font-size: 1.4em;
+  }
+
+  .expertise-card-description {
+    font-size: 0.9em;
+  }
+}
+
+/* Projects Showcase */
+@media (max-width: 768px) {
+  .projects-heading {
+    font-size: 1.8em;
+  }
+
+  .project-title {
+    font-size: 1.2em;
+  }
+
+  .projects-cards-wrapper {
+    gap: 15px;
+  }
+}
+
+/* Footer */
+@media (max-width: 768px) {
+  .footer {
+    padding: 15px 0;
+    font-size: 0.9em;
+  }
+}
+
+/* General Responsive Styles */
+@media (max-width: 480px) {
+  body {
+    font-size: 14px;
+  }
+
+  .homepage {
+    padding: 10px;
+  }
+}
+
+/* Header Styles */
+.home-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Fix vertical alignment */
+  /* padding: 15px 30px; */
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.home-header-logo {
+  display: flex;
+  /* margin-right: 840px;  */
+  margin: 5px 840px 5px 50px;/* Automatically space the logo from the rest */
+}
+
+.home-header-logo .home-logo {
+  width: 50px;
+  margin-right: 20px;
+}
+
+.home-header-right {
+  display: flex;
+  align-items: center;
+}
+
+.home-be-client-button {
+  padding: 10px 25px;
+  background-color: orange;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  margin-right: 15px; /* Reduced the space between button and icon */
+  transition: background-color 0.3s;
+  border-radius: 4px;
+}
+
+.home-be-client-button:hover {
+  background-color: #ff9933;
+}
+
+.home-hamburger-icon {
+  font-size: 28px;
+  cursor: pointer;
+  margin-left: 15px; /* Slight left margin for more spacing */
+}
+
+/* Sidebar Styles */
+.home-sidebar {
+  position: fixed;
+  top: 0;
+  right: 0; /* Adjusted to 0 to hide it off-screen by default */
+  width: 250px;
+  height: 100%;
+  background-color: #fff;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease;
+  padding: 20px;
+  z-index: 1000;
+  transform: translateX(100%); /* Hide it completely off-screen */
+  display: none; /* Ensure it's not displayed initially */
+}
+
+.home-sidebar.open {
+  transform: translateX(0); /* Bring it into view */
+  display: block; /* Make it visible when open */
+}
+
+.home-sidebar-title {
+  margin-bottom: 20px;
+  font-size: 1.5em;
+  color: #333;
+}
+
+.home-sidebar-menu {
+  list-style: none;
+  padding: 0;
+}
+
+.home-sidebar-item {
+  margin-bottom: 15px;
+  cursor: pointer;
+  font-size: 1.2em;
+}
+
+.home-sidebar-item a {
+  text-decoration: none;
+  color: #333;
+  transition: color 0.3s;
+}
+
+.home-sidebar-item a:hover {
+  color: orange;
+}
+
+.home-dropdown {
+  list-style: none;
+  padding-left: 15px;
+  margin-top: 10px;
+}
+
+.home-dropdown li {
+  margin-bottom: 10px;
+}
+
+.home-dropdown li a {
+  text-decoration: none;
+  color: #555;
+}
+
+.home-dropdown-icon {
+  float: right;
+}

@@ -1,0 +1,92 @@
+.sidebar {
+    width: 250px; /* Set the width of the sidebar */
+    background-color: orange; /* Orange background color */
+    color: white; /* Text color */
+    height: 100vh; /* Full height */
+    padding: 20px; /* Padding */
+    position: fixed; /* Fix position on the left */
+    overflow-y: auto; /* Enable scrolling if content exceeds height */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.logo {
+    text-align: center; /* Center the logo */
+    margin-bottom: 20px; /* Space below the logo */
+}
+
+.logo img {
+    max-width: 100%; /* Make logo responsive */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.sidebar-links {
+    list-style-type: none; /* Remove bullet points */
+    padding: 0; /* Remove padding */
+}
+
+.sidebar-links li {
+    padding: 10px 0; /* Add padding for each link */
+    cursor: pointer; /* Change cursor on hover */
+    position: relative; /* For positioning subfields */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border for separation */
+}
+
+.sidebar-links li:last-child {
+    border-bottom: none; /* Remove border from last item */
+}
+
+.sidebar-links a {
+    color: white; /* Text color */
+    text-decoration: none; /* Remove underline */
+    display: block; /* Block display for full clickable area */
+    transition: background-color 0.3s, padding-left 0.3s; /* Smooth transitions */
+}
+
+.sidebar-links a:hover {
+    background-color: #ff7f00; /* Darker orange on hover */
+    padding-left: 10px; /* Indent on hover */
+}
+
+.subfields {
+    display: none; /* Hide by default */
+    transition: max-height 0.2s ease-out; /* Smooth transition */
+    overflow: hidden; /* Prevent overflow when collapsed */
+}
+
+.subfields.open {
+    display: block; /* Show when open */
+}
+
+.subfields li {
+    padding: 5px 20px; /* Indent subfield items */
+}
+
+.subfields li a {
+    color: white; /* Text color for subfield links */
+    text-decoration: none; /* Remove underline */
+}
+
+.subfields li a:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+.sidebar-divider {
+    border: none; /* Remove default border */
+    border-top: 1px solid #e0e0e0; /* Divider line */
+    margin: 15px 0; /* Space above and below the divider */
+}
+
+.quick-action-panel {
+    margin-top: 15px; /* Space above the panel */
+}
+
+.quick-action-panel h4 {
+    margin-bottom: 10px; /* Space below the heading */
+    font-size: 1.2rem; /* Font size for the heading */
+    color: #343a40; /* Heading color */
+}
+
+.quick-action-panel .sidebar-links li {
+    padding: 8px 0; /* Padding for quick action links */
+    color: #fff; /* Text color for quick action links */
+}

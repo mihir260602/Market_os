@@ -1,0 +1,47 @@
+.lead-analysis-container {
+  padding: 20px;
+  background-color: #f5f5f5; /* Light background for better contrast */
+  margin-left: 250px;
+}
+
+.filter-container {
+  margin: 20px 0;
+}
+
+.filter-container label {
+  margin-right: 10px;
+}
+
+.leads-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 15px;
+}
+
+.lead-card {
+  background-color: #e8f5e9; /* Light green background */
+  border: 1px solid #81c784; /* Green border */
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s; /* Add hover effect */
+}
+
+.lead-card:hover {
+  transform: translateY(-5px); /* Lift effect on hover */
+  background-color: #a5d6a7; /* Slightly darker green on hover */
+}
+
+.user-analysis {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.user-card {
+  border: 1px solid #ccc;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

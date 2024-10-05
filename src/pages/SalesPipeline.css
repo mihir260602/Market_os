@@ -4,6 +4,9 @@
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   margin: 20px 0;
+  margin-left: 250px; /* Prevent overlap with sidebar */
+  margin-top: 60px; /* Prevent overlap with header */
+  box-sizing: border-box; /* Include padding in width calculations */
 }
 
 .stage-container {
@@ -11,9 +14,6 @@
   border-radius: 8px;
   padding: 10px;
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
-  /* background-color: #f1f1f1;
-  padding: 15px;
-  border-radius: 8px; */
   min-height: 150px;
   margin-bottom: 20px;
 }
@@ -27,7 +27,6 @@
   margin-bottom: 10px;
   text-align: center;
   font-family: "Arial", sans-serif;
-  /* margin-bottom: 10px; */
   font-size: 18px;
   font-weight: bold;
 }
@@ -51,8 +50,6 @@
   color: #666;
   text-align: center;
   padding: 10px;
-  /* background-color: #ddd;
-  margin-bottom: 10px; */
   border-radius: 8px;
 }
 
@@ -61,6 +58,26 @@
   background-color: #fff4e1;
 }
 
-.sales-pipeline-container .MuiGrid-root {
-  margin-bottom: 20px;
+/* Media Query for Responsiveness */
+@media screen and (max-width: 768px) {
+  .sidebar {
+    width: 100px; /* Shrink sidebar */
+    overflow-x: hidden; /* Hide overflow */
+  }
+
+  .sales-pipeline-container {
+    margin-left: 100px; /* Adjust content margin */
+  }
+
+  .header {
+    left: 100px; /* Adjust header to match smaller sidebar */
+  }
+
+  .lead-card {
+    width: 100%; /* Make lead cards full width */
+  }
+
+  .stage-container {
+    margin: 10px 0; /* Adjust margin for mobile */
+  }
 }

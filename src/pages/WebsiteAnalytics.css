@@ -1,0 +1,106 @@
+/* WebsiteAnalytics.css */
+
+.app {
+  display: flex; /* Use flexbox for layout */
+  background-color: rgb(244, 249, 250);
+}
+
+.analytics-container {
+  display: flex; /* Use flexbox to align cards in a row */
+  justify-content: space-between; /* Space between cards */
+  padding: 20px; /* Padding around the container */
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+/* Analytics Card */
+.metrics-box {
+  background-color: #ffffff; /* Solid white background */
+  border: 1px solid #e0e0e0; /* Light gray border */
+  border-radius: 8px; /* Slightly rounded corners */
+  padding: 20px; /* Padding inside the card */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+  flex: 1; /* Allow cards to grow equally */
+  min-width: 200px; /* Minimum width for cards */
+  margin: 10px; /* Margin around cards for spacing */
+  transition: box-shadow 0.3s; /* Smooth shadow transition */
+}
+
+.metrics-box:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Darker shadow on hover */
+}
+
+/* Chart Container */
+.chart-paper {
+  background-color: #ffffff; /* White background */
+  padding: 20px; /* Padding inside the chart */
+  border: 1px solid #e0e0e0; /* Light gray border */
+  border-radius: 8px; /* Slightly rounded corners */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+  margin-bottom: 20px; /* Margin below the chart */
+  transition: box-shadow 0.3s; /* Smooth shadow transition */
+}
+
+.chart-paper:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Darker shadow on hover */
+}
+
+/* Responsive behavior */
+@media (max-width: 768px) {
+  .metrics-box {
+    flex: 1 0 100%; /* Full width for smaller screens */
+    margin: 10px 0; /* Stack boxes vertically on small screens */
+  }
+
+  .chart-paper {
+    width: 100%; /* Full width for charts on smaller screens */
+  }
+}
+
+.analytics-header {
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  margin-bottom: 20px;
+  text-align: center; /* Center header text */
+  font-weight: bold; /* Bold header text */
+}
+
+.card-content {
+  flex-grow: 1; /* Allow content to grow and fill space */
+}
+
+.card-content h3 {
+  margin: 0; /* Remove margin for heading */
+  font-size: 18px; /* Font size for heading */
+  color: #333; /* Dark gray text color for heading */
+}
+
+.card-content p {
+  font-size: 24px; /* Font size for value */
+  font-weight: bold; /* Bold font for value */
+  color: #333; /* Text color for value */
+  margin: 5px 0 0; /* Margin for spacing */
+}
+
+.card-footer {
+  margin-top: 10px; /* Space above the footer */
+  font-size: 14px; /* Font size for footer */
+  color: #666; /* Gray color for footer text */
+}
+
+.card-footer span {
+  display: inline-block; /* Allow items to sit next to each other */
+  margin-right: 15px; /* Space between footer items */
+}
+
+@media (max-width: 900px) {
+  .charts-container {
+    flex-direction: column; /* Stack charts vertically on smaller screens */
+  }
+
+  .line-chart,
+  .pie-chart {
+    width: 100%; /* Full width on smaller screens */
+  }
+}

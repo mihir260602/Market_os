@@ -1,16 +1,58 @@
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import React, { useState } from "react";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import Header from "./components/Header"; // Import the Header component
-import Sidebar from "./components/Sidebar";
+import {
+  Route,
+  BrowserRouter as Router,
+  Routes,
+  useLocation,
+} from "react-router-dom";
+import Dashboard from "./Dashboard/Dashboard"; // Import Dashboard from the first file
+import Header from "./Dashboard/Header";
+import Sidebar from "./Dashboard/Sidebar";
+import Home from "./Home/Home";
+import Login from "./Login/Login";
+import AudienceSegmentation from "./pages/AudienceSegmentation";
+import CampaignBuilder from "./pages/CampaignBuilder";
 import CampaignManager from "./pages/CampaignManager";
+import CampaignOverview from "./pages/CampaignOverview";
 import ContactList from "./pages/ContactList";
+import DashboardContent from "./pages/DashboardContent";
+import EmailAnalytics from "./pages/EmailAnalytics";
+import EmailTemplatesPage from "./pages/EmailTemplatesPage";
 import LeadActivity from "./pages/LeadActivity";
+import LeadAnalysis from "./pages/LeadAnalysis";
 import LeadScoring from "./pages/LeadScoring";
 import ReportDashboard from "./pages/ReportDashboard";
-import SalesPipeline from "./pages/SalesPipeline";
 import TaskManager from "./pages/TaskManager";
+import WebsiteAnalytics from "./pages/WebsiteAnalytics";
 import theme from "./theme/theme";
+// import CampaignBuilder from "./pages/CampaignBuilder";
+import CreateContent from "./pages/CreateContent";
+import Editunpublishedcontent from "./pages/EditUnpublishedContent";
+import Posteditorpage from "./pages/PostEditorPage";
+import Publishcontent from "./pages/PublishedContent";
+import Unpublishedcontent from "./pages/UnpublishedContent";
+import Tickets from "./Tickets/Tickets";
+
+// Layout component that conditionally renders Sidebar and Header
+function Layout({ children }) {
+  const location = useLocation(); // Use useLocation inside Router
+
+  // Pages where Sidebar and Header should not be displayed
+  const hideSidebarAndHeader = ["/", "/Login"].includes(location.pathname);
+
+  return (
+    <div style={{ display: "flex", height: "100vh" }}>
+      {/* Conditionally render Sidebar */}
+      {!hideSidebarAndHeader && <Sidebar />}
+      <main style={{ padding: "0px", width: "100% " }}>
+        {/* Conditionally render Header */}
+        {!hideSidebarAndHeader && <Header />}
+        {children}
+      </main>
+    </div>
+  );
+}
 
 function App() {
   const [selectedPage, setSelectedPage] = useState("Contact List");
@@ -19,24 +61,37 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Router>
-        <div style={{ display: "flex", height: "100vh" }}>
-          <Sidebar
-            selectedPage={selectedPage}
-            setSelectedPage={setSelectedPage}
-          />
-          <main style={{ padding: "20px", width: "100%", overflowY: "auto" }}>
-            <Header /> {/* Add the Header component here */}
-            <Routes>
-              <Route path="/" element={<ReportDashboard />} />
-              <Route path="/contact-list" element={<ContactList />} />
-              <Route path="/lead-activity" element={<LeadActivity />} />
-              <Route path="/task-manager" element={<TaskManager />} />
-              <Route path="/campaign-manager" element={<CampaignManager />} />
-              <Route path="/sales-pipeline" element={<SalesPipeline />} />
-              <Route path="/lead-scoring" element={<LeadScoring />} />
-            </Routes>
-          </main>
-        </div>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/Login" element={<Login />} />
+            <Route path="/dashboard" element={<Dashboard />} />{" "}
+            {/* Dashboard from first file */}
+            <Route path="/report-dashboard" element={<ReportDashboard />} />
+            <Route path="/contact-list" element={<ContactList />} />
+            <Route path="/lead-activity" element={<LeadActivity />} />
+            <Route path="/task-manager" element={<TaskManager />} />
+            <Route path="/email-templates" element={<EmailTemplatesPage />} />
+            <Route path="/lead-analysis" element={<LeadAnalysis />} />
+            <Route path="/dashboard-content" element={<DashboardContent />} />
+            <Route path="/campaign-manager" element={<CampaignManager />} />
+            <Route path="/campaign-overview" element={<CampaignOverview />} />
+            <Route path="/lead-scoring" element={<LeadScoring />} />
+            <Route path="/tickets" element={<Tickets />} />
+            <Route path="/website-analytics" element={<WebsiteAnalytics />} />
+            <Route path="/email-analytics" element={<EmailAnalytics />} />
+            <Route
+              path="/audience-segmentation"
+              element={<AudienceSegmentation />}
+            />
+            <Route path="/campaign-builder" element={<CampaignBuilder />} />
+            <Route path="/create-page" element={<CreateContent />} />
+            <Route path="/post-editor" element={<Posteditorpage />} />
+            <Route path="/unpublished-content" element={<Unpublishedcontent />} />
+            <Route path="/published-content" element={<Publishcontent />} />
+            <Route path="/edit-unpublish-content" element={<Editunpublishedcontent />} />
+          </Routes>
+        </Layout>
       </Router>
     </ThemeProvider>
   );

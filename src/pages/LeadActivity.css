@@ -4,6 +4,9 @@
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   margin: 20px 0;
+  margin-left: 250px; /* Prevent overlap with sidebar */
+  margin-top: 60px; /* Prevent overlap with header */
+  box-sizing: border-box; /* Include padding in width calculations */
 }
 
 h2 {
@@ -49,13 +52,6 @@ p {
   color: #888;
   float: right;
 }
-/* .lead-activity-container {
-  padding: 20px;
-  background-color: #f8f8f8;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  margin: 20px 0;
-} */
 
 .charts-container {
   display: flex;
@@ -75,4 +71,32 @@ p {
 h3 {
   color: #ff5722;
   text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+  .sidebar {
+      width: 100px; /* Shrink sidebar */
+      overflow-x: hidden; /* Hide overflow */
+  }
+
+  .main-content {
+      margin-left: 100px; /* Adjust content margin */
+  }
+
+  .header {
+      left: 100px; /* Adjust header to match smaller sidebar */
+  }
+
+  .lead-activity-container {
+      margin-left: 100px; /* Adjust content margin */
+  }
+
+  .charts-container {
+      flex-direction: column; /* Stack charts vertically on small screens */
+      width: 100%; /* Ensure charts take full width */
+  }
+
+  .chart {
+      width: 100%; /* Make charts responsive */
+  }
 }

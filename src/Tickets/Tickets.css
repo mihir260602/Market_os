@@ -1,0 +1,118 @@
+/* Card styles */
+.info-card {
+  padding: 20px;
+  margin-top: 30px;
+  background-color: #ffffff; /* White background for cards */
+  border-radius: 12px; /* Rounded corners */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Increased shadow for depth */
+  transition: transform 0.3s, box-shadow 0.3s; /* Smooth transition */
+  display: flex; /* Flexbox for alignment */
+  flex-direction: column; /* Stack items vertically */
+  align-items: center; /* Center align items */
+  justify-content: center; /* Center content */
+  text-align: center; /* Center align text */
+}
+
+.info-card:hover {
+  transform: translateY(-5px); /* Lift effect on hover */
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2); /* Deeper shadow on hover */
+}
+
+.info-card h5 {
+  font-size: 1.25rem; /* Larger font for title */
+  color: #333333; /* Dark gray color for title */
+  margin: 0 0 8px; /* Spacing */
+}
+
+.info-card h6 {
+  font-size: 2rem; /* Larger font for count */
+  font-weight: bold; /* Bold for emphasis */
+  color: black; /* Color for count */
+}
+
+/* Additional styling for responsiveness */
+@media (max-width: 600px) {
+  .info-card {
+    padding: 15px; /* Reduce padding on smaller screens */
+  }
+
+  .info-card h5 {
+    font-size: 1.1rem; /* Smaller title on small screens */
+  }
+
+  .info-card h6 {
+    font-size: 1.5rem; /* Smaller count on small screens */
+  }
+}
+
+/* Table styles */
+.table {
+  border-collapse: collapse; /* Collapses borders to remove space between columns */
+  width: 100%; /* Full width */
+}
+
+.table-cell {
+  padding: 12px; /* Increased padding for better spacing */
+  color: #333333; /* Dark gray color for table cells */
+  text-align: left; /* Left-align text for better readability */
+  font-size: 0.9rem; /* Slightly larger font for improved readability */
+  border: none; /* Remove border from table cells */
+}
+
+.table-cell:hover {
+  background-color: #f5f5f5; /* Light gray background on hover */
+}
+
+.table-header {
+  background-color: rgb(245, 241, 241); /* Header background color */
+  color: #ff6600; /* Header text color */
+  cursor: pointer; /* Pointer cursor */
+  padding: 12px; /* Added padding for a better look */
+  font-weight: bold; /* Bold text for emphasis */
+  border: none; /* Remove border */
+}
+
+/* Button styles in table cells */
+.table-cell button {
+  background-color: rgb(245, 241, 241); /* Button background color */
+  color: orange; /* Button text color */
+  border: none; /* Remove border */
+  border-radius: 5px; /* Rounded corners */
+  padding: 10px 16px; /* Increased padding for better click area */
+  cursor: pointer; /* Pointer cursor */
+  transition: background-color 0.3s, transform 0.2s; /* Smooth transition */
+  font-size: 0.9rem; /* Font size */
+}
+
+.table-cell button:hover {
+  background-color: #e65c00; /* Darker orange on hover */
+  transform: translateY(-2px); /* Lift effect on hover */
+}
+
+.table-cell button:active {
+  transform: translateY(1px); /* Slightly press down effect on click */
+}
+
+/* Additional styles for actions column */
+.table-cell .action-buttons {
+  display: flex; /* Flexbox for button alignment */
+  gap: 10px; /* Space between buttons */
+}
+
+/* Additional styling for pagination */
+.MuiTablePagination-toolbar {
+  border-top: 1px solid #ddd; /* Top border */
+  padding: 8px; /* Increased padding for pagination area */
+}
+
+/* Responsive styling */
+@media (max-width: 600px) {
+  .table-cell {
+    font-size: 0.8rem; /* Smaller font size for table cells */
+    padding: 8px; /* Adjust padding for smaller screens */
+  }
+
+  .table-header {
+    font-size: 1.1rem; /* Smaller font size for table headers */
+  }
+}

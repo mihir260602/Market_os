@@ -65,7 +65,7 @@ const pieData = [
 // Sample data for the bar chart (Leads by Status)
 const barData = [
   { name: 'New', leads: 6 },
-  { name: 'Assigned', leads: 5 },
+  { name: 'Tasked', leads: 5 },
   { name: 'In Process', leads: 6 },
   {name: 'Done', leads: 3}
 ];

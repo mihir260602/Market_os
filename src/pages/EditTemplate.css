@@ -1,0 +1,211 @@
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.campaign-builder {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.campaign-builder-header {
+    display: flex;
+    color: orange;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #ff9800;
+}
+
+.header-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.nav-button {
+    padding: 10px 15px;
+    background-color: #ff9800;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.nav-button:hover {
+    background-color: #e68a00;
+    transform: scale(1.05);
+}
+
+.builder-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.email-builder,
+.personalization-options {
+    width: 48%;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.personalization-preview {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #ffffff;
+    margin-top: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+}
+
+.personalization-preview-content {
+    max-width: 100%;
+    white-space: normal;
+    word-wrap: break-word;
+    line-height: 1.5;
+    color: #333;
+    padding: 10px;
+}
+
+.personalization-preview-content>div {
+    white-space: normal;
+    word-wrap: break-word;
+    line-height: 1.5;
+    max-width: 100%;
+    color: #333;
+}
+
+.email-preview-content>h2 {
+    color: black;
+}
+
+.personalization-preview>div>h2 {
+    color: black;
+}
+
+.personalization-preview::-webkit-scrollbar {
+    width: 8px;
+}
+
+.personalization-preview::-webkit-scrollbar-thumb {
+    background-color: #ff9800;
+    border-radius: 10px;
+}
+
+.ck>h2 {
+    color: black;
+}
+
+.personalization-preview::-webkit-scrollbar-track {
+    background: #f4f4f4;
+    border-radius: 10px;
+}
+
+.data-visualizations {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.preview-pane {
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border: 1px solid #ccc;
+    padding: 10px;
+    height: 500px;
+    text-align: left;
+    margin-top: 10px;
+    background-color: #ffffff;
+}
+
+.email-preview {
+    white-space: normal;
+    word-wrap: break-word;
+    line-height: 1.5;
+    max-width: 100%;
+    color: #333;
+    padding: 10px;
+}
+
+.template-gallery {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.templates {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.template {
+    width: 30%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.template:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.modal-button {
+    margin: 10px;
+    padding: 10px 15px;
+    background-color: #ff9800;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.modal-button:hover {
+    background-color: #e68a00;
+    transform: scale(1.05);
+}

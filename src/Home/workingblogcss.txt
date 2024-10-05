@@ -1,0 +1,110 @@
+.blog-section {
+    width: 100%;
+    padding: 50px 20px;
+    background-color: lightgrey;
+    text-align: center;
+  }
+  
+  .blog-heading {
+    font-size: 2em;
+    color: #333;
+    margin-bottom: 30px;
+    font-weight: 600;
+  }
+  
+  .blog-carousel {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .blog-card {
+    width: 350px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8); /* Adjust the alpha value (0.8) for more or less transparency */
+    border-radius: 10px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effects */
+}
+
+.blog-card:hover {
+    transform: translateY(-10px) scale(1.05); /* Slightly lift and scale the card */
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+}
+
+  .blog-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 15px;
+  }
+  
+  .blog-details {
+    flex-grow: 1;
+  }
+  
+  .blog-title {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  
+  .blog-description {
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 15px;
+  }
+  
+  .blog-meta {
+    font-size: 0.7em;
+    color: #999;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .blog-date {
+    font-style: italic;
+  }
+  
+  .blog-author {
+    font-weight: bold;
+  }
+  
+  .blog-category {
+    font-size: 0.8em;
+    color: Orange;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .page-button {
+    background-color: rgba(255, 255, 255, 0.4);
+    border: none;
+    color: orange;
+    font-size: 1em;
+    padding: 10px 20px;
+    margin: 0 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .page-button:hover {
+    background-color: darkgrey;
+  }
+  
+  .page-info {
+    font-size: 1em;
+    color: #666;
+  }
+  

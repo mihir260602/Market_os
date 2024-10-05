@@ -1,0 +1,237 @@
+.email-template-container {
+    font-family: 'Arial', sans-serif;
+    margin-left: 295px;
+    padding: 20px;
+    max-width: 100%;
+}
+
+.header {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: orange;
+}
+
+.filters {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.search-bar {
+    padding: 10px;
+    margin-right: 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.filter-select {
+    padding: 10px;
+    margin-right: 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.template-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    padding: 0;
+}
+
+.template-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+    padding: 15px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.template-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.template-img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    transition: transform 0.3s;
+}
+
+.template-card:hover .template-img {
+    transform: scale(1.05);
+}
+
+.pagination-controls {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.pagination-controls button {
+    padding: 10px 15px;
+    margin: 0 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: orange;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.pagination-controls button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.pagination-controls button:hover:not(:disabled) {
+    background-color: darkorange;
+}
+
+.template-detail-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s;
+}
+
+.template-detail-modal>div {
+    background: white;
+    border-radius: 10px;
+    padding: 30px;
+    max-width: 800px;
+    width: 90%;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+
+.template-detail-modal h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+}
+
+.template-detail-modal div {
+    line-height: 1.6;
+    color: #555;
+    overflow-y: auto;
+    max-height: 60vh;
+}
+
+.close-btn {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+
+
+.delete-confirmation-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.delete-confirmation-modal>div {
+    background: white;
+    border-radius: 10px;
+    padding: 30px;
+    max-width: 400px;
+    width: 80%;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+.delete-confirmation-modal h2 {
+    margin-bottom: 20px;
+}
+
+.close-btn,
+.delete-btn,
+.edit-btn,
+.confirm-delete-btn,
+.cancel-delete-btn {
+    background-color: #f39c12;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.close-btn:hover,
+.delete-btn:hover,
+.edit-btn:hover,
+.confirm-delete-btn:hover,
+.cancel-delete-btn:hover {
+    background-color: #e67e22;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 1024px) {
+    .template-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .template-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .filters {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .search-bar,
+    .filter-select {
+        margin: 5px 0;
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .template-grid {
+        grid-template-columns: 1fr;
+    }
+}
+

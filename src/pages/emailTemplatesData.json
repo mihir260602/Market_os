@@ -1,0 +1,162 @@
+[
+  {
+    "id": 1,
+    "name": "Summer Sale Promotion",
+    "theme": "Promotional",
+    "design": "Creative",
+    "imageUrl": "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-4.0.3&q=80&w=400",
+    "content": "<html><body><h1>Summer Sale!</h1><p>Get 50% off on all items. Hurry, offer ends soon!</p><img src='https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-4.0.3&q=80&w=600'/></body></html>"
+  },
+  {
+    "id": 2,
+    "name": "Corporate Newsletter July",
+    "theme": "Corporate",
+    "design": "Minimal",
+    "imageUrl": "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-4.0.3&q=80&w=400",
+    "content": "<html><body><h1>July Updates</h1><p>Here are the latest updates from our company.</p><img src='https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-4.0.3&q=80&w=600'/></body></html>"
+  },
+  {
+    "id": 3,
+    "name": "Event Invitation - Webinar",
+    "theme": "Event",
+    "design": "Elegant",
+    "imageUrl": "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxpaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-4.0.3&q=80&w=400",
+    "content": "<html><body><h1>You're Invited!</h1><p>Join us for an exciting webinar.</p><img src='https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxpaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-4.0.3&q=80&w=600'/></body></html>"
+  },
+  {
+    "id": 4,
+    "name": "Spring Clearance Sale",
+    "theme": "Promotional",
+    "design": "Creative",
+    "imageUrl": "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxpaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-4.0.3&q=80&w=400",
+    "content": "<html><body><h1>Spring Clearance Sale!</h1><p>Up to 70% off on selected items.</p><img src='https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxpaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-4.0.3&q=80&w=600'/></body></html>"
+  },
+  {
+    "id": 5,
+    "name": "Monthly Team Meeting Reminder",
+    "theme": "Corporate",
+    "design": "Minimal",
+    "imageUrl": "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxpaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-4.0.3&q=80&w=400",
+    "content": "<html><body><h1>Monthly Team Meeting</h1><p>Don't forget our monthly team meeting next week.</p><img src='https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxpaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-4.0.3&q=80&w=600'/></body></html>"
+  },
+  {
+    "id": 6,
+    "name": "Holiday Party Invitation",
+    "theme": "Event",
+    "design": "Festive",
+    "imageUrl": "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxpaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-4.0.3&q=80&w=400",
+    "content": "<html><body><h1>You're Invited to Our Holiday Party!</h1><p>Join us for a night of fun and festivities!</p><img src='https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxpaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-4.0.3&q=80&w=600'/></body></html>"
+  },
+  {
+    "id": 7,
+    "name": "Product Launch Announcement",
+    "theme": "Promotional",
+    "design": "Bold",
+    "imageUrl": "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxpaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-4.0.3&q=80&w=400",
+    "content": "<html><body><h1>Introducing Our New Product!</h1><p>Check out the latest addition to our line-up.</p><img src='https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxpaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-4.0.3&q=80&w=600'/></body></html>"
+  },
+  {
+    "id": 8,
+    "name": "Weekly Fitness Challenge",
+    "theme": "Promotional",
+    "design": "Energetic",
+    "imageUrl": "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxpaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-4.0.3&q=80&w=400",
+    "content": "<html><body><h1>Join Our Weekly Fitness Challenge!</h1><p>Stay fit and healthy with us!</p><img src='https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxpaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-4.0.3&q=80&w=600'/></body></html>"
+  },
+  {
+    "id": 9,
+    "name": "Thank You for Attending",
+    "theme": "Event",
+    "design": "Grateful",
+    "imageUrl": "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxpaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-4.0.3&q=80&w=400",
+    "content": "<html><body><h1>Thank You!</h1><p>We appreciate your attendance at our event!</p><img src='https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxpaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-4.0.3&q=80&w=600'/></body></html>"
+  },
+  {
+    "id": 10,
+    "name": "Charity Run Registration",
+    "theme": "Event",
+    "design": "Community",
+    "imageUrl": "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxpaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-4.0.3&q=80&w=400",
+    "content": "<html><body><h1>Join Our Charity Run!</h1><p>Help us make a difference.</p><img src='https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxpaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-4.0.3&q=80&w=600'/></body></html>"
+  },
+  {
+    "id": 11,
+    "name": "Monthly Web Development Update",
+    "theme": "Corporate",
+    "design": "Professional",
+    "imageUrl": "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxpaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-4.0.3&q=80&w=400",
+    "content": "<html><body><h1>Web Development Updates</h1><p>Check out the latest features we've added!</p><img src='https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxpaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-4.0.3&q=80&w=600'/></body></html>"
+  },
+  {
+    "id": 12,
+    "name": "Customer Feedback Request",
+    "theme": "Feedback",
+    "design": "Engaging",
+    "imageUrl": "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxpaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-4.0.3&q=80&w=400",
+    "content": "<html><body><h1>We Value Your Feedback!</h1><p>Please take a moment to share your thoughts with us.</p><img src='https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxpaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-4.0.3&q=80&w=600'/></body></html>"
+  },
+  {
+    "id": 13,
+    "name": "New Store Opening",
+    "theme": "Event",
+    "design": "Exciting",
+    "imageUrl": "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxpaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-4.0.3&q=80&w=400",
+    "content": "<html><body><h1>Grand Opening!</h1><p>Join us for the opening of our new store!</p><img src='https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxpaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-4.0.3&q=80&w=600'/></body></html>"
+  },
+  {
+    "id": 14,
+    "name": "Seasonal Recipe Newsletter",
+    "theme": "Newsletter",
+    "design": "Delicious",
+    "imageUrl": "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxpaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-4.0.3&q=80&w=400",
+    "content": "<html><body><h1>Try Our New Seasonal Recipes!</h1><p>Delicious recipes to enjoy this season.</p><img src='https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxpaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-4.0.3&q=80&w=600'/></body></html>"
+  },
+  {
+    "id": 15,
+    "name": "Weekly Book Club Update",
+    "theme": "Newsletter",
+    "design": "Inviting",
+    "imageUrl": "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxpaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-4.0.3&q=80&w=400",
+    "content": "<html><body><h1>Book Club Updates</h1><p>Join us for this week's discussion!</p><img src='https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxpaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-4.0.3&q=80&w=600'/></body></html>"
+  },
+  {
+    "id": 16,
+    "name": "Charity Auction Announcement",
+    "theme": "Event",
+    "design": "Heartfelt",
+    "imageUrl": "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxpaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-4.0.3&q=80&w=400",
+    "content": "<html><body><h1>Join Us for Our Charity Auction!</h1><p>Your support makes a difference.</p><img src='https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxpaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-4.0.3&q=80&w=600'/></body></html>"
+  },
+  {
+    "id": 17,
+    "name": "Holiday Sale Announcement",
+    "theme": "Event",
+    "design": "Festive",
+    "imageUrl": "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxpaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-4.0.3&q=80&w=400",
+    "content": "<html><body><h1>Don't Miss Our Holiday Sale!</h1><p>Exclusive discounts just for you!</p><img src='https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxpaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-4.0.3&q=80&w=600'/></body></html>"
+  },
+  {
+    "id": 18,
+    "name": "Fitness Challenge Invitation",
+    "theme": "Health",
+    "design": "Motivational",
+    "imageUrl": "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxpaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-4.0.3&q=80&w=400",
+    "content": "<html><body><h1>Join Our Fitness Challenge!</h1><p>Get fit and have fun!</p><img src='https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxpaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-4.0.3&q=80&w=600'/></body></html>"
+  },
+  {
+    "id": 19,
+    "name": "Local Market Event Invitation",
+    "theme": "Event",
+    "design": "Community",
+    "imageUrl": "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxpaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-4.0.3&q=80&w=400",
+    "content": "<html><body><h1>Come to Our Local Market!</h1><p>Support local businesses and have fun!</p><img src='https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxpaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-4.0.3&q=80&w=600'/></body></html>"
+  },
+  {
+    "id": 20,
+    "name": "Thanksgiving Dinner Invitation",
+    "theme": "Holiday",
+    "design": "Warm",
+    "imageUrl": "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxpaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-4.0.3&q=80&w=400",
+    "content": "<html><body><h1>Join Us for Thanksgiving Dinner!</h1><p>Celebrate with family and friends!</p><img src='https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxpaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-4.0.3&q=80&w=600'/></body></html>"
+  }
+]
