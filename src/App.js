@@ -1,5 +1,5 @@
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
 import {
   Route,
   BrowserRouter as Router,
@@ -55,7 +55,7 @@ function Layout({ children }) {
 }
 
 function App() {
-  const [selectedPage, setSelectedPage] = useState("Contact List");
+  // const [selectedPage, setSelectedPage] = useState("Contact List");
 
   return (
     <ThemeProvider theme={theme}>
