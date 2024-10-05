@@ -1,8 +1,0 @@
-version: 1
-services:
-  - type: web
-    name: market-os-frontend
-    env: static
-    buildCommand: npm run build
-    publishDir: build
-    autoDeploy: true
