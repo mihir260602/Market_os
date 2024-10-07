@@ -1,4 +1,5 @@
 import { CssBaseline, ThemeProvider } from "@mui/material";
+import posthog from 'posthog-js';
 import React, { useEffect } from "react";
 import {
   Route,
@@ -26,7 +27,6 @@ import ReportDashboard from "./pages/ReportDashboard";
 import TaskManager from "./pages/TaskManager";
 import WebsiteAnalytics from "./pages/WebsiteAnalytics";
 import theme from "./theme/theme";
-// import posthog from 'posthog-js'; 
 // import CampaignBuilder from "./pages/CampaignBuilder";
 import CreateContent from "./pages/CreateContent";
 import Editunpublishedcontent from "./pages/EditUnpublishedContent";
@@ -36,16 +36,16 @@ import Publishcontent from "./pages/PublishedContent";
 import Unpublishedcontent from "./pages/UnpublishedContent";
 import Tickets from "./Tickets/Tickets";
 
-// posthog.init(process.env.REACT_APP_POSTHOG_API_KEY, {
-//   api_host: 'https://app.posthog.com',
-// });
+posthog.init(process.env.REACT_APP_POSTHOG_API_KEY, {
+  api_host: 'https://app.posthog.com',
+});
 
 // Layout component that conditionally renders Sidebar and Header
 function Layout({ children }) {
   const location = useLocation(); // Use useLocation inside Router
-  // useEffect(() => {
-  //   posthog.capture('$pageview'); // PostHog pageview tracking
-  // }, [location]);
+  useEffect(() => {
+    posthog.capture('$pageview'); // PostHog pageview tracking
+  }, [location]);
 
   // Pages where Sidebar and Header should not be displayed
   const hideSidebarAndHeader = ["/", "/Login", 
