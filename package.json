@@ -16,6 +16,7 @@
     "chart.js": "^4.4.4",
     "chartjs-plugin-datalabels": "^2.2.0",
     "date-fns": "^4.1.0",
+    "market-os-crm": "file:",
     "papaparse": "^5.4.1",
     "posthog-js": "^1.166.1",
     "react": "^18.3.1",

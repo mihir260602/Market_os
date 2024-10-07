@@ -260,7 +260,7 @@
 // export default Blog;
 
 import React, { useEffect, useState } from 'react';
-import { fetchContentList } from "../api/contentService";
+import { fetchContentList , getPostImageUrl} from "../api/contentService";
 import './Blog.css';
 import Modal from './Modal'; // Import your Modal component
 

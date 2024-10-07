@@ -52,7 +52,7 @@ function PublishedContent() {
   // Handle edit action
   const handleEdit = async (contentId) => {
     const content = await fetchDraftById(contentId);
-    navigate(`/post-editor`, {
+    navigate(`/edit-unpublish-content/${contentId}`, {
       state: {
         contentData: {
           title: content.title, // Pass the selected title
@@ -61,7 +61,8 @@ function PublishedContent() {
           tags: content.tags,
           meta_title: content.meta_title,
           meta_description: content.meta_description,
-          image: content.banner_image,
+          // image: content.banner_image,
+          banner_image: content.banner_image,
           meta_keywords: content.meta_keywords,
         },
       },

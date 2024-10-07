@@ -1,5 +1,5 @@
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import posthog from 'posthog-js';
+import posthog from "posthog-js";
 import React, { useEffect } from "react";
 import {
   Route,
@@ -37,20 +37,20 @@ import Unpublishedcontent from "./pages/UnpublishedContent";
 import Tickets from "./Tickets/Tickets";
 
 posthog.init(process.env.REACT_APP_POSTHOG_API_KEY, {
-  api_host: 'https://app.posthog.com',
+  api_host: "https://app.posthog.com",
 });
 
 // Layout component that conditionally renders Sidebar and Header
 function Layout({ children }) {
   const location = useLocation(); // Use useLocation inside Router
   useEffect(() => {
-    posthog.capture('$pageview'); // PostHog pageview tracking
+    posthog.capture("$pageview"); // PostHog pageview tracking
   }, [location]);
 
   // Pages where Sidebar and Header should not be displayed
-  const hideSidebarAndHeader = ["/", "/Login", 
-    "/mform",
-  ].includes(location.pathname);
+  const hideSidebarAndHeader = ["/", "/Login", "/mform"].includes(
+    location.pathname
+  );
 
   return (
     <div style={{ display: "flex", height: "100vh" }}>
@@ -99,9 +99,15 @@ function App() {
             <Route path="/campaign-builder" element={<CampaignBuilder />} />
             <Route path="/create-page" element={<CreateContent />} />
             <Route path="/post-editor" element={<Posteditorpage />} />
-            <Route path="/unpublished-content" element={<Unpublishedcontent />} />
+            <Route
+              path="/unpublished-content"
+              element={<Unpublishedcontent />}
+            />
             <Route path="/published-content" element={<Publishcontent />} />
-            <Route path="/edit-unpublish-content" element={<Editunpublishedcontent />} />
+            <Route
+              path="/edit-unpublish-content/:id"
+              element={<Editunpublishedcontent />}
+            />
           </Routes>
         </Layout>
       </Router>

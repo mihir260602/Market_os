@@ -577,6 +577,7 @@ import {
   deleteContent,
   fetchDraftById,
   fetchDrafts,
+  getPostImageUrl,
   updateDraft,
 } from "../api/contentService";
 import "./UnpublishedContent.css";
@@ -595,7 +596,8 @@ function UnpublishedContent() {
   const [contentIdToDelete, setContentIdToDelete] = useState(null);
   const [suggestion, setSuggestion] = useState(""); // State for suggestion input
   const navigate = useNavigate();
-  const formatDate = (isoString) => format(new Date(isoString), "MMMM dd, yyyy, hh:mm:ss a");
+  const formatDate = (isoString) =>
+    format(new Date(isoString), "MMMM dd, yyyy, hh:mm:ss a");
 
   useEffect(() => {
     const getUnpublishedContentList = async () => {
@@ -618,7 +620,7 @@ function UnpublishedContent() {
 
   const handleEdit = async (contentId) => {
     const content = await fetchDraftById(contentId);
-    navigate(`/post-editor`, {
+    navigate(`/edit-unpublish-content/${contentId}`, {
       state: {
         contentData: {
           title: content.title,
@@ -627,7 +629,8 @@ function UnpublishedContent() {
           tags: content.tags,
           meta_title: content.meta_title,
           meta_description: content.meta_description,
-          image: content.banner_image,
+          // image: content.banner_image,
+          banner_image: content.banner_image,
           meta_keywords: content.meta_keywords,
         },
       },
@@ -642,7 +645,9 @@ function UnpublishedContent() {
   const handleConfirmDelete = async () => {
     try {
       await deleteContent(contentIdToDelete);
-      setContentList((prevList) => prevList.filter((content) => content.id !== contentIdToDelete));
+      setContentList((prevList) =>
+        prevList.filter((content) => content.id !== contentIdToDelete)
+      );
       setOpenDelete(false);
     } catch (error) {
       console.error("Error deleting content:", error);
@@ -684,7 +689,10 @@ function UnpublishedContent() {
       setOpenSuggestion(false); // Close the suggestion modal
     } catch (error) {
       console.error("Failed to raise a suggestion", error);
-      alert("Failed to raise a suggestion: " + error.response?.data?.detail || error.message);
+      alert(
+        "Failed to raise a suggestion: " + error.response?.data?.detail ||
+          error.message
+      );
     }
   };
 
@@ -698,31 +706,63 @@ function UnpublishedContent() {
       {
         Header: "Title",
         accessor: "title",
-        Cell: ({ row }) => <Typography variant="caption" className="table-title">{row.original.title}</Typography>,
+        Cell: ({ row }) => (
+          <Typography variant="caption" className="table-title">
+            {row.original.title}
+          </Typography>
+        ),
       },
       {
         Header: "Author",
         accessor: "author_name",
-        Cell: ({ value }) => <Typography className="table-data">{value || "—"}</Typography>,
+        Cell: ({ value }) => (
+          <Typography className="table-data">{value || "—"}</Typography>
+        ),
       },
       {
         Header: "Status",
         accessor: "review_status",
-        Cell: ({ value }) => <Typography className="table-data">{value || "—"}</Typography>,
+        Cell: ({ value }) => (
+          <Typography className="table-data">{value || "—"}</Typography>
+        ),
       },
       {
         Header: "Updated Date",
         accessor: "updated_at",
-        Cell: ({ value }) => <Typography className="table-data">{formatDate(value) || "—"}</Typography>,
+        Cell: ({ value }) => (
+          <Typography className="table-data">
+            {formatDate(value) || "—"}
+          </Typography>
+        ),
       },
       {
         Header: "Actions",
         Cell: ({ row }) => (
           <div className="table-actions">
-            <button className="edit-btn" onClick={() => handleEdit(row.original.id)}>Edit</button>
-            <button className="edit-btn" onClick={() => handlePublish(row.original.id)}>Publish</button>
-            <button className="delete-btn" onClick={() => handleDeleteClick(row.original.id)}>Delete</button>
-            <button className="ticket-btn" onClick={() => handleOpenSuggestion(row.original.id)}>Raise Ticket</button>
+            <button
+              className="edit-btn"
+              onClick={() => handleEdit(row.original.id)}
+            >
+              Edit
+            </button>
+            <button
+              className="edit-btn"
+              onClick={() => handlePublish(row.original.id)}
+            >
+              Publish
+            </button>
+            <button
+              className="delete-btn"
+              onClick={() => handleDeleteClick(row.original.id)}
+            >
+              Delete
+            </button>
+            <button
+              className="ticket-btn"
+              onClick={() => handleOpenSuggestion(row.original.id)}
+            >
+              Raise Ticket
+            </button>
           </div>
         ),
       },
@@ -755,15 +795,22 @@ function UnpublishedContent() {
       <div className="main-content">
         <Card className="card-container">
           <Box className="header-container">
-            <Typography variant="h6" gutterBottom>Unpublished Contents</Typography>
+            <Typography variant="h6" gutterBottom>
+              Unpublished Contents
+            </Typography>
           </Box>
           <Box className="table-container">
             <table {...getTableProps()} className="styled-table">
               <thead>
                 {headerGroups.map((headerGroup) => (
-                  <tr {...headerGroup.getHeaderGroupProps()} className="table-header">
+                  <tr
+                    {...headerGroup.getHeaderGroupProps()}
+                    className="table-header"
+                  >
                     {headerGroup.headers.map((column) => (
-                      <th {...column.getHeaderProps()}>{column.render("Header")}</th>
+                      <th {...column.getHeaderProps()}>
+                        {column.render("Header")}
+                      </th>
                     ))}
                   </tr>
                 ))}
@@ -783,9 +830,25 @@ function UnpublishedContent() {
             </table>
           </Box>
           <Box className="pagination-controls">
-            <Button onClick={previousPage} disabled={!canPreviousPage} variant="contained" color="primary">Previous</Button>
-            <Typography>Page {pageIndex + 1} of {Math.ceil(contentList.length / pageSize)}</Typography>
-            <Button onClick={nextPage} disabled={!canNextPage} variant="contained" color="primary">Next</Button>
+            <Button
+              onClick={previousPage}
+              disabled={!canPreviousPage}
+              variant="contained"
+              color="primary"
+            >
+              Previous
+            </Button>
+            <Typography>
+              Page {pageIndex + 1} of {Math.ceil(contentList.length / pageSize)}
+            </Typography>
+            <Button
+              onClick={nextPage}
+              disabled={!canNextPage}
+              variant="contained"
+              color="primary"
+            >
+              Next
+            </Button>
           </Box>
         </Card>
       </div>
@@ -797,8 +860,12 @@ function UnpublishedContent() {
           <Typography>Are you sure you want to delete this content?</Typography>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCancelDelete} color="primary">Cancel</Button>
-          <Button onClick={handleConfirmDelete} color="secondary">Delete</Button>
+          <Button onClick={handleCancelDelete} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleConfirmDelete} color="secondary">
+            Delete
+          </Button>
         </DialogActions>
       </Dialog>
 
@@ -815,8 +882,12 @@ function UnpublishedContent() {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCancelSuggestion} color="primary">Cancel</Button>
-          <Button onClick={handleSubmitSuggestion} color="secondary">Submit</Button>
+          <Button onClick={handleCancelSuggestion} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleSubmitSuggestion} color="secondary">
+            Submit
+          </Button>
         </DialogActions>
       </Dialog>
     </div>

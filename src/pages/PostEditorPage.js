@@ -8,7 +8,7 @@ import { saveDraft, saveDraftAndSendForReview } from "../api/contentService";
 function PostEditorPage() {
   const location = useLocation();
   const { contentData } = location.state || {};
-
+  
   const [postTitle, setPostTitle] = useState(contentData?.title || "");
   const [postBody, setPostBody] = useState(contentData?.body || "");
   const [category, setCategory] = useState(contentData?.category || "Business");
@@ -41,11 +41,13 @@ function PostEditorPage() {
       category,
       tags: tags.split(",").map((tag) => tag.trim()),
       content_body: postBody,
-      banner_image: imageFile || contentData?.image,
+      banner_image: imageFile,
       meta_title: metaTitle,
       meta_description: metaDescription,
       meta_keywords: metaKeywords,
     };
+
+    // console.log("IMAge ", draftData.banner_image);
 
     try {
       const response = await saveDraft(draftData);
@@ -63,7 +65,7 @@ function PostEditorPage() {
       category,
       tags: tags.split(",").map((tag) => tag.trim()),
       content_body: postBody,
-      banner_image: imageFile || contentData?.image,
+      banner_image: imageFile,
       meta_title: metaTitle,
       meta_description: metaDescription,
       meta_keywords: metaKeywords,

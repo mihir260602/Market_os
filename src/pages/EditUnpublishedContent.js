@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import {
+  getPostImageUrl,
   saveDraft,
   saveDraftAndSendForReview,
   updateDraft,
@@ -12,13 +13,14 @@ import {
 function EditUnpublishedContent() {
   const location = useLocation();
   const { contentData } = location.state || {};
-
   const [postTitle, setPostTitle] = useState(contentData?.title || "");
   const [postBody, setPostBody] = useState(contentData?.body || "");
   const [category, setCategory] = useState(contentData?.category || "Business");
   const [tags, setTags] = useState(contentData?.tags || "");
   const [imageFile, setImageFile] = useState(null);
-  const [previewImage, setPreviewImage] = useState(contentData?.image || "");
+  const [previewImage, setPreviewImage] = useState(
+    getPostImageUrl(contentData) || ""
+  );
   const [metaTitle, setMetaTitle] = useState(contentData?.meta_title || "");
   const [metaDescription, setMetaDescription] = useState(
     contentData?.meta_description || ""
@@ -28,8 +30,8 @@ function EditUnpublishedContent() {
   );
   const [draftId, setDraftId] = useState(null);
 
-  const { id } = useParams();
   const navigate = useNavigate();
+  const { id } = useParams();
 
   const handleCancel = () => {
     navigate("/unpublished-content");
@@ -41,7 +43,7 @@ function EditUnpublishedContent() {
       category,
       tags: tags.split(",").map((tag) => tag.trim()),
       content_body: postBody,
-      banner_image: imageFile || contentData?.image,
+      banner_image: imageFile || contentData?.banner_image,
       meta_title: metaTitle,
       meta_description: metaDescription,
       meta_keywords: metaKeywords,
@@ -63,7 +65,7 @@ function EditUnpublishedContent() {
       category,
       tags: tags.split(",").map((tag) => tag.trim()),
       content_body: postBody,
-      banner_image: imageFile || contentData?.image,
+      banner_image: imageFile || contentData?.banner_image,
       meta_title: metaTitle,
       meta_description: metaDescription,
       meta_keywords: metaKeywords,
@@ -79,24 +81,11 @@ function EditUnpublishedContent() {
       alert("Failed to save draft and send for review");
     }
   };
-  
-  const handlePublish = async () => {
-    const draftData = {
-      title: postTitle,
-      category,
-      tags: tags.split(",").map((tag) => tag.trim()),
-      content_body: postBody,
-      banner_image: imageFile || contentData?.image,
-      meta_title: metaTitle,
-      meta_description: metaDescription,
-      meta_keywords: metaKeywords,
-      status: "published",
-      review_status: "reviewed",
-    };
 
+  const handlePublish = async () => {
+    const draftData = { status: "published", review_status: "reviewed" };
     try {
-      const response = await updateDraft(id, draftData);
-      setDraftId(response.id);
+      await updateDraft(id, draftData);
       navigate("/unpublished-content");
     } catch (error) {
       console.error("Failed to publish draft", error);
@@ -108,7 +97,8 @@ function EditUnpublishedContent() {
     const file = acceptedFiles[0];
     if (file) {
       setImageFile(file);
-      setPreviewImage(URL.createObjectURL(file));
+      setPreviewImage(file);
+      // setPreviewImage(URL.createObjectURL(file));
     }
   };
 

@@ -1,7 +1,6 @@
 // // // import React from 'react';
 // // // import './Modal.css'; // Make sure to import your modal styles
 
-
 // // // const Modal = ({ isOpen, onClose, blog }) => {
 // // //   if (!isOpen || !blog) return null; // Don't render anything if not open
 
@@ -156,19 +155,24 @@
 
 // export default Modal;
 
-import React from 'react';
+import React from "react";
 import { getPostImageUrl } from "../api/contentService"; // Import the function to get image URL
-import './Modal.css';
+import "./Modal.css";
 
 const Modal = ({ isOpen, onClose, blog }) => {
   if (!isOpen || !blog) return null; // Don't render anything if not open
 
   // Function to download content as a text file
   const downloadContent = () => {
-    const blob = new Blob([`Title: ${blog.title}\n\nDescription: ${blog.description}\n\nContent:\n${blog.content_body}`], {
-      type: 'text/plain',
-    });
-    const link = document.createElement('a');
+    const blob = new Blob(
+      [
+        `Title: ${blog.title}\n\nDescription: ${blog.description}\n\nContent:\n${blog.content_body}`,
+      ],
+      {
+        type: "text/plain",
+      }
+    );
+    const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
     link.download = `${blog.title}.txt`; // Name the file with the blog title
     link.click();
@@ -176,38 +180,35 @@ const Modal = ({ isOpen, onClose, blog }) => {
 
   // Handle closing the modal when clicking outside the content area
   const handleOverlayClick = (e) => {
-    if (e.target.classList.contains('modal-overlay')) {
+    if (e.target.classList.contains("modal-overlay")) {
       onClose();
     }
   };
 
   // Check if the image URL is valid (starts with http or https)
   const isImageValid = (url) => {
-    return url && (url.startsWith('http://') || url.startsWith('https://'));
+    return url && (url.startsWith("http://") || url.startsWith("https://"));
   };
 
   // Fetch the image URL from the blog data
-  const imageUrl = getPostImageUrl(blog.banner_image); // Assuming blog has a 'banner_image' field
+  const imageUrl = getPostImageUrl(blog); // Assuming blog has a 'banner_image' field
 
   return (
     <div className="modal-overlay" onClick={handleOverlayClick}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <h2 className="modal-title">{blog.title}</h2>
-        
         {/* Check if image URL is valid before rendering the image */}
         {isImageValid(imageUrl) ? (
-          <img
-            src={imageUrl}
-            alt={blog.title}
-            className="modal-image"
-          />
+          <img src={imageUrl} alt={blog.title} className="modal-image" />
         ) : (
           <div className="modal-no-image">No Image Available</div>
         )}
-        
-        <div className="modal-description">{blog.content_body}</div> {/* Display full content here */}
+        <div className="modal-description">{blog.content_body}</div>{" "}
+        {/* Display full content here */}
         <div className="modal-meta">
-          <span className="modal-date">{new Date(blog.created_at).toLocaleDateString()}</span>
+          <span className="modal-date">
+            {new Date(blog.created_at).toLocaleDateString()}
+          </span>
           <span className="modal-author">{blog.author_name}</span>
           <span className="modal-category">{blog.category}</span>
           <span className="download-icon" onClick={downloadContent}>

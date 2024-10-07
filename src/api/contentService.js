@@ -63,7 +63,7 @@ export const saveDraft = async (draftData) => {
 //     formData.append("meta_title", draftData.meta_title);
 //     formData.append("meta_description", draftData.meta_description);
 //     formData.append("meta_keywords", draftData.meta_keywords);
-    
+
 //     const response = await axios.post(`${getBaseUrl()}/content`, formData, {
 //       headers: {
 //         "Authorization": `Bearer ${token}`,
@@ -77,15 +77,17 @@ export const saveDraft = async (draftData) => {
 //   }
 // };
 
-
 export const deleteContent = async (contentId) => {
   try {
     const token = getAuthToken();
-    const response = await axios.delete(`${getBaseUrl()}/content/${contentId}`, {
-      headers: {
-        "Authorization": `Bearer ${token}`,
-      },
-    });
+    const response = await axios.delete(
+      `${getBaseUrl()}/content/${contentId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     return response.data; // Return any data from delete response
   } catch (error) {
     console.error("Error deleting content:", error);
@@ -168,26 +170,12 @@ export const saveDraftAndSendForReview = async (draftData) => {
   }
 };
 
-// // Function to fetch drafted content
-// export const fetchDrafts = async () => {
-//   try {
-//     const response = await axios.get(`${getBaseUrl()}/content/draft/`, {
-//       withCredentials: true, // Ensure cookies are included
-//     });
-//     // console.log(response.data);
-//     return response.data; // Return the fetched drafts
-//   } catch (error) {
-//     console.error("Error fetching drafts:", error);
-//     throw error;
-//   }
-// };
-
 export const fetchDrafts = async () => {
   try {
     const token = getAuthToken();
     const response = await axios.get(`${getBaseUrl()}/content/draft`, {
       headers: {
-        "Authorization": `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     });
     return response.data; // Return the response data directly
@@ -218,20 +206,27 @@ export const fetchContentList = async (options = {}) => {
       order: options.order || "asc",
       ...(options.author && { author: options.author }),
       ...(options.title && { title: options.title }),
-      ...(options.createdAtStart && { created_at_start: options.createdAtStart }),
+      ...(options.createdAtStart && {
+        created_at_start: options.createdAtStart,
+      }),
       ...(options.createdAtEnd && { created_at_end: options.createdAtEnd }),
       ...(options.tags && { tags: options.tags }),
-      ...(options.updatedAtStart && { updated_at_start: options.updatedAtStart }),
+      ...(options.updatedAtStart && {
+        updated_at_start: options.updatedAtStart,
+      }),
       ...(options.updatedAtEnd && { updated_at_end: options.updatedAtEnd }),
       ...(options.search && { search: options.search }),
     });
 
-    const response = await fetch(`${getBaseUrl()}/content/list/?${params.toString()}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      `${getBaseUrl()}/content/list/?${params.toString()}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     if (!response.ok) {
       const text = await response.text();
@@ -335,20 +330,20 @@ export const updateDraft = async (draftId, draftData) => {
     const token = getAuthToken();
     const config = {
       headers: {
-        "Authorization": `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
     };
-    
+
     // Ensure the "published" status is part of the request body, not headers
     draftData.status = "published";
 
     const response = await axios.put(
-      `${getBaseUrl()}/content/${draftId}/`, 
-      draftData, 
+      `${getBaseUrl()}/content/${draftId}/`,
+      draftData,
       config
     );
-    
+
     return response.data; // Return the updated draft data
   } catch (error) {
     console.error("Error updating draft:", error);
@@ -356,13 +351,12 @@ export const updateDraft = async (draftId, draftData) => {
   }
 };
 
-
 export const fetchDraftById = async (draftId) => {
   try {
     const token = getAuthToken();
     const response = await axios.get(`${getBaseUrl()}/content/${draftId}`, {
       headers: {
-        "Authorization": `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     });
     return response.data; // Return the draft data directly
