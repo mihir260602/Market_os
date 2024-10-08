@@ -294,3 +294,39 @@
   border: 1px solid #ccc;
   border-radius: 4px;
 }
+
+
+
+.path-table table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+.path-table th, .path-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.sort-button {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  margin-left: 1px;
+}
+
+.sort-button:hover {
+  color: #007bff;
+}
+
+.path-table th {
+  position: relative;
+}
+
+.path-table th .sort-button {
+  /* position: absolute; */
+  right: 5px;
+  top: 10px;
+}

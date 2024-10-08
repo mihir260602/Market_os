@@ -56,11 +56,31 @@ const Layout = () => {
   const [error, setError] = useState(null);
   const [lineGraphData, setLineGraphData] = useState([]);
   const [filter, setFilter] = useState("hour"); // State to hold OS data
+  const [sortDirection, setSortDirection] = useState('asc');
 
+  const [sortConfig, setSortConfig] = useState({
+    key: 'views',  // Default sorting by views
+    direction: 'asc', // Default ascending order
+  });
+  const handleSort = (field) => {
+    let sortedData = [...pathData];
+    const isAsc = sortConfig.key === field && sortConfig.direction === 'asc';
 
-  
+    sortedData.sort((a, b) => {
+      if (isAsc) {
+        return a[field] - b[field];
+      } else {
+        return b[field] - a[field];
+      }
+    });
+    
+    setSortConfig({
+      key: field,
+      direction: isAsc ? 'desc' : 'asc',
+    });
 
-
+    setPathData(sortedData);
+  };
   const handleFilterChange = (newFilter) => {
     setFilter(newFilter);
   };
@@ -69,7 +89,7 @@ const Layout = () => {
   let timeAggregatedViews = {};
   let totalPageViews = 0;
   let nextUrl =
-    "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=1000";
+    "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=10000";
   const headers = {
     Authorization: `Bearer ${process.env.REACT_APP_PERSONAL_API_KEY_NEW}`,
   };
@@ -521,7 +541,7 @@ const reversedData = lineGraphData.slice().reverse();
 
       {/* Line graph section */}
 <div className="line-chart-container">
-  <h3 className="line-chart-title">Live Page Views</h3>
+  <h3 className="line-chart-title">Page Views</h3>
   <ResponsiveContainer width="100%" height={300}>
   <LineChart data={reversedData}>
     <XAxis dataKey="time" stroke="#8884d8" />
@@ -546,7 +566,7 @@ const reversedData = lineGraphData.slice().reverse();
   </LineChart>
 </ResponsiveContainer>
 </div>
-        {/* Path Data Table */}
+        {/* Path Data Table
         <div className="path-data-section">
           <h3>Path Data</h3>
           <table>
@@ -569,7 +589,36 @@ const reversedData = lineGraphData.slice().reverse();
               ))}
             </tbody>
           </table>
-        </div>
+        </div> */}
+        <div className="path-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Path</th>
+            <th><button onClick={() => handleSort('Visitors')} className="sort-button">
+                {sortConfig.key === 'Visitors' && sortConfig.direction === 'asc' ? '↑' : '↓'}
+              </button>Visitors</th>
+            <th><button onClick={() => handleSort('Views')} className="sort-button">
+                {sortConfig.key === 'Views' && sortConfig.direction === 'asc' ? '↑' : '↓'}
+              </button>
+              Views
+              
+            </th>
+            <th>Bounce Rate</th>
+          </tr>
+        </thead>
+        <tbody>
+          {pathData.map((data, index) => (
+  <tr key={index}>
+  <td>{data.Path}</td>
+  <td>{data.Visitors}</td>
+  <td>{data.Views}</td>
+  <td>{data["Bounce Rate"]}</td>
+</tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
 
         {/* OS Data Table */}
         <div className="os-data-section">

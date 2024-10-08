@@ -59,6 +59,34 @@ const Layout = () => {
   const [lineGraphData, setLineGraphData] = useState([]);
   const [filter, setFilter] = useState("hour");
   const [pageViewData, setPageViewData] = useState([]);
+  const [sortDirection, setSortDirection] = useState('asc');
+
+  const [sortConfig, setSortConfig] = useState({
+    key: 'views',  // Default sorting by views
+    direction: 'asc', // Default ascending order
+  });
+  const handleSort = (field) => {
+    let sortedData = [...pathData];
+    const isAsc = sortConfig.key === field && sortConfig.direction === 'asc';
+
+    sortedData.sort((a, b) => {
+      if (isAsc) {
+        return a[field] - b[field];
+      } else {
+        return b[field] - a[field];
+      }
+    });
+    
+    setSortConfig({
+      key: field,
+      direction: isAsc ? 'desc' : 'asc',
+    });
+
+    setPathData(sortedData);
+  };
+  // const handleFilterChange = (newFilter) => {
+  //   setFilter(newFilter);
+  // };
 // Default filter // State to hold OS data
 
 // ---------------------------
@@ -476,7 +504,7 @@ const reversedData = lineGraphData.slice().reverse();
           <div className="analytics-container">
             <div className="analytics-card">
               <div className="card-content">
-                <h3>Total Page Views</h3>
+                <h3>Page Views</h3>
                 <p>{totalPageViews}</p>
               </div>
             </div>
@@ -558,12 +586,19 @@ const reversedData = lineGraphData.slice().reverse();
           <h3>Path Data</h3>
           <table>
             <thead>
-              <tr>
-                <th>Path</th>
-                <th>Visitors</th>
-                <th>Views</th>
-                <th>Bounce Rate</th>
-              </tr>
+            <tr>
+            <th>Path</th>
+            <th><button onClick={() => handleSort('Visitors')} className="sort-button">
+                {sortConfig.key === 'Visitors' && sortConfig.direction === 'asc' ? '↑' : '↓'}
+              </button>Visitors</th>
+            <th><button onClick={() => handleSort('Views')} className="sort-button">
+                {sortConfig.key === 'Views' && sortConfig.direction === 'asc' ? '↑' : '↓'}
+              </button>
+              Views
+              
+            </th>
+            <th>Bounce Rate</th>
+          </tr>
             </thead>
             <tbody>
               {pathData.map((data, index) => (
