@@ -67,7 +67,7 @@ const fetchPageViewsForGraph = async () => {
   let timeAggregatedViews = {};
   let totalPageViews = 0;
   let nextUrl =
-    "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=1000";
+    "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=10000";
   const headers = {
     Authorization: `Bearer ${process.env.REACT_APP_PERSONAL_API_KEY_NEW}`,
   };
@@ -159,7 +159,7 @@ const getWeekNumber = (date) => {
     try {
       // Fetch the first page of results
       const response = await axios.get(
-        "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=1000",
+        "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=10000",
         {
           headers: {
             Authorization: `Bearer ${process.env.REACT_APP_PERSONAL_API_KEY_NEW}`, // Replace with your actual API key
@@ -210,7 +210,7 @@ const getWeekNumber = (date) => {
   const fetchPageViews = async () => {
     let totalPageViews = 0;
     let nextUrl =
-      "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=1000";
+      "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=10000";
     const headers = {
       Authorization: `Bearer ${process.env.REACT_APP_PERSONAL_API_KEY_NEW}`,
     };
@@ -234,7 +234,7 @@ const getWeekNumber = (date) => {
   const fetchUniqueVisitors = async () => {
     let visitorSet = new Set();
     let nextUrl =
-      "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=1000";
+      "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=10000";
     const headers = {
       Authorization: `Bearer ${process.env.REACT_APP_PERSONAL_API_KEY_NEW}`,
     };
@@ -264,7 +264,7 @@ const getWeekNumber = (date) => {
   const fetchPathData = async () => {
     let pathDataObj = {};
     let nextUrl =
-      "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=1000";
+      "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=10000";
     const headers = {
       Authorization: `Bearer ${process.env.REACT_APP_PERSONAL_API_KEY_NEW}`,
     };
@@ -322,7 +322,7 @@ const getWeekNumber = (date) => {
     let osDataObj = {};
     let totalVisitors = 0;
     let nextUrl =
-      "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=1000";
+      "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=10000";
     const headers = {
       Authorization: `Bearer ${process.env.REACT_APP_PERSONAL_API_KEY_NEW}`,
     };
@@ -367,7 +367,7 @@ const getWeekNumber = (date) => {
   const fetchCityData = async () => {
     let cityDataObj = {};
     let nextUrl =
-      "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=1000";
+      "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=10000";
     const headers = {
       Authorization: `Bearer ${process.env.REACT_APP_PERSONAL_API_KEY_NEW}`,
     };
@@ -406,7 +406,7 @@ const getWeekNumber = (date) => {
   const fetchChannelData = async () => {
     let channelDataObj = {};
     let nextUrl =
-      "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=1000";
+      "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=10000";
     const headers = {
       Authorization: `Bearer ${process.env.REACT_APP_PERSONAL_API_KEY_NEW}`,
     };
@@ -511,69 +511,6 @@ const reversedData = lineGraphData.slice().reverse();
           </div>
         </div>
 
-<<<<<<< HEAD
-        {/* Line and Pie Chart Widgets */}
-        <div className="widgets-container">
-          <div className="bar-chart-widget">
-            <div className="line-chart-widget">
-              <h3>Lead Generation Over Time</h3>
-              <ResponsiveContainer width="100%" height={300}>
-                <LineChart data={leadData}>
-                  <Line
-                    type="monotone"
-                    dataKey="leads"
-                    stroke="#8884d8"
-                    strokeWidth={2}
-                  />
-                  <Tooltip />
-                </LineChart>
-              </ResponsiveContainer>
-            </div>
-          </div>
-          <div className="bar-chart-widget">
-            <div className="pie-chart-widget">
-              <h3>Lead Conversion Breakdown</h3>
-              <ResponsiveContainer width="100%" height={300}>
-                <PieChart>
-                  <Pie
-                    data={pieData}
-                    cx="50%"
-                    cy="50%"
-                    label={({ name, percent }) =>
-                      `${name} ${(percent * 100).toFixed(0)}%`
-                    }
-                    outerRadius={80}
-                    fill="#8884d8"
-                    dataKey="value"
-                    animationDuration={800}
-                  >
-                    {pieData.map((entry, index) => (
-                      <Cell
-                        key={`cell-${index}`}
-                        fill={COLORS[index % COLORS.length]}
-                        onMouseEnter={() =>
-                          console.log(`Hovered over: ${entry.name}`)
-                        }
-                      />
-                    ))}
-                  </Pie>
-                  <Tooltip
-                    formatter={(value) => new Intl.NumberFormat().format(value)}
-                  />
-                  <Legend
-                    layout="vertical"
-                    verticalAlign="middle"
-                    align="right"
-                    iconType="circle"
-                    wrapperStyle={{
-                      paddingLeft: "20px",
-                    }}
-                  />
-                </PieChart>
-              </ResponsiveContainer>
-            </div>
-          </div>
-=======
         <div className="filter-dropdown">
         <label htmlFor="filter-select">Select Time Filter:</label>
         <select 
@@ -639,7 +576,6 @@ const reversedData = lineGraphData.slice().reverse();
               ))}
             </tbody>
           </table>
->>>>>>> e8d45dca04f9527b91e58ff919d08d78bc36bf24
         </div>
 
         {/* OS Data Table */}
