@@ -109,64 +109,64 @@ const Layout = () => {
 
         {/* Line and Pie Chart Widgets */}
         <div className="widgets-container">
-        <div className="bar-chart-widget">
-          <div className="line-chart-widget">
-            <h3>Lead Generation Over Time</h3>
-            <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={leadData}>
-                <Line
-                  type="monotone"
-                  dataKey="leads"
-                  stroke="#8884d8"
-                  strokeWidth={2}
-                />
-                <Tooltip />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
+          <div className="bar-chart-widget">
+            <div className="line-chart-widget">
+              <h3>Lead Generation Over Time</h3>
+              <ResponsiveContainer width="100%" height={300}>
+                <LineChart data={leadData}>
+                  <Line
+                    type="monotone"
+                    dataKey="leads"
+                    stroke="#8884d8"
+                    strokeWidth={2}
+                  />
+                  <Tooltip />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
           </div>
           <div className="bar-chart-widget">
-          <div className="pie-chart-widget">
-            <h3>Lead Conversion Breakdown</h3>
-            <ResponsiveContainer width="100%" height={300}>
-              <PieChart>
-                <Pie
-                  data={pieData}
-                  cx="50%"
-                  cy="50%"
-                  label={({ name, percent }) =>
-                    `${name} ${(percent * 100).toFixed(0)}%`
-                  }
-                  outerRadius={80}
-                  fill="#8884d8"
-                  dataKey="value"
-                  animationDuration={800}
-                >
-                  {pieData.map((entry, index) => (
-                    <Cell
-                      key={`cell-${index}`}
-                      fill={COLORS[index % COLORS.length]}
-                      onMouseEnter={() =>
-                        console.log(`Hovered over: ${entry.name}`)
-                      }
-                    />
-                  ))}
-                </Pie>
-                <Tooltip
-                  formatter={(value) => new Intl.NumberFormat().format(value)}
-                />
-                <Legend
-                  layout="vertical"
-                  verticalAlign="middle"
-                  align="right"
-                  iconType="circle"
-                  wrapperStyle={{
-                    paddingLeft: "20px",
-                  }}
-                />
-              </PieChart>
-            </ResponsiveContainer>
-          </div>
+            <div className="pie-chart-widget">
+              <h3>Lead Conversion Breakdown</h3>
+              <ResponsiveContainer width="100%" height={300}>
+                <PieChart>
+                  <Pie
+                    data={pieData}
+                    cx="50%"
+                    cy="50%"
+                    label={({ name, percent }) =>
+                      `${name} ${(percent * 100).toFixed(0)}%`
+                    }
+                    outerRadius={80}
+                    fill="#8884d8"
+                    dataKey="value"
+                    animationDuration={800}
+                  >
+                    {pieData.map((entry, index) => (
+                      <Cell
+                        key={`cell-${index}`}
+                        fill={COLORS[index % COLORS.length]}
+                        onMouseEnter={() =>
+                          console.log(`Hovered over: ${entry.name}`)
+                        }
+                      />
+                    ))}
+                  </Pie>
+                  <Tooltip
+                    formatter={(value) => new Intl.NumberFormat().format(value)}
+                  />
+                  <Legend
+                    layout="vertical"
+                    verticalAlign="middle"
+                    align="right"
+                    iconType="circle"
+                    wrapperStyle={{
+                      paddingLeft: "20px",
+                    }}
+                  />
+                </PieChart>
+              </ResponsiveContainer>
+            </div>
           </div>
         </div>
 
