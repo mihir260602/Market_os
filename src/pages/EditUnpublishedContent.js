@@ -258,6 +258,7 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    marginLeft: "200px", // Adjusts based on side navigation
     padding: "40px",
     backgroundColor: "#f0f2f5",
     minHeight: "100vh",
@@ -293,6 +294,7 @@ const styles = {
     width: "100%",
     maxWidth: "1200px",
     marginRight: "0px", // Removed extra padding/margin
+    flexWrap: "wrap", // Allows wrapping of editorContent and rightSidebar
   },
   editorContent: {
     flex: 2,
@@ -300,14 +302,17 @@ const styles = {
     backgroundColor: "#fff",
     borderRadius: "8px",
     boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
-    marginRight: "0px", // Ensure no right margin
+    marginRight: "20px", // Ensure some right margin for large screens
+    minWidth: "300px", // Min width for responsiveness
   },
   rightSidebar: {
     flex: 1,
-    padding: "20px 20px 20px 20px", // Removed right padding
+    padding: "20px",
     backgroundColor: "#fff",
     borderRadius: "8px",
     boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
+    minWidth: "300px", // Min width for responsiveness
+    marginTop: "20px", // Added margin for small screens
   },
   formGroup: {
     marginBottom: "20px",
@@ -322,13 +327,9 @@ const styles = {
     width: "100%",
     padding: "10px",
     borderRadius: "4px",
-    border: "2px solid #FF6F00", // Added border color
+    border: "2px solid #FF6F00",
     boxSizing: "border-box",
     transition: "border-color 0.3s ease, box-shadow 0.3s ease",
-  },
-  inputFocus: {
-    borderColor: "#FFA726", // Change border color on focus
-    boxShadow: "0 0 5px rgba(255, 105, 0, 0.5)", // Shadow on focus
   },
   dropzone: {
     border: "2px dashed #FF6F00",
@@ -348,7 +349,7 @@ const styles = {
   },
   editorWrapper: {
     marginTop: "10px",
-    border: "1px solid #FF6F00", // Changed border color
+    border: "1px solid #FF6F00",
     borderRadius: "4px",
     padding: "10px",
   },
@@ -358,6 +359,7 @@ const styles = {
     width: "100%",
     maxWidth: "1200px",
     marginTop: "20px",
+    flexWrap: "wrap", // Stack buttons if necessary
   },
   cancelButton: {
     backgroundColor: "#f44336",
@@ -367,6 +369,7 @@ const styles = {
     borderRadius: "4px",
     cursor: "pointer",
     transition: "background-color 0.3s ease, transform 0.3s ease",
+    marginBottom: "10px", // Ensure spacing on smaller screens
   },
   saveDraftButton: {
     backgroundColor: "green",
@@ -376,55 +379,45 @@ const styles = {
     borderRadius: "4px",
     cursor: "pointer",
     transition: "background-color 0.3s ease, transform 0.3s ease",
+    marginBottom: "10px", // Ensure spacing on smaller screens
   },
-  buttonHover: {
-    backgroundColor: "#FFA726",
-    transform: "scale(1.05)",
+
+  // Responsive adjustments with media queries
+  "@media (max-width: 1024px)": {
+    pageContainer: {
+      marginLeft: "0", // Remove margin for side navigation on smaller screens
+      padding: "20px",
+    },
+    editorContainer: {
+      flexDirection: "column", // Stack editor and sidebar vertically
+    },
+    editorContent: {
+      marginRight: "0", // No margin needed in stacked layout
+    },
+    rightSidebar: {
+      marginTop: "0", // Align right sidebar with editor on smaller screens
+    },
+    buttonContainer: {
+      flexDirection: "column", // Stack buttons vertically on small screens
+    },
   },
-  editorScrollContainer: {
-    height: "500px", // Adjust height as needed
-    overflowY: "auto",
-    border: "1px solid #ddd",
-    borderRadius: "4px",
-  },
-  modalBackdrop: {
-    position: "fixed",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: "rgba(0,0,0,0.5)",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  modalContainer: {
-    backgroundColor: "#fff",
-    padding: "20px",
-    borderRadius: "8px",
-    boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
-    textAlign: "center",
-  },
-  modalActions: {
-    display: "flex",
-    justifyContent: "space-around",
-  },
-  modalButton: {
-    backgroundColor: "orange",
-    border: "none",
-    color: "#fff",
-    padding: "10px 20px",
-    borderRadius: "4px",
-    cursor: "pointer",
-    margin: "0 10px",
-  },
-  modalCloseButton: {
-    backgroundColor: "#f44336",
-    border: "none",
-    color: "#fff",
-    padding: "10px 20px",
-    borderRadius: "4px",
-    cursor: "pointer",
+
+  "@media (max-width: 768px)": {
+    editorContainer: {
+      flexDirection: "column", // Stack editor and sidebar vertically on smaller screens
+    },
+    rightSidebar: {
+      width: "100%", // Full width for sidebar on small screens
+    },
+    buttonContainer: {
+      justifyContent: "center", // Center buttons on smaller screens
+    },
+    cancelButton: {
+      width: "100%", // Full width buttons on small screens
+    },
+    saveDraftButton: {
+      width: "100%", // Full width buttons on small screens
+    },
   },
 };
 

@@ -95,7 +95,7 @@ const fetchPageViewsForGraph = async () => {
   let timeAggregatedViews = {};
   let totalPageViews = 0;
   let nextUrl =
-    "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=1000";
+    "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=10000";
   const headers = {
     Authorization: `Bearer ${process.env.REACT_APP_PERSONAL_API_KEY_NEW}`,
   };
@@ -187,7 +187,7 @@ const getWeekNumber = (date) => {
     try {
       // Fetch the first page of results
       const response = await axios.get(
-        "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=1000",
+        "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=10000",
         {
           headers: {
             Authorization: `Bearer ${process.env.REACT_APP_PERSONAL_API_KEY_NEW}`, // Replace with your actual API key
@@ -238,7 +238,7 @@ const getWeekNumber = (date) => {
   const fetchPageViews = async () => {
     let totalPageViews = 0;
     let nextUrl =
-      "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=1000";
+      "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=10000";
     const headers = {
       Authorization: `Bearer ${process.env.REACT_APP_PERSONAL_API_KEY_NEW}`,
     };
@@ -262,7 +262,7 @@ const getWeekNumber = (date) => {
   const fetchUniqueVisitors = async () => {
     let visitorSet = new Set();
     let nextUrl =
-      "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=1000";
+      "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=10000";
     const headers = {
       Authorization: `Bearer ${process.env.REACT_APP_PERSONAL_API_KEY_NEW}`,
     };
@@ -292,7 +292,7 @@ const getWeekNumber = (date) => {
   const fetchPathData = async () => {
     let pathDataObj = {};
     let nextUrl =
-      "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=1000";
+      "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=10000";
     const headers = {
       Authorization: `Bearer ${process.env.REACT_APP_PERSONAL_API_KEY_NEW}`,
     };
@@ -350,7 +350,7 @@ const getWeekNumber = (date) => {
     let osDataObj = {};
     let totalVisitors = 0;
     let nextUrl =
-      "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=1000";
+      "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=10000";
     const headers = {
       Authorization: `Bearer ${process.env.REACT_APP_PERSONAL_API_KEY_NEW}`,
     };
@@ -395,7 +395,7 @@ const getWeekNumber = (date) => {
   const fetchCityData = async () => {
     let cityDataObj = {};
     let nextUrl =
-      "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=1000";
+      "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=10000";
     const headers = {
       Authorization: `Bearer ${process.env.REACT_APP_PERSONAL_API_KEY_NEW}`,
     };
@@ -434,7 +434,7 @@ const getWeekNumber = (date) => {
   const fetchChannelData = async () => {
     let channelDataObj = {};
     let nextUrl =
-      "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=1000";
+      "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=10000";
     const headers = {
       Authorization: `Bearer ${process.env.REACT_APP_PERSONAL_API_KEY_NEW}`,
     };
