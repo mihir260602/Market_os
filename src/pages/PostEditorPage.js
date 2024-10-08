@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
+import { useLocation, useNavigate } from "react-router-dom";
 import { saveDraft, saveDraftAndSendForReview } from "../api/contentService";
 // import {savaDraft, saveDraftAndSendForReview} from "../api/contentService";
 function PostEditorPage() {

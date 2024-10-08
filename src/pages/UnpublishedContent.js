@@ -568,8 +568,14 @@
 // export default UnpublishedContent;
 
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
 import Typography from "@mui/material/Typography";
+import { format } from "date-fns";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { usePagination, useTable } from "react-table";
@@ -577,17 +583,10 @@ import {
   deleteContent,
   fetchDraftById,
   fetchDrafts,
-  getPostImageUrl,
-  updateDraft,
+  updateDraft
 } from "../api/contentService";
-import "./UnpublishedContent.css";
-import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogTitle from "@mui/material/DialogTitle";
-import { format } from "date-fns";
 import { raiseContentTicket } from "../api/ticketService";
+import "./UnpublishedContent.css";
 
 function UnpublishedContent() {
   const [contentList, setContentList] = useState([]);
@@ -658,7 +657,7 @@ function UnpublishedContent() {
     const draftData = { status: "published", review_status: "reviewed" };
     try {
       await updateDraft(contentId, draftData);
-      navigate("/unpublished-content");
+      navigate("/published-content");
     } catch (error) {
       console.error("Failed to publish draft", error);
       alert("Failed to publish draft");

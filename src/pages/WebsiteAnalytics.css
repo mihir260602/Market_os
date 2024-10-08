@@ -1,106 +1,234 @@
-/* WebsiteAnalytics.css */
-
+/* General Layout */
 .app {
-  display: flex; /* Use flexbox for layout */
+  display: flex;
   background-color: rgb(244, 249, 250);
+  flex-direction: column; /* Mobile-first column layout */
 }
 
+.main-content {
+  margin-left: 250px; /* Space for sidebar */
+  padding: 20px;
+  width: calc(100% - 250px); /* Full width minus sidebar */
+  background-color: rgb(253, 250, 250);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0; /* Remove sidebar for smaller screens */
+    width: 100%; /* Full width */
+    padding: 15px;
+  }
+}
+
+/* Analytics Cards Container */
 .analytics-container {
-  display: flex; /* Use flexbox to align cards in a row */
-  justify-content: space-between; /* Space between cards */
-  padding: 20px; /* Padding around the container */
-  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+@media (max-width: 1024px) {
+  .analytics-container {
+    flex-direction: column; /* Stack cards on smaller screens */
+    gap: 20px;
+  }
 }
 
 /* Analytics Card */
-.metrics-box {
-  background-color: #ffffff; /* Solid white background */
-  border: 1px solid #e0e0e0; /* Light gray border */
-  border-radius: 8px; /* Slightly rounded corners */
-  padding: 20px; /* Padding inside the card */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
-  flex: 1; /* Allow cards to grow equally */
-  min-width: 200px; /* Minimum width for cards */
-  margin: 10px; /* Margin around cards for spacing */
-  transition: box-shadow 0.3s; /* Smooth shadow transition */
+.analytics-card {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+  flex: 1;
+  min-width: 220px;
+  margin: 10px;
+  transition: box-shadow 0.3s ease-in-out;
 }
 
-.metrics-box:hover {
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Darker shadow on hover */
+.analytics-card:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
-/* Chart Container */
-.chart-paper {
-  background-color: #ffffff; /* White background */
-  padding: 20px; /* Padding inside the chart */
-  border: 1px solid #e0e0e0; /* Light gray border */
-  border-radius: 8px; /* Slightly rounded corners */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
-  margin-bottom: 20px; /* Margin below the chart */
-  transition: box-shadow 0.3s; /* Smooth shadow transition */
-}
-
-.chart-paper:hover {
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Darker shadow on hover */
-}
-
-/* Responsive behavior */
 @media (max-width: 768px) {
-  .metrics-box {
-    flex: 1 0 100%; /* Full width for smaller screens */
-    margin: 10px 0; /* Stack boxes vertically on small screens */
+  .analytics-card {
+    min-width: 100%; /* Full width on smaller screens */
+    margin: 10px 0;
   }
-
-  .chart-paper {
-    width: 100%; /* Full width for charts on smaller screens */
-  }
-}
-
-.analytics-header {
-  padding: 16px;
-  border-radius: 8px;
-  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
-  background-color: white;
-  margin-bottom: 20px;
-  text-align: center; /* Center header text */
-  font-weight: bold; /* Bold header text */
-}
-
-.card-content {
-  flex-grow: 1; /* Allow content to grow and fill space */
 }
 
 .card-content h3 {
-  margin: 0; /* Remove margin for heading */
-  font-size: 18px; /* Font size for heading */
-  color: #333; /* Dark gray text color for heading */
+  font-size: 18px;
 }
 
 .card-content p {
-  font-size: 24px; /* Font size for value */
-  font-weight: bold; /* Bold font for value */
-  color: #333; /* Text color for value */
-  margin: 5px 0 0; /* Margin for spacing */
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin: 5px 0 0;
 }
 
-.card-footer {
-  margin-top: 10px; /* Space above the footer */
-  font-size: 14px; /* Font size for footer */
-  color: #666; /* Gray color for footer text */
+/* Charts Container */
+.charts-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 25px;
+  padding: 20px;
+  flex-wrap: wrap;
 }
 
-.card-footer span {
-  display: inline-block; /* Allow items to sit next to each other */
-  margin-right: 15px; /* Space between footer items */
-}
-
-@media (max-width: 900px) {
+@media (max-width: 768px) {
   .charts-container {
-    flex-direction: column; /* Stack charts vertically on smaller screens */
+    flex-direction: column; /* Stack charts vertically */
+    gap: 20px;
+  }
+}
+
+/* Line Chart */
+.line-chart, .pie-chart {
+  flex: 1;
+  min-width: 400px;
+  background-color: #ffffff;
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.line-chart:hover, .pie-chart:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+  .line-chart, .pie-chart {
+    min-width: 100%; /* Full width on small screens */
+  }
+}
+
+/* Metric Card */
+.metric-card {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 160px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.metric-card:hover {
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .metric-card {
+    width: 100%; /* Full width on small screens */
+  }
+}
+
+/* Top Leads Table */
+.top-leads-table {
+  margin-bottom: 30px;
+}
+
+.top-leads-table h4 {
+  margin-bottom: 15px;
+}
+
+.top-leads-table table {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
+  margin-bottom: 25px;
+}
+
+.top-leads-table th, .top-leads-table td {
+  padding: 15px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.top-leads-table th {
+  background-color: #f4f4f4;
+}
+
+.top-leads-table td {
+  background-color: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .top-leads-table th, .top-leads-table td {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 576px) {
+  .app {
+    flex-direction: column;
   }
 
-  .line-chart,
-  .pie-chart {
-    width: 100%; /* Full width on smaller screens */
+  .charts-container, .analytics-container {
+    flex-direction: column;
   }
+
+  .main-content {
+    padding: 10px;
+  }
+
+  .line-chart, .pie-chart {
+    min-width: 100%;
+  }
+}
+
+
+
+/* General styling for the line graph section */
+.line-chart-container {
+  background-color: #ffffff; /* White background for contrast */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  padding: 20px; /* Padding around the chart */
+  margin: 20px 0; /* Margin above and below the chart */
+}
+
+.line-chart-title {
+  font-size: 24px; /* Larger title font */
+  font-weight: bold; /* Bold title */
+  margin-bottom: 15px; /* Space below title */
+  color: #333; /* Dark color for the title */
+}
+
+.line-chart-label {
+  font-size: 14px; /* Slightly larger label font */
+  color: #666; /* Medium gray for labels */
+}
+
+.line-chart-tooltip {
+  background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background for tooltip */
+  border: 1px solid #888; /* Border for tooltip */
+  border-radius: 4px; /* Rounded corners for tooltip */
+  padding: 10px; /* Padding for tooltip */
+}
+
+.filter-dropdown {
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+}
+
+.filter-dropdown label {
+  margin-right: 10px;
+}
+
+.filter-dropdown select {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
