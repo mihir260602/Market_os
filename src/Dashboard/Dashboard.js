@@ -63,29 +63,15 @@ const Layout = () => {
   const [lineGraphData, setLineGraphData] = useState([]);
   const [filter, setFilter] = useState("hour");
   const [pageViewData, setPageViewData] = useState([]);
-
-  // Default filter // State to hold OS data
-
-  // ---------------------------
-  const fetchPageViewsForGraph = async () => {
-    let pageViewData = [];
-    let timeAggregatedViews = {};
-    let totalPageViews = 0;
-    let nextUrl =
-      "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=1000";
-    const headers = {
-      Authorization: `Bearer ${process.env.REACT_APP_PERSONAL_API_KEY_NEW}`,
-    };
-
-  const [sortDirection, setSortDirection] = useState('asc');
+  const [sortDirection, setSortDirection] = useState("asc");
 
   const [sortConfig, setSortConfig] = useState({
-    key: 'views',  // Default sorting by views
-    direction: 'asc', // Default ascending order
+    key: "views", // Default sorting by views
+    direction: "asc", // Default ascending order
   });
   const handleSort = (field) => {
     let sortedData = [...pathData];
-    const isAsc = sortConfig.key === field && sortConfig.direction === 'asc';
+    const isAsc = sortConfig.key === field && sortConfig.direction === "asc";
 
     sortedData.sort((a, b) => {
       if (isAsc) {
@@ -94,10 +80,10 @@ const Layout = () => {
         return b[field] - a[field];
       }
     });
-    
+
     setSortConfig({
       key: field,
-      direction: isAsc ? 'desc' : 'asc',
+      direction: isAsc ? "desc" : "asc",
     });
 
     setPathData(sortedData);
@@ -105,19 +91,18 @@ const Layout = () => {
   // const handleFilterChange = (newFilter) => {
   //   setFilter(newFilter);
   // };
-// Default filter // State to hold OS data
+  // Default filter // State to hold OS data
 
-// ---------------------------
-const fetchPageViewsForGraph = async () => {
-  let pageViewData = [];
-  let timeAggregatedViews = {};
-  let totalPageViews = 0;
-  let nextUrl =
-    "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=10000";
-  const headers = {
-    Authorization: `Bearer ${process.env.REACT_APP_PERSONAL_API_KEY_NEW}`,
-  };
-
+  // ---------------------------
+  const fetchPageViewsForGraph = async () => {
+    let pageViewData = [];
+    let timeAggregatedViews = {};
+    let totalPageViews = 0;
+    let nextUrl =
+      "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=10000";
+    const headers = {
+      Authorization: `Bearer ${process.env.REACT_APP_PERSONAL_API_KEY_NEW}`,
+    };
 
     // Function to process events and extract timestamps
     const processEvents = (events) => {
@@ -601,19 +586,34 @@ const fetchPageViewsForGraph = async () => {
           <h3>Path Data</h3>
           <table>
             <thead>
-            <tr>
-            <th>Path</th>
-            <th><button onClick={() => handleSort('Visitors')} className="sort-button">
-                {sortConfig.key === 'Visitors' && sortConfig.direction === 'asc' ? '↑' : '↓'}
-              </button>Visitors</th>
-            <th><button onClick={() => handleSort('Views')} className="sort-button">
-                {sortConfig.key === 'Views' && sortConfig.direction === 'asc' ? '↑' : '↓'}
-              </button>
-              Views
-              
-            </th>
-            <th>Bounce Rate</th>
-          </tr>
+              <tr>
+                <th>Path</th>
+                <th>
+                  <button
+                    onClick={() => handleSort("Visitors")}
+                    className="sort-button"
+                  >
+                    {sortConfig.key === "Visitors" &&
+                    sortConfig.direction === "asc"
+                      ? "↑"
+                      : "↓"}
+                  </button>
+                  Visitors
+                </th>
+                <th>
+                  <button
+                    onClick={() => handleSort("Views")}
+                    className="sort-button"
+                  >
+                    {sortConfig.key === "Views" &&
+                    sortConfig.direction === "asc"
+                      ? "↑"
+                      : "↓"}
+                  </button>
+                  Views
+                </th>
+                <th>Bounce Rate</th>
+              </tr>
             </thead>
             <tbody>
               {pathData.map((data, index) => (
