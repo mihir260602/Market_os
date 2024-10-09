@@ -51,32 +51,6 @@ export const saveDraft = async (draftData) => {
   }
 };
 
-// export const saveDraft = async (draftData) => {
-//   try {
-//     const token = getAuthToken();
-//     const formData = new FormData();
-//     formData.append("title", draftData.title);
-//     formData.append("category", draftData.category);
-//     formData.append("tags", JSON.stringify(draftData.tags));
-//     formData.append("content_body", draftData.content_body);
-//     formData.append("banner_image", draftData.banner_image);
-//     formData.append("meta_title", draftData.meta_title);
-//     formData.append("meta_description", draftData.meta_description);
-//     formData.append("meta_keywords", draftData.meta_keywords);
-
-//     const response = await axios.post(`${getBaseUrl()}/content`, formData, {
-//       headers: {
-//         "Authorization": `Bearer ${token}`,
-//         "Content-Type": "multipart/form-data",
-//       },
-//     });
-//     return response.data;
-//   } catch (error) {
-//     console.error("Error saving draft:", error);
-//     throw error;
-//   }
-// };
-
 export const deleteContent = async (contentId) => {
   try {
     const token = getAuthToken();
@@ -94,38 +68,6 @@ export const deleteContent = async (contentId) => {
     throw error;
   }
 };
-
-// export const deleteContent = async (contentId) => {
-//   try {
-//     // Retrieve the auth_token from local storage (or wherever it's stored)
-//     const authToken = localStorage.getItem("auth_token");
-
-//     // Set up the authorization headers
-//     const config = {
-//       headers: {
-//         Authorization: `Bearer ${authToken}`,
-//       },
-//       withCredentials: true,
-//     };
-
-//     // Make the DELETE request
-//     const response = await axios.delete(
-//       `${getBaseUrl()}/content/${contentId}/`,
-//       config
-//     );
-
-//     // Check the response status or return the response data if needed
-//     if (response.status === 204) {
-//       // 204 No Content indicates success
-//       return true; // Successfully deleted
-//     } else {
-//       throw new Error("Failed to delete content. Please try again.");
-//     }
-//   } catch (error) {
-//     console.error("Error deleting content:", error);
-//     throw error; // Re-throw the error for further handling
-//   }
-// };
 
 export const saveDraftAndSendForReview = async (draftData) => {
   try {
@@ -201,7 +143,7 @@ export const fetchContentList = async (options = {}) => {
   try {
     const params = new URLSearchParams({
       page: options.page || 1,
-      limit: options.limit || 10,
+      limit: options.limit || 100,
       sort_by: options.sortBy || "created_at",
       order: options.order || "asc",
       ...(options.author && { author: options.author }),
@@ -241,89 +183,6 @@ export const fetchContentList = async (options = {}) => {
     throw error;
   }
 };
-
-// Update
-// export const updateDraft = async (id, updatedContent) => {
-//   try {
-//     const token = localStorage.getItem("auth_token");
-
-//     // Create a new FormData object for multipart form data
-//     const formData = new FormData();
-
-//     // Conditionally append fields to the formData
-//     if (updatedContent.title) {
-//       formData.append("title", updatedContent.title);
-//     }
-//     if (updatedContent.category) {
-//       formData.append("category", updatedContent.category);
-//     }
-//     if (updatedContent.tags) {
-//       formData.append("tags", JSON.stringify(updatedContent.tags)); // Stringify tags if it's an array
-//     }
-//     if (updatedContent.content_body) {
-//       formData.append("content_body", updatedContent.content_body);
-//     }
-//     if (updatedContent.status) {
-//       formData.append("status", updatedContent.status);
-//     }
-//     if (updatedContent.review_status) {
-//       formData.append("review_status", updatedContent.review_status);
-//     }
-
-//     // Append files only if they are updated
-//     if (updatedContent.banner_image) {
-//       formData.append("banner_image", updatedContent.banner_image); // Banner image file
-//     }
-
-//     if (updatedContent.meta_title) {
-//       formData.append("meta_title", updatedContent.meta_title);
-//     }
-//     if (updatedContent.meta_description) {
-//       formData.append("meta_description", updatedContent.meta_description);
-//     }
-//     if (updatedContent.meta_keywords) {
-//       formData.append("meta_keywords", updatedContent.meta_keywords);
-//     }
-
-//     // Configure request headers with JWT token
-//     const config = {
-//       headers: {
-//         Authorization: `Bearer ${token}`,
-//         // Remove Content-Type; axios will set it automatically for FormData
-//       },
-//       withCredentials: true,
-//     };
-
-//     // Send PUT request to update the draft
-//     const response = await axios.put(
-//       `${getBaseUrl()}/content/${id}/`,
-//       formData,
-//       config
-//     );
-
-//     console.log(response.data);
-//     return response.data; // Return the updated content data
-//   } catch (error) {
-//     console.error("Error updating draft:", error);
-//     throw error; // Rethrow the error to handle it in the component
-//   }
-// };
-
-// export const updateDraft = async (draftId, draftData) => {
-//   try {
-//     const token = getAuthToken();
-//     const response = await axios.put(`${getBaseUrl()}/content/${draftId}/`, draftData, {
-//       headers: {
-//         "Authorization": `Bearer ${token}`,
-//         "status": "published"
-//       },
-//     });
-//     return response.data; // Return the updated draft data
-//   } catch (error) {
-//     console.error("Error updating draft:", error);
-//     throw error;
-//   }
-// };
 
 export const updateDraft = async (draftId, draftData) => {
   try {
@@ -365,31 +224,3 @@ export const fetchDraftById = async (draftId) => {
     throw error;
   }
 };
-
-// Fetch by Id
-// export const fetchDraftById = async (postId) => {
-//   try {
-//     // Retrieve the JWT token from localStorage
-//     const token = localStorage.getItem("auth_token"); // Ensure this is the correct way to get your token
-
-//     // Set up the config for the axios request with the Authorization header
-//     const config = {
-//       headers: {
-//         Authorization: `Bearer ${token}`, // Include the JWT token
-//         "Content-Type": "application/json", // Ensure correct content type
-//       },
-//     };
-
-//     // Make the API call to fetch the post by ID
-//     const response = await axios.get(
-//       `${getBaseUrl()}/content/${postId}/`,
-//       config
-//     );
-
-//     // Return the data received from the API
-//     return response.data;
-//   } catch (error) {
-//     console.error("Error fetching post:", error);
-//     throw error; // Handle the error
-//   }
-// };
