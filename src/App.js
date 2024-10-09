@@ -35,20 +35,20 @@ import Posteditorpage from "./pages/PostEditorPage";
 import Publishcontent from "./pages/PublishedContent";
 import Unpublishedcontent from "./pages/UnpublishedContent";
 import Tickets from "./Tickets/Tickets";
+import PostPage from "./Home/PostPage";
+import ContactForm from "./pages/ContactForm";
 
 posthog.init(process.env.REACT_APP_POSTHOG_API_KEY, {
   api_host: "https://app.posthog.com",
 });
 
-// Layout component that conditionally renders Sidebar and Header
 function Layout({ children }) {
-  const location = useLocation(); // Use useLocation inside Router
+  const location = useLocation();
   useEffect(() => {
-    posthog.capture("$pageview"); // PostHog pageview tracking
+    posthog.capture("$pageview");
   }, [location]);
 
-  // Pages where Sidebar and Header should not be displayed
-  const hideSidebarAndHeader = ["/", "/Login", "/mform"].includes(
+  const hideSidebarAndHeader = ["/", "/Login", "/mform", "/contact"].includes(
     location.pathname
   );
 
@@ -92,6 +92,7 @@ function App() {
             <Route path="/tickets" element={<Tickets />} />
             <Route path="/website-analytics" element={<WebsiteAnalytics />} />
             <Route path="/email-analytics" element={<EmailAnalytics />} />
+            <Route path="/contact" element={<ContactForm />} />
             <Route
               path="/audience-segmentation"
               element={<AudienceSegmentation />}
@@ -108,6 +109,7 @@ function App() {
               path="/edit-unpublish-content/:id"
               element={<Editunpublishedcontent />}
             />
+            <Route path="/post/:id" element={<PostPage />} />
           </Routes>
         </Layout>
       </Router>

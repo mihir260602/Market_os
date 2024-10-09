@@ -1,17 +1,21 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import "./Dashboard.css";
 
 import {
   Bar,
   BarChart,
   CartesianGrid,
+  Cell,
+  Legend,
   Line,
   LineChart,
+  Pie,
+  PieChart,
   ResponsiveContainer,
   Tooltip,
   XAxis,
-  YAxis
+  YAxis,
 } from "recharts";
 // Example data for the charts
 const leadData = [
@@ -55,101 +59,99 @@ const Layout = () => {
   const [totalSessions, setTotalSessions] = useState(0);
   const [uniqueSessions, setUniqueSessions] = useState(0);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null); 
+  const [error, setError] = useState(null);
   const [lineGraphData, setLineGraphData] = useState([]);
   const [filter, setFilter] = useState("hour");
   const [pageViewData, setPageViewData] = useState([]);
-// Default filter // State to hold OS data
+  // Default filter // State to hold OS data
 
-// ---------------------------
-const fetchPageViewsForGraph = async () => {
-  let pageViewData = [];
-  let timeAggregatedViews = {};
-  let totalPageViews = 0;
-  let nextUrl =
-    "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=1000";
-  const headers = {
-    Authorization: `Bearer ${process.env.REACT_APP_PERSONAL_API_KEY_NEW}`,
-  };
+  // ---------------------------
+  const fetchPageViewsForGraph = async () => {
+    let pageViewData = [];
+    let timeAggregatedViews = {};
+    let totalPageViews = 0;
+    let nextUrl =
+      "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=1000";
+    const headers = {
+      Authorization: `Bearer ${process.env.REACT_APP_PERSONAL_API_KEY_NEW}`,
+    };
 
-  // Function to process events and extract timestamps
-  const processEvents = (events) => {
-    events.forEach((event) => {
-      const timestamp = event.timestamp;
-      if (timestamp) {
-        pageViewData.push(new Date(timestamp));
+    // Function to process events and extract timestamps
+    const processEvents = (events) => {
+      events.forEach((event) => {
+        const timestamp = event.timestamp;
+        if (timestamp) {
+          pageViewData.push(new Date(timestamp));
+        }
+      });
+    };
+
+    const fetchNextPage = async (nextUrl) => {
+      try {
+        const response = await axios.get(nextUrl, { headers });
+        processEvents(response.data.results);
+        totalPageViews += response.data.results.length;
+
+        if (response.data.next) {
+          await fetchNextPage(response.data.next); // Recursive call to fetch all pages
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setError("Error fetching line graph data.");
       }
-    });
-  };
+    };
 
-  const fetchNextPage = async (nextUrl) => {
     try {
-      const response = await axios.get(nextUrl, { headers });
-      processEvents(response.data.results);
-      totalPageViews += response.data.results.length;
+      await fetchNextPage(nextUrl); // Start fetching from the first page
 
-      if (response.data.next) {
-        await fetchNextPage(response.data.next); // Recursive call to fetch all pages
-      }
+      // Aggregating page views based on the filter (minute/hour/day)
+      const aggregatePageViews = () => {
+        pageViewData.forEach((timestamp) => {
+          let timeUnit;
+          if (filter === "month") {
+            timeUnit = timestamp.toISOString().slice(0, 7); // "YYYY-MM-DDTHH:MM"
+          } else if (filter === "hour") {
+            timeUnit = timestamp.toISOString().slice(0, 13); // "YYYY-MM-DDTHH"
+          } else if (filter === "day") {
+            timeUnit = timestamp.toISOString().slice(0, 10); // "YYYY-MM-DD"
+          } else if (filter === "year") {
+            timeUnit = timestamp.getFullYear(); // "YYYY-MM-DD"
+          } else if (filter === "week") {
+            timeUnit = getWeekNumber(timestamp); // "YYYY-MM-DD"
+          }
+
+          if (!timeAggregatedViews[timeUnit]) {
+            timeAggregatedViews[timeUnit] = 0;
+          }
+
+          timeAggregatedViews[timeUnit] += 1;
+        });
+
+        // Formatting data for the line graph
+        const formattedData = Object.keys(timeAggregatedViews).map(
+          (timeUnit) => ({
+            time: timeUnit,
+            views: timeAggregatedViews[timeUnit],
+          })
+        );
+
+        setLineGraphData(formattedData);
+        setTotalPageViews(totalPageViews); // Set the total page views
+      };
+
+      aggregatePageViews(); // Call the aggregation function after fetching data
     } catch (error) {
-      console.error("Error fetching data:", error);
-      setError("Error fetching line graph data.");
+      console.error("Error fetching page view data:", error);
     }
   };
 
-  try {
-    await fetchNextPage(nextUrl); // Start fetching from the first page
+  const getWeekNumber = (date) => {
+    const start = new Date(date.getFullYear(), 0, 1);
+    const days = Math.floor((date - start) / (24 * 60 * 60 * 1000));
+    return `Week ${Math.ceil(days / 7)} of ${date.getFullYear()}`;
+  };
 
-    // Aggregating page views based on the filter (minute/hour/day)
-    const aggregatePageViews = () => {
-      pageViewData.forEach((timestamp) => {
-        let timeUnit;
-        if (filter === "month") {
-          timeUnit = timestamp.toISOString().slice(0, 7); // "YYYY-MM-DDTHH:MM"
-        } else if (filter === "hour") {
-          timeUnit = timestamp.toISOString().slice(0, 13); // "YYYY-MM-DDTHH"
-        } else if (filter === "day") {
-          timeUnit = timestamp.toISOString().slice(0, 10); // "YYYY-MM-DD"
-        }else if (filter === "year") {
-          timeUnit = timestamp.getFullYear(); // "YYYY-MM-DD"
-        }
-        else if (filter === "week") {
-          timeUnit = getWeekNumber(timestamp);// "YYYY-MM-DD"
-        }
-  
-        if (!timeAggregatedViews[timeUnit]) {
-          timeAggregatedViews[timeUnit] = 0;
-        }
-
-        timeAggregatedViews[timeUnit] += 1;
-      });
-
-      // Formatting data for the line graph
-      const formattedData = Object.keys(timeAggregatedViews).map((timeUnit) => ({
-        time: timeUnit,
-        views: timeAggregatedViews[timeUnit],
-      }));
-
-      setLineGraphData(formattedData);
-      setTotalPageViews(totalPageViews); // Set the total page views
-    };
-
-    aggregatePageViews(); // Call the aggregation function after fetching data
-  } catch (error) {
-    console.error("Error fetching page view data:", error);
-  }
-};
-
-const getWeekNumber = (date) => {
-  const start = new Date(date.getFullYear(), 0, 1);
-  const days = Math.floor((date - start) / (24 * 60 * 60 * 1000));
-  return `Week ${Math.ceil(days / 7)} of ${date.getFullYear()}`;
-};
-
-
-// ==========================
-
-
+  // ==========================
 
   const fetchSessionData = async () => {
     setLoading(true);
@@ -443,8 +445,6 @@ const getWeekNumber = (date) => {
     }
   };
 
-
-
   useEffect(() => {
     fetchPageViews();
     fetchUniqueVisitors();
@@ -452,7 +452,7 @@ const getWeekNumber = (date) => {
     fetchOsData();
     fetchCityData();
     fetchChannelData();
-    fetchSessionData(); 
+    fetchSessionData();
     // Fetch OS data
     fetchPageViewsForGraph();
   }, [filter]);
@@ -462,10 +462,10 @@ const getWeekNumber = (date) => {
   };
 
   lineGraphData.sort((a, b) => new Date(a.time) - new Date(b.time));
-console.log("Sorted Data: ", lineGraphData); // Debugging line
+  console.log("Sorted Data: ", lineGraphData); // Debugging line
 
-// Reversing the data to render correctly
-const reversedData = lineGraphData.slice().reverse();
+  // Reversing the data to render correctly
+  const reversedData = lineGraphData.slice().reverse();
   return (
     <div className="app">
       <div className="main-content">
@@ -511,113 +511,50 @@ const reversedData = lineGraphData.slice().reverse();
           </div>
         </div>
 
-<<<<<<< HEAD
-        {/* Line and Pie Chart Widgets */}
-        <div className="widgets-container">
-          <div className="bar-chart-widget">
-            <div className="line-chart-widget">
-              <h3>Lead Generation Over Time</h3>
-              <ResponsiveContainer width="100%" height={300}>
-                <LineChart data={leadData}>
-                  <Line
-                    type="monotone"
-                    dataKey="leads"
-                    stroke="#8884d8"
-                    strokeWidth={2}
-                  />
-                  <Tooltip />
-                </LineChart>
-              </ResponsiveContainer>
-            </div>
-          </div>
-          <div className="bar-chart-widget">
-            <div className="pie-chart-widget">
-              <h3>Lead Conversion Breakdown</h3>
-              <ResponsiveContainer width="100%" height={300}>
-                <PieChart>
-                  <Pie
-                    data={pieData}
-                    cx="50%"
-                    cy="50%"
-                    label={({ name, percent }) =>
-                      `${name} ${(percent * 100).toFixed(0)}%`
-                    }
-                    outerRadius={80}
-                    fill="#8884d8"
-                    dataKey="value"
-                    animationDuration={800}
-                  >
-                    {pieData.map((entry, index) => (
-                      <Cell
-                        key={`cell-${index}`}
-                        fill={COLORS[index % COLORS.length]}
-                        onMouseEnter={() =>
-                          console.log(`Hovered over: ${entry.name}`)
-                        }
-                      />
-                    ))}
-                  </Pie>
-                  <Tooltip
-                    formatter={(value) => new Intl.NumberFormat().format(value)}
-                  />
-                  <Legend
-                    layout="vertical"
-                    verticalAlign="middle"
-                    align="right"
-                    iconType="circle"
-                    wrapperStyle={{
-                      paddingLeft: "20px",
-                    }}
-                  />
-                </PieChart>
-              </ResponsiveContainer>
-            </div>
-          </div>
-=======
         <div className="filter-dropdown">
-        <label htmlFor="filter-select">Select Time Filter:</label>
-        <select 
-          id="filter-select" 
-          value={filter} 
-          onChange={(e) => handleFilterChange(e.target.value)}
-        >
-          <option value="hour">Hour</option>
-          <option value="day">Day</option>
-          <option value="week">Week</option>
-          <option value="month">Month</option>
-          <option value="year">Year</option>
-        </select>
-      </div>
+          <label htmlFor="filter-select">Select Time Filter:</label>
+          <select
+            id="filter-select"
+            value={filter}
+            onChange={(e) => handleFilterChange(e.target.value)}
+          >
+            <option value="hour">Hour</option>
+            <option value="day">Day</option>
+            <option value="week">Week</option>
+            <option value="month">Month</option>
+            <option value="year">Year</option>
+          </select>
+        </div>
 
-      {/* Line graph section */}
-<div className="line-chart-container">
-  <h3 className="line-chart-title">Live Page Views</h3>
-  <ResponsiveContainer width="100%" height={300}>
-  <LineChart data={reversedData}>
-    <XAxis dataKey="time" stroke="#8884d8" />
-    <YAxis stroke="#8884d8" />
-    <Tooltip 
-      contentStyle={{
-        backgroundColor: 'rgba(255, 255, 255, 0.9)',
-        border: '1px solid #888',
-        borderRadius: '4px',
-        padding: '10px',
-      }} 
-      cursor={false} 
-    />
-    <CartesianGrid strokeDasharray="5 5" stroke="#e0e0e0" />
-    <Line 
-      type="monotone" 
-      dataKey="views" 
-      stroke="#4caf50" 
-      strokeWidth={2} 
-      dot={{ fill: '#4caf50', stroke: '#fff', strokeWidth: 2 }} 
-    />
-  </LineChart>
-</ResponsiveContainer>
-</div>
-     {/* Path Data Table */}
-     <div className="path-data-section">
+        {/* Line graph section */}
+        <div className="line-chart-container">
+          <h3 className="line-chart-title">Live Page Views</h3>
+          <ResponsiveContainer width="100%" height={300}>
+            <LineChart data={reversedData}>
+              <XAxis dataKey="time" stroke="#8884d8" />
+              <YAxis stroke="#8884d8" />
+              <Tooltip
+                contentStyle={{
+                  backgroundColor: "rgba(255, 255, 255, 0.9)",
+                  border: "1px solid #888",
+                  borderRadius: "4px",
+                  padding: "10px",
+                }}
+                cursor={false}
+              />
+              <CartesianGrid strokeDasharray="5 5" stroke="#e0e0e0" />
+              <Line
+                type="monotone"
+                dataKey="views"
+                stroke="#4caf50"
+                strokeWidth={2}
+                dot={{ fill: "#4caf50", stroke: "#fff", strokeWidth: 2 }}
+              />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+        {/* Path Data Table */}
+        <div className="path-data-section">
           <h3>Path Data</h3>
           <table>
             <thead>
@@ -639,7 +576,6 @@ const reversedData = lineGraphData.slice().reverse();
               ))}
             </tbody>
           </table>
->>>>>>> e8d45dca04f9527b91e58ff919d08d78bc36bf24
         </div>
 
         {/* OS Data Table */}
@@ -709,39 +645,45 @@ const reversedData = lineGraphData.slice().reverse();
             </tbody>
           </table>
         </div>
-        <div className="button-container" style={{ margin: '20px' }}>
-        <button
-          onClick={() => window.location.href = 'https://us.posthog.com/project/95663/replay/home'} // Replace with your target URL
-          style={{
-            padding: '10px 20px',
-            backgroundColor: "orange",
-            color: '#fff',
-            border: 'none',
-            borderRadius: '5px',
-            cursor: 'pointer',
-            fontSize: '16px',
-          }}
-        >
-          Preview Session Recordings 
-        </button>
-      {/* </div>
+        <div className="button-container" style={{ margin: "20px" }}>
+          <button
+            onClick={() =>
+              (window.location.href =
+                "https://us.posthog.com/project/95663/replay/home")
+            } // Replace with your target URL
+            style={{
+              padding: "10px 20px",
+              backgroundColor: "orange",
+              color: "#fff",
+              border: "none",
+              borderRadius: "5px",
+              cursor: "pointer",
+              fontSize: "16px",
+            }}
+          >
+            Preview Session Recordings
+          </button>
+          {/* </div>
       <div className="button-container" style={{ marginTop: '20px' }}> */}
-        <button
-          onClick={() => window.location.href = 'https://us.posthog.com/project/95663/web'} // Replace with your target URL
-          style={{
-            padding: '10px 20px',
-            backgroundColor: "orange",
-            color: '#fff',
-            border: 'none',
-            borderRadius: '5px',
-            cursor: 'pointer',
-            fontSize: '16px',
-            marginLeft:'20px',
-          }}
-        >
-          Visit Posthog 
-        </button>
-      </div>
+          <button
+            onClick={() =>
+              (window.location.href =
+                "https://us.posthog.com/project/95663/web")
+            } // Replace with your target URL
+            style={{
+              padding: "10px 20px",
+              backgroundColor: "orange",
+              color: "#fff",
+              border: "none",
+              borderRadius: "5px",
+              cursor: "pointer",
+              fontSize: "16px",
+              marginLeft: "20px",
+            }}
+          >
+            Visit Posthog
+          </button>
+        </div>
 
         <div className="analytics-section">
           <div className="analytics-partition">

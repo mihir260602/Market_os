@@ -1,0 +1,177 @@
+/* Reset some default styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+.mauticform_wrapper {
+    background-color: white;
+    /* White background for the form */
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 20px auto;
+    /* Center the form */
+    transition: transform 0.3s ease;
+    /* Smooth hover effect */
+}
+
+
+
+/* Title and subtitle styles */
+.mauticform-title {
+    color: #ff9800;
+    /* Orange color */
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 1.8em;
+    /* Increased font size */
+}
+
+.mauticform-subtitle {
+    color: #555;
+    /* Darker gray for subtitle */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Form styles */
+.mauticform-innerform {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Label styles */
+.mauticform-label {
+    color: #ff9800;
+    /* Orange color for labels */
+    margin-bottom: 5px;
+}
+
+/* Input and textarea styles */
+.mauticform-input {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ff9800;
+    /* Border in orange */
+    border-radius: 5px;
+    transition: border-color 0.3s ease;
+    /* Transition for border color */
+}
+
+.mauticform-input:focus {
+    border-color: #ffa726;
+    /* Darker orange on focus */
+    outline: none;
+    /* Remove default outline */
+}
+
+/* Button styles */
+.mauticform-button {
+    padding: 10px 15px;
+    background-color: #ff9800;
+    /* Orange background */
+    color: white;
+    /* White text */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    /* Smooth background transition */
+}
+
+.mauticform-button:hover {
+    background-color: #ffa726;
+    /* Darker orange on hover */
+}
+/* Modal Styles */
+.modal {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+    /* Darker background with transparency */
+}
+
+.modal-content {
+    background-color: #ffffff;
+    /* White background for the modal */
+    margin: 15% auto;
+    /* Center the modal vertically */
+    padding: 20px;
+    border-radius: 12px;
+    /* Rounded corners */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    /* Subtle shadow for depth */
+    width: 80%;
+    /* Responsive width */
+    max-width: 500px;
+    /* Maximum width */
+    text-align: center;
+    /* Center text inside modal */
+    animation: fadeIn 0.3s ease;
+    /* Fade-in animation */
+}
+
+.close {
+    color: #aaa;
+    /* Gray close button */
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #ff0000;
+    /* Change color on hover */
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal p {
+    color: #333;
+    /* Darker text color for better readability */
+    font-size: 1.2em;
+    /* Slightly larger font size */
+    margin: 15px 0;
+    /* Space around text */
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+        /* Slide down effect */
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive styles */
+@media (max-width: 600px) {
+    .mauticform_wrapper {
+        padding: 15px;
+        margin: 10px;
+    }
+
+    .mauticform-title {
+        font-size: 1.5em;
+        /* Smaller font size on mobile */
+    }
+
+    .modal-content {
+        width: 90%;
+        /* Full width on mobile */
+    }
+}

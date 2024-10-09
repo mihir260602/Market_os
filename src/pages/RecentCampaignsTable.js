@@ -8,33 +8,9 @@ import {
   TableRow,
   Paper,
 } from "@mui/material";
-import "./DashboardContent.css"; 
+import "./DashboardContent.css";
 
-const RecentCampaignsTable = () => {
-  const campaigns = [
-    {
-      name: "Campaign 1",
-      status: "Sent",
-      openRate: "75%",
-      clickRate: "30%",
-      createdDate: "2024-09-20",
-    },
-    {
-      name: "Campaign 2",
-      status: "Scheduled",
-      openRate: "60%",
-      clickRate: "25%",
-      createdDate: "2024-09-18",
-    },
-    {
-      name: "Campaign 3",
-      status: "Draft",
-      openRate: "N/A",
-      clickRate: "N/A",
-      createdDate: "2024-09-15",
-    },
-  ];
-
+const RecentCampaignsTable = ({ campaigns }) => {
   return (
     <div className="table-container">
       <TableContainer component={Paper}>
@@ -52,10 +28,13 @@ const RecentCampaignsTable = () => {
             {campaigns.map((campaign, index) => (
               <TableRow key={index}>
                 <TableCell>{campaign.name}</TableCell>
-                <TableCell>{campaign.status}</TableCell>
+                <TableCell>
+                  {campaign.isPublished ? "Published" : "Not Published"}
+                </TableCell>{" "}
+                {/* Conditional rendering */}
                 <TableCell>{campaign.openRate}</TableCell>
                 <TableCell>{campaign.clickRate}</TableCell>
-                <TableCell>{campaign.createdDate}</TableCell>
+                <TableCell>{campaign.dateAdded}</TableCell>
               </TableRow>
             ))}
           </TableBody>

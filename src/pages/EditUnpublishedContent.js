@@ -38,20 +38,9 @@ function EditUnpublishedContent() {
   };
 
   const handleSaveDraft = async () => {
-    const draftData = {
-      title: postTitle,
-      category,
-      tags: tags.split(",").map((tag) => tag.trim()),
-      content_body: postBody,
-      banner_image: imageFile || contentData?.banner_image,
-      meta_title: metaTitle,
-      meta_description: metaDescription,
-      meta_keywords: metaKeywords,
-    };
-
+    const draftData = { status: "draft", review_status: "pending_review" };
     try {
-      const response = await saveDraft(draftData);
-      setDraftId(response.id);
+      await updateDraft(id, draftData);
       navigate("/unpublished-content");
     } catch (error) {
       console.error("Failed to save draft", error);
@@ -60,25 +49,13 @@ function EditUnpublishedContent() {
   };
 
   const handleSaveDraftAndSendForReview = async () => {
-    const draftData = {
-      title: postTitle,
-      category,
-      tags: tags.split(",").map((tag) => tag.trim()),
-      content_body: postBody,
-      banner_image: imageFile || contentData?.banner_image,
-      meta_title: metaTitle,
-      meta_description: metaDescription,
-      meta_keywords: metaKeywords,
-      review_status: "in_review",
-    };
-
+    const draftData = { status: "draft", review_status: "in_review" };
     try {
-      const response = await saveDraftAndSendForReview(draftData);
-      setDraftId(response.id);
+      await updateDraft(id, draftData);
       navigate("/unpublished-content");
     } catch (error) {
-      console.error("Failed to save draft and send for review", error);
-      alert("Failed to save draft and send for review");
+      console.error("Failed to save and send for review draft", error);
+      alert("Failed to save and send for review draft");
     }
   };
 
@@ -86,7 +63,7 @@ function EditUnpublishedContent() {
     const draftData = { status: "published", review_status: "reviewed" };
     try {
       await updateDraft(id, draftData);
-      navigate("/unpublished-content");
+      navigate("/published-content");
     } catch (error) {
       console.error("Failed to publish draft", error);
       alert("Failed to publish draft");

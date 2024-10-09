@@ -1,572 +1,4 @@
-// // import React, { useEffect, useState } from "react";
-// // import Card from "@mui/material/Card";
-// // import Box from "@mui/material/Box";
-// // import Typography from "@mui/material/Typography";
-// // import { useNavigate } from "react-router-dom";
-// // import { useTable, usePagination } from "react-table";
-// // import {
-// //   fetchDrafts,
-// //   deleteContent,
-// //   fetchDraftById,
-// //   updateDraft,
-// // } from "../api/contentService"; // Ensure deleteContent is imported
-// // import "./UnpublishedContent.css"; // Import the CSS file
-
-// // // Import Material-UI Dialog components
-// // import Dialog from "@mui/material/Dialog";
-// // import DialogTitle from "@mui/material/DialogTitle";
-// // import DialogContent from "@mui/material/DialogContent";
-// // import DialogActions from "@mui/material/DialogActions";
-// // import Button from "@mui/material/Button";
-// // import { format } from "date-fns";
-
-// // function UnpublishedContent() {
-// //   const [contentList, setContentList] = useState([]); // Hold the content list data
-// //   const [open, setOpen] = useState(false); // State for the modal visibility
-// //   const [contentIdToDelete, setContentIdToDelete] = useState(null); // ID of the content to delete
-// //   const navigate = useNavigate();
-// //   const formatDate = (isoString) => {
-// //     return format(new Date(isoString), "MMMM dd, yyyy, hh:mm:ss a");
-// //   };
-
-// //   useEffect(() => {
-// //     const getUnpublishedContentList = async () => {
-// //       try {
-// //         const response = await fetchDrafts();
-// //         console.log("API Response:", response);
-
-// //         // Check if the response is an array or if it's wrapped in an object
-// //         if (Array.isArray(response)) {
-// //           setContentList(response); // Directly set response if it's an array
-// //         } else if (response && response.results) {
-// //           setContentList(response.results); // Handle cases where data is inside "results"
-// //         } else {
-// //           console.error("Unexpected response structure", response);
-// //           setContentList([]); // Set an empty array if no valid data is found
-// //         }
-// //       } catch (error) {
-// //         console.error("Error fetching unpublished content list:", error);
-// //       }
-// //     };
-// //     getUnpublishedContentList();
-// //   }, []);
-
-// //   // Handle edit action
-// //   const handleEdit = async (contentId) => {
-// //     const content = await fetchDraftById(contentId);
-// //     navigate(`/edit-unpublish-content/${contentId}`, {
-// //       state: {
-// //         contentData: {
-// //           title: content.title, // Pass the selected title
-// //           body: content.content_body, // Pass the generated content
-// //           category: content.category,
-// //           tags: content.tags,
-// //           meta_title: content.meta_title,
-// //           meta_description: content.meta_description,
-// //           image: content.banner_image,
-// //           meta_keywords: content.meta_keywords,
-// //         },
-// //       },
-// //     });
-// //   };
-
-// //   // Open the delete confirmation modal
-// //   const handleDeleteClick = (contentId) => {
-// //     setContentIdToDelete(contentId);
-// //     setOpen(true);
-// //   };
-
-// //   // Confirm deletion
-// //   const handleConfirmDelete = async () => {
-// //     try {
-// //       await deleteContent(contentIdToDelete); // Call your delete API function
-// //       setContentList((prevList) =>
-// //         prevList.filter((content) => content.id !== contentIdToDelete)
-// //       ); // Remove the deleted content from the list
-// //       setOpen(false); // Close the modal
-// //     } catch (error) {
-// //       console.error("Error deleting content:", error);
-// //     }
-// //   };
-
-// //   const handlePublish = async (contentId) => {
-// //     // const content = await fetchDraftById(contentId);
-// //     const draftData = {
-// //       status: "published",
-// //       review_status: "reviewed",
-// //     };
-
-// //     try {
-// //       const response = await updateDraft(contentId, draftData);
-// //       navigate("/unpublished-content");
-// //     } catch (error) {
-// //       console.error("Failed to publish draft", error);
-// //       alert("Failed to publish draft");
-// //     }
-// //   };
-
-// //   // Cancel deletion
-// //   const handleCancelDelete = () => {
-// //     setOpen(false); // Close the modal without deleting
-// //   };
-
-// //   // Define columns for the DataTable
-// //   const columns = React.useMemo(
-// //     () => [
-// //       {
-// //         Header: "Title",
-// //         accessor: "title",
-// //         Cell: ({ row }) => (
-// //           <Typography variant="caption" className="table-title">
-// //             {row.original.title}
-// //           </Typography>
-// //         ),
-// //       },
-// //       {
-// //         Header: "Author",
-// //         accessor: "author_name",
-// //         Cell: ({ value }) => (
-// //           <Typography className="table-data">{value || "—"}</Typography>
-// //         ),
-// //       },
-// //       {
-// //         Header: "Status",
-// //         accessor: "review_status",
-// //         Cell: ({ value }) => (
-// //           <Typography className="table-data">{value || "—"}</Typography>
-// //         ),
-// //       },
-// //       {
-// //         Header: "Updated Date",
-// //         accessor: "updated_at",
-// //         Cell: ({ value }) => (
-// //           <Typography className="table-data">
-// //             {formatDate(value) || "—"}
-// //           </Typography>
-// //         ),
-// //       },
-// //       {
-// //         Header: "Actions",
-// //         Cell: ({ row }) => (
-// //           <div className="table-actions">
-// //             <button
-// //               className="edit-btn"
-// //               onClick={() => handleEdit(row.original.id)}
-// //             >
-// //               Edit
-// //             </button>
-// //             <button
-// //               className="edit-btn"
-// //               onClick={() => handlePublish(row.original.id)}
-// //             >
-// //               Publish
-// //             </button>
-// //             <button
-// //               className="delete-btn"
-// //               onClick={() => handleDeleteClick(row.original.id)} // Open modal on delete click
-// //             >
-// //               Delete
-// //             </button>
-// //           </div>
-// //         ),
-// //       },
-// //     ],
-// //     []
-// //   );
-
-// //   const {
-// //     getTableProps,
-// //     getTableBodyProps,
-// //     headerGroups,
-// //     prepareRow,
-// //     page,
-// //     nextPage,
-// //     previousPage,
-// //     canNextPage,
-// //     canPreviousPage,
-// //     state: { pageIndex, pageSize },
-// //   } = useTable(
-// //     {
-// //       columns,
-// //       data: contentList,
-// //       initialState: { pageIndex: 0, pageSize: 4 }, // Show 10 results at a time
-// //     },
-// //     usePagination
-// //   );
-
-// //   return (
-// //     <div>
-// //       <div className="main-content">
-// //         <Card className="card-container">
-// //           <Box className="header-container">
-// //             <Typography variant="h6" gutterBottom>
-// //               Unpublished Contents
-// //             </Typography>
-// //           </Box>
-// //           <Box className="table-container">
-// //             <table {...getTableProps()} className="styled-table">
-// //               <thead>
-// //                 {headerGroups.map((headerGroup) => (
-// //                   <tr
-// //                     {...headerGroup.getHeaderGroupProps()}
-// //                     className="table-header"
-// //                   >
-// //                     {headerGroup.headers.map((column) => (
-// //                       <th {...column.getHeaderProps()}>
-// //                         {column.render("Header")}
-// //                       </th>
-// //                     ))}
-// //                   </tr>
-// //                 ))}
-// //               </thead>
-// //               <tbody {...getTableBodyProps()}>
-// //                 {page.map((row) => {
-// //                   prepareRow(row);
-// //                   return (
-// //                     <tr {...row.getRowProps()} className="table-row">
-// //                       {row.cells.map((cell) => {
-// //                         return (
-// //                           <td {...cell.getCellProps()}>
-// //                             {cell.render("Cell")}
-// //                           </td>
-// //                         );
-// //                       })}
-// //                     </tr>
-// //                   );
-// //                 })}
-// //               </tbody>
-// //             </table>
-// //           </Box>
-// //           {/* Pagination Controls */}
-// //           <Box className="pagination-controls">
-// //             <Button
-// //               onClick={previousPage}
-// //               disabled={!canPreviousPage}
-// //               variant="contained"
-// //               color="primary"
-// //             >
-// //               Previous
-// //             </Button>
-// //             <Typography>
-// //               Page {pageIndex + 1} of {Math.ceil(contentList.length / pageSize)}
-// //             </Typography>
-// //             <Button
-// //               onClick={nextPage}
-// //               disabled={!canNextPage}
-// //               variant="contained"
-// //               color="primary"
-// //             >
-// //               Next
-// //             </Button>
-// //           </Box>
-// //         </Card>
-// //       </div>
-
-// //       {/* Confirmation Modal */}
-// //       <Dialog open={open} onClose={handleCancelDelete}>
-// //         <DialogTitle>Confirm Deletion</DialogTitle>
-// //         <DialogContent>
-// //           <Typography>Are you sure you want to delete this content?</Typography>
-// //         </DialogContent>
-// //         <DialogActions>
-// //           <Button onClick={handleCancelDelete} color="primary">
-// //             Cancel
-// //           </Button>
-// //           <Button onClick={handleConfirmDelete} color="secondary">
-// //             Delete
-// //           </Button>
-// //         </DialogActions>
-// //       </Dialog>
-// //     </div>
-// //   );
-// // }
-
-// // export default UnpublishedContent;
-
-// import Box from "@mui/material/Box";
-// import Card from "@mui/material/Card";
-// import Typography from "@mui/material/Typography";
-// import React, { useEffect, useState } from "react";
-// import { useNavigate } from "react-router-dom";
-// import { usePagination, useTable } from "react-table";
-// import {
-//   deleteContent,
-//   fetchDraftById,
-//   fetchDrafts,
-//   updateDraft,
-// } from "../api/contentService"; // Ensure deleteContent is imported
-// import "./UnpublishedContent.css"; // Import the CSS file
-
-// // Import Material-UI Dialog components
-// import Button from "@mui/material/Button";
-// import Dialog from "@mui/material/Dialog";
-// import DialogActions from "@mui/material/DialogActions";
-// import DialogContent from "@mui/material/DialogContent";
-// import DialogTitle from "@mui/material/DialogTitle";
-// import { format } from "date-fns";
-
-// function UnpublishedContent() {
-//   const [contentList, setContentList] = useState([]); // Hold the content list data
-//   const [open, setOpen] = useState(false); // State for the modal visibility
-//   const [contentIdToDelete, setContentIdToDelete] = useState(null); // ID of the content to delete
-//   const navigate = useNavigate();
-//   const formatDate = (isoString) => {
-//     return format(new Date(isoString), "MMMM dd, yyyy, hh:mm:ss a");
-//   };
-
-//   useEffect(() => {
-//     const getUnpublishedContentList = async () => {
-//       try {
-//         const response = await fetchDrafts();
-//         console.log("API Response:", response);
-
-//         // Check if the response is an array or if it's wrapped in an object
-//         if (Array.isArray(response)) {
-//           setContentList(response); // Directly set response if it's an array
-//         } else if (response && response.results) {
-//           setContentList(response.results); // Handle cases where data is inside "results"
-//         } else {
-//           console.error("Unexpected response structure", response);
-//           setContentList([]); // Set an empty array if no valid data is found
-//         }
-//       } catch (error) {
-//         console.error("Error fetching unpublished content list:", error);
-//       }
-//     };
-//     getUnpublishedContentList();
-//   }, []);
-
-//   // Handle edit action
-//   const handleEdit = async (contentId) => {
-//     const content = await fetchDraftById(contentId);
-//     navigate(`/post-editor`, {
-//       state: {
-//         contentData: {
-//           title: content.title, // Pass the selected title
-//           body: content.content_body, // Pass the generated content
-//           category: content.category,
-//           tags: content.tags,
-//           meta_title: content.meta_title,
-//           meta_description: content.meta_description,
-//           image: content.banner_image,
-//           meta_keywords: content.meta_keywords,
-//         },
-//       },
-//     });
-//   };
-
-//   // Open the delete confirmation modal
-//   const handleDeleteClick = (contentId) => {
-//     setContentIdToDelete(contentId);
-//     setOpen(true);
-//   };
-
-//   // Confirm deletion
-//   const handleConfirmDelete = async () => {
-//     try {
-//       await deleteContent(contentIdToDelete); // Call your delete API function
-//       setContentList((prevList) =>
-//         prevList.filter((content) => content.id !== contentIdToDelete)
-//       ); // Remove the deleted content from the list
-//       setOpen(false); // Close the modal
-//     } catch (error) {
-//       console.error("Error deleting content:", error);
-//     }
-//   };
-
-//   const handlePublish = async (contentId) => {
-//     const draftData = {
-//       status: "published",
-//       review_status: "reviewed",
-//     };
-
-//     try {
-//       await updateDraft(contentId, draftData);
-//       navigate("/unpublished-content");
-//     } catch (error) {
-//       console.error("Failed to publish draft", error);
-//       alert("Failed to publish draft");
-//     }
-//   };
-
-//   // Cancel deletion
-//   const handleCancelDelete = () => {
-//     setOpen(false); // Close the modal without deleting
-//   };
-
-//   // Define columns for the DataTable
-//   const columns = React.useMemo(
-//     () => [
-//       {
-//         Header: "Title",
-//         accessor: "title",
-//         Cell: ({ row }) => (
-//           <Typography variant="caption" className="table-title">
-//             {row.original.title}
-//           </Typography>
-//         ),
-//       },
-//       {
-//         Header: "Author",
-//         accessor: "author_name",
-//         Cell: ({ value }) => (
-//           <Typography className="table-data">{value || "—"}</Typography>
-//         ),
-//       },
-//       {
-//         Header: "Status",
-//         accessor: "review_status",
-//         Cell: ({ value }) => (
-//           <Typography className="table-data">{value || "—"}</Typography>
-//         ),
-//       },
-//       {
-//         Header: "Updated Date",
-//         accessor: "updated_at",
-//         Cell: ({ value }) => (
-//           <Typography className="table-data">
-//             {formatDate(value) || "—"}
-//           </Typography>
-//         ),
-//       },
-//       {
-//         Header: "Actions",
-//         Cell: ({ row }) => (
-//           <div className="table-actions">
-//             <button
-//               className="edit-btn"
-//               onClick={() => handleEdit(row.original.id)}
-//             >
-//               Edit
-//             </button>
-//             <button
-//               className="edit-btn"
-//               onClick={() => handlePublish(row.original.id)}
-//             >
-//               Publish
-//             </button>
-//             <button
-//               className="delete-btn"
-//               onClick={() => handleDeleteClick(row.original.id)} // Open modal on delete click
-//             >
-//               Delete
-//             </button>
-//           </div>
-//         ),
-//       },
-//     ],
-//     []
-//   );
-
-//   const {
-//     getTableProps,
-//     getTableBodyProps,
-//     headerGroups,
-//     prepareRow,
-//     page,
-//     nextPage,
-//     previousPage,
-//     canNextPage,
-//     canPreviousPage,
-//     state: { pageIndex, pageSize },
-//   } = useTable(
-//     {
-//       columns,
-//       data: contentList,
-//       initialState: { pageIndex: 0, pageSize: 4 }, // Show 10 results at a time
-//     },
-//     usePagination
-//   );
-
-//   return (
-//     <div>
-//       <div className="main-content">
-//         <Card className="card-container">
-//           <Box className="header-container">
-//             <Typography variant="h6" gutterBottom>
-//               Unpublished Contents
-//             </Typography>
-//           </Box>
-//           <Box className="table-container">
-//             <table {...getTableProps()} className="styled-table">
-//               <thead>
-//                 {headerGroups.map((headerGroup) => (
-//                   <tr
-//                     {...headerGroup.getHeaderGroupProps()}
-//                     className="table-header"
-//                   >
-//                     {headerGroup.headers.map((column) => (
-//                       <th {...column.getHeaderProps()}>
-//                         {column.render("Header")}
-//                       </th>
-//                     ))}
-//                   </tr>
-//                 ))}
-//               </thead>
-//               <tbody {...getTableBodyProps()}>
-//                 {page.map((row) => {
-//                   prepareRow(row);
-//                   return (
-//                     <tr {...row.getRowProps()} className="table-row">
-//                       {row.cells.map((cell) => {
-//                         return (
-//                           <td {...cell.getCellProps()}>
-//                             {cell.render("Cell")}
-//                           </td>
-//                         );
-//                       })}
-//                     </tr>
-//                   );
-//                 })}
-//               </tbody>
-//             </table>
-//           </Box>
-//           {/* Pagination Controls */}
-//           <Box className="pagination-controls">
-//             <Button
-//               onClick={previousPage}
-//               disabled={!canPreviousPage}
-//               variant="contained"
-//               color="primary"
-//             >
-//               Previous
-//             </Button>
-//             <Typography>
-//               Page {pageIndex + 1} of {Math.ceil(contentList.length / pageSize)}
-//             </Typography>
-//             <Button
-//               onClick={nextPage}
-//               disabled={!canNextPage}
-//               variant="contained"
-//               color="primary"
-//             >
-//               Next
-//             </Button>
-//           </Box>
-//         </Card>
-//       </div>
-
-//       {/* Confirmation Modal */}
-//       <Dialog open={open} onClose={handleCancelDelete}>
-//         <DialogTitle>Confirm Deletion</DialogTitle>
-//         <DialogContent>
-//           <Typography>Are you sure you want to delete this content?</Typography>
-//         </DialogContent>
-//         <DialogActions>
-//           <Button onClick={handleCancelDelete} color="primary">
-//             Cancel
-//           </Button>
-//           <Button onClick={handleConfirmDelete} color="secondary">
-//             Delete
-//           </Button>
-//         </DialogActions>
-//       </Dialog>
-//     </div>
-//   );
-// }
-
-// export default UnpublishedContent;
-
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
@@ -574,27 +6,31 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
 import Typography from "@mui/material/Typography";
 import { format } from "date-fns";
-import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { usePagination, useTable } from "react-table";
 import {
   deleteContent,
   fetchDraftById,
   fetchDrafts,
-  updateDraft
+  updateDraft,
 } from "../api/contentService";
 import { raiseContentTicket } from "../api/ticketService";
 import "./UnpublishedContent.css";
 
 function UnpublishedContent() {
   const [contentList, setContentList] = useState([]);
+  const [filteredContentList, setFilteredContentList] = useState([]); // Add filtered list state
+  const [filterStatus, setFilterStatus] = useState(""); // Track filter status
   const [openDelete, setOpenDelete] = useState(false);
   const [openSuggestion, setOpenSuggestion] = useState(false);
   const [contentIdToDelete, setContentIdToDelete] = useState(null);
-  const [suggestion, setSuggestion] = useState(""); // State for suggestion input
+  const [suggestion, setSuggestion] = useState("");
   const navigate = useNavigate();
+
   const formatDate = (isoString) =>
     format(new Date(isoString), "MMMM dd, yyyy, hh:mm:ss a");
 
@@ -602,13 +38,17 @@ function UnpublishedContent() {
     const getUnpublishedContentList = async () => {
       try {
         const response = await fetchDrafts();
+        console.log("Response--> ", response);
         if (Array.isArray(response)) {
           setContentList(response);
+          setFilteredContentList(response); // Set the filtered list initially
         } else if (response && response.results) {
           setContentList(response.results);
+          setFilteredContentList(response.results); // Set the filtered list initially
         } else {
           console.error("Unexpected response structure", response);
           setContentList([]);
+          setFilteredContentList([]);
         }
       } catch (error) {
         console.error("Error fetching unpublished content list:", error);
@@ -616,6 +56,17 @@ function UnpublishedContent() {
     };
     getUnpublishedContentList();
   }, []);
+
+  // Filter content based on status
+  useEffect(() => {
+    if (filterStatus === "") {
+      setFilteredContentList(contentList);
+    } else {
+      setFilteredContentList(
+        contentList.filter((content) => content.review_status === filterStatus)
+      );
+    }
+  }, [filterStatus, contentList]);
 
   const handleEdit = async (contentId) => {
     const content = await fetchDraftById(contentId);
@@ -628,7 +79,6 @@ function UnpublishedContent() {
           tags: content.tags,
           meta_title: content.meta_title,
           meta_description: content.meta_description,
-          // image: content.banner_image,
           banner_image: content.banner_image,
           meta_keywords: content.meta_keywords,
         },
@@ -668,13 +118,11 @@ function UnpublishedContent() {
     setOpenDelete(false);
   };
 
-  // New function to open the suggestion form
   const handleOpenSuggestion = (contentId) => {
-    setContentIdToDelete(contentId); // Store the content ID to raise a ticket
-    setOpenSuggestion(true); // Open the suggestion modal
+    setContentIdToDelete(contentId);
+    setOpenSuggestion(true);
   };
 
-  // Handle suggestion submission
   const handleSubmitSuggestion = async () => {
     const ticketData = {
       title: "Suggestion",
@@ -682,10 +130,10 @@ function UnpublishedContent() {
     };
 
     try {
-      await raiseContentTicket(contentIdToDelete, ticketData); // Call the ticket creation API
+      await raiseContentTicket(contentIdToDelete, ticketData);
       alert("Suggestion raised successfully!");
-      setSuggestion(""); // Reset suggestion input
-      setOpenSuggestion(false); // Close the suggestion modal
+      setSuggestion("");
+      setOpenSuggestion(false);
     } catch (error) {
       console.error("Failed to raise a suggestion", error);
       alert(
@@ -696,8 +144,8 @@ function UnpublishedContent() {
   };
 
   const handleCancelSuggestion = () => {
-    setOpenSuggestion(false); // Close the suggestion modal without submission
-    setSuggestion(""); // Clear the suggestion input
+    setOpenSuggestion(false);
+    setSuggestion("");
   };
 
   const columns = React.useMemo(
@@ -783,7 +231,7 @@ function UnpublishedContent() {
   } = useTable(
     {
       columns,
-      data: contentList,
+      data: filteredContentList, // Use filtered data instead of full content list
       initialState: { pageIndex: 0, pageSize: 4 },
     },
     usePagination
@@ -797,7 +245,21 @@ function UnpublishedContent() {
             <Typography variant="h6" gutterBottom>
               Unpublished Contents
             </Typography>
+
+            {/* Status Filter Dropdown */}
+            <Select
+              value={filterStatus}
+              onChange={(e) => setFilterStatus(e.target.value)}
+              displayEmpty
+              style={{ marginBottom: "20px", minWidth: "200px" }}
+            >
+              <MenuItem value="">All Statuses</MenuItem>
+              <MenuItem value="pending_review">Pending Review</MenuItem>
+              <MenuItem value="in_review">In Review</MenuItem>
+              <MenuItem value="reviewed">Reviewed</MenuItem>
+            </Select>
           </Box>
+
           <Box className="table-container">
             <table {...getTableProps()} className="styled-table">
               <thead>
@@ -832,19 +294,14 @@ function UnpublishedContent() {
             <Button
               onClick={previousPage}
               disabled={!canPreviousPage}
-              variant="contained"
-              color="primary"
+              className="pagination-button"
             >
               Previous
             </Button>
-            <Typography>
-              Page {pageIndex + 1} of {Math.ceil(contentList.length / pageSize)}
-            </Typography>
             <Button
               onClick={nextPage}
               disabled={!canNextPage}
-              variant="contained"
-              color="primary"
+              className="pagination-button"
             >
               Next
             </Button>
@@ -852,11 +309,10 @@ function UnpublishedContent() {
         </Card>
       </div>
 
-      {/* Confirmation Modal */}
       <Dialog open={openDelete} onClose={handleCancelDelete}>
-        <DialogTitle>Confirm Deletion</DialogTitle>
+        <DialogTitle>Confirm Delete</DialogTitle>
         <DialogContent>
-          <Typography>Are you sure you want to delete this content?</Typography>
+          Are you sure you want to delete this content?
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCancelDelete} color="primary">
@@ -868,24 +324,23 @@ function UnpublishedContent() {
         </DialogActions>
       </Dialog>
 
-      {/* Suggestion Modal */}
       <Dialog open={openSuggestion} onClose={handleCancelSuggestion}>
-        <DialogTitle>Submit Suggestion</DialogTitle>
+        <DialogTitle>Raise a Suggestion</DialogTitle>
         <DialogContent>
-          <Typography>Provide your suggestion:</Typography>
           <textarea
             value={suggestion}
             onChange={(e) => setSuggestion(e.target.value)}
-            rows="4"
-            style={{ width: "100%", marginTop: "8px" }}
+            placeholder="Write your suggestion here..."
+            rows={4}
+            style={{ width: "100%" }}
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCancelSuggestion} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={handleSubmitSuggestion} color="secondary">
+          <Button onClick={handleSubmitSuggestion} color="primary">
             Submit
+          </Button>
+          <Button onClick={handleCancelSuggestion} color="secondary">
+            Cancel
           </Button>
         </DialogActions>
       </Dialog>

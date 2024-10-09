@@ -1,8 +1,8 @@
-
-import React, { useEffect, useRef, useState } from 'react';
-import Blog from './Blog';
-import Footer from './Footer';
-import './Home.css'; // Combined CSS for Home and Header
+import React, { useEffect, useRef, useState } from "react";
+import Blog from "./Blog";
+import Footer from "./Footer";
+import "./Home.css"; // Combined CSS for Home and Header
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   // Header Component
@@ -11,6 +11,7 @@ const Home = () => {
     const [dropdown1Open, setDropdown1Open] = useState(false);
     const [dropdown2Open, setDropdown2Open] = useState(false);
     const sidebarRef = useRef(null);
+    const navigate = useNavigate();
 
     const toggleSidebar = () => {
       setIsSidebarOpen((prev) => !prev);
@@ -35,13 +36,13 @@ const Home = () => {
       };
 
       if (isSidebarOpen) {
-        document.addEventListener('mousedown', handleClickOutside);
+        document.addEventListener("mousedown", handleClickOutside);
       } else {
-        document.removeEventListener('mousedown', handleClickOutside);
+        document.removeEventListener("mousedown", handleClickOutside);
       }
- 
+
       return () => {
-        document.removeEventListener('mousedown', handleClickOutside);
+        document.removeEventListener("mousedown", handleClickOutside);
       };
     }, [isSidebarOpen]);
 
@@ -55,7 +56,12 @@ const Home = () => {
           />
         </div>
         <div className="home-header-right">
-          <button className="home-be-client-button">Become a Client</button>
+          <button
+            className="home-be-client-button"
+            onClick={() => navigate("/contact")}
+          >
+            Become a Client
+          </button>
           <div
             className="home-hamburger-icon"
             onClick={toggleSidebar}
@@ -65,12 +71,17 @@ const Home = () => {
             <span>☰</span>
           </div>
         </div>
-        <div ref={sidebarRef} className={`home-sidebar ${isSidebarOpen ? 'open' : ''}`}>
+        <div
+          ref={sidebarRef}
+          className={`home-sidebar ${isSidebarOpen ? "open" : ""}`}
+        >
           <h3 className="home-sidebar-title">Menu</h3>
           <ul className="home-sidebar-menu">
             <li className="home-sidebar-item" onClick={toggleDropdown1}>
               Services
-              <span className="home-dropdown-icon">{dropdown1Open ? '' : ''}</span>
+              <span className="home-dropdown-icon">
+                {dropdown1Open ? "" : ""}
+              </span>
               {dropdown1Open && (
                 <ul className="home-dropdown">
                   <li>
@@ -96,7 +107,9 @@ const Home = () => {
             </li>
             <li className="home-sidebar-item" onClick={toggleDropdown2}>
               Resources
-              <span className="home-dropdown-icon">{dropdown2Open ? '' : ''}</span>
+              <span className="home-dropdown-icon">
+                {dropdown2Open ? "" : ""}
+              </span>
               {dropdown2Open && (
                 <ul className="home-dropdown">
                   <li>
@@ -115,10 +128,10 @@ const Home = () => {
               <a href="/field3">Case Studies</a>
             </li>
             <li className="home-sidebar-item">
-              <a href="/field4">About Us</a>
+              <a href="/about">About Us</a>
             </li>
             <li className="home-sidebar-item">
-              <a href="/field5">Contact Us</a>
+              <a href="/contact">Contact Us</a>
             </li>
             <li className="home-sidebar-item">
               <a href="/Login">Sign In</a>
@@ -131,7 +144,7 @@ const Home = () => {
 
   // Button Click Handler
   const handleButtonClick = () => {
-    window.location.href = '/contact';
+    window.location.href = "/contact";
   };
 
   return (
@@ -158,7 +171,9 @@ const Home = () => {
               className="expertise-card-image"
             />
             <h3 className="expertise-card-title">Cloud Native Solutions</h3>
-            <p className="expertise-card-description">Unleash Cloud's Power with Scalable, Secure Solutions.</p>
+            <p className="expertise-card-description">
+              Unleash Cloud's Power with Scalable, Secure Solutions.
+            </p>
           </div>
           <div className="expertise-card">
             <img
@@ -167,7 +182,9 @@ const Home = () => {
               className="expertise-card-image"
             />
             <h3 className="expertise-card-title">AWS Services</h3>
-            <p className="expertise-card-description">Elevate Business on Cloud, AWS Expertise at Core.</p>
+            <p className="expertise-card-description">
+              Elevate Business on Cloud, AWS Expertise at Core.
+            </p>
           </div>
           <div className="expertise-card">
             <img
@@ -176,7 +193,9 @@ const Home = () => {
               className="expertise-card-image"
             />
             <h3 className="expertise-card-title">Integration Process</h3>
-            <p className="expertise-card-description">Amplify Growth, Seamlessly Integrate Diverse Systems.</p>
+            <p className="expertise-card-description">
+              Amplify Growth, Seamlessly Integrate Diverse Systems.
+            </p>
           </div>
           <div className="expertise-card">
             <img
@@ -185,7 +204,9 @@ const Home = () => {
               className="expertise-card-image"
             />
             <h3 className="expertise-card-title">Drupal Consulting</h3>
-            <p className="expertise-card-description">Enhance Digital Presence, Leverage Drupal Expertise.</p>
+            <p className="expertise-card-description">
+              Enhance Digital Presence, Leverage Drupal Expertise.
+            </p>
           </div>
         </div>
       </section>
@@ -197,20 +218,30 @@ const Home = () => {
       <section className="cta-section">
         <h2>Take the Next Step Toward Innovation</h2>
         <p>Let us partner with you to drive your digital transformation.</p>
-        <button className="cta-btn" onClick={handleButtonClick} title="Get in touch with our team!">
+        <button
+          className="cta-btn"
+          onClick={handleButtonClick}
+          title="Get in touch with our team!"
+        >
           Get in Touch
         </button>
       </section>
 
       {/* Projects Section */}
       <section className="projects-showcase">
-        <h2 className="projects-heading">Highlights of Our Esteemed Projects</h2>
+        <h2 className="projects-heading">
+          Highlights of Our Esteemed Projects
+        </h2>
         <div className="projects-cards-wrapper">
           <div className="project-item">
-            <h3 className="project-title">Innovative Marketing Operating System</h3>
+            <h3 className="project-title">
+              Innovative Marketing Operating System
+            </h3>
           </div>
           <div className="project-item">
-            <h3 className="project-title">Unified Content Management System with Multisite Architecture</h3>
+            <h3 className="project-title">
+              Unified Content Management System with Multisite Architecture
+            </h3>
           </div>
           <div className="project-item">
             <h3 className="project-title">LASK AI Code Assistant</h3>
@@ -219,41 +250,51 @@ const Home = () => {
             <h3 className="project-title">Dynamic Marketplace Platform</h3>
           </div>
           <div className="project-item">
-            <h3 className="project-title">Comprehensive Knowledge Hub for the Company</h3>
+            <h3 className="project-title">
+              Comprehensive Knowledge Hub for the Company
+            </h3>
           </div>
         </div>
       </section>
 
       {/* Expertise Showcase */}
       <section className="expertise-showcase">
-        <h2 className="expertise-heading">Overview of Microservices Architecture</h2>
+        <h2 className="expertise-heading">
+          Overview of Microservices Architecture
+        </h2>
         <div className="expertise-cards-container">
           <div className="expertise-card-item">
             <h3 className="expertise-card-title">Wagtail</h3>
             <div className="card-partition"></div> {/* Partition Line */}
             <p className="expertise-card-details">
-              Manages user-facing content, marketing pages, lead generation forms, and personalized experiences based on user behavior.
+              Manages user-facing content, marketing pages, lead generation
+              forms, and personalized experiences based on user behavior.
             </p>
           </div>
           <div className="expertise-card-item">
             <h3 className="expertise-card-title">PostHog</h3>
             <div className="card-partition"></div>
             <p className="expertise-card-details">
-              Provides real-time tracking of user behavior on the website (page views, clicks, form submissions), powering behavioral analytics for CRM and AI models.
+              Provides real-time tracking of user behavior on the website (page
+              views, clicks, form submissions), powering behavioral analytics
+              for CRM and AI models.
             </p>
           </div>
           <div className="expertise-card-item">
             <h3 className="expertise-card-title">Mautic</h3>
             <div className="card-partition"></div>
             <p className="expertise-card-details">
-              Manages email marketing automation, personalized drip campaigns, and lead nurturing sequences based on data.
+              Manages email marketing automation, personalized drip campaigns,
+              and lead nurturing sequences based on data.
             </p>
           </div>
           <div className="expertise-card-item">
             <h3 className="expertise-card-title">EspoCRM</h3>
             <div className="card-partition"></div>
             <p className="expertise-card-details">
-              Stores customer and lead information, manages interactions with prospects, and syncs with email marketing tools and lead scoring systems.
+              Stores customer and lead information, manages interactions with
+              prospects, and syncs with email marketing tools and lead scoring
+              systems.
             </p>
           </div>
         </div>

@@ -113,7 +113,7 @@ function PublishedContent() {
       },
       {
         Header: "Published Date",
-        accessor: "created_at",
+        accessor: "updated_at",
         Cell: ({ value }) => (
           <Typography className="table-data">
             {formatDate(value) || "—"}
