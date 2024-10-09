@@ -1,4 +1,4 @@
-.blog-section {
+/* .blog-section {
   width: 100%;
   padding: 50px 20px;
   background-color: #e9eaeb;
@@ -94,4 +94,118 @@
 .page-info {
   font-size: 1em;
   color: #666;
+} */
+
+.blog-section {
+  width: 100%;
+  padding: 50px 20px;
+  background-color: #e9eaeb;
+  text-align: center;
+}
+
+.blog-heading {
+  font-size: 2.5em;
+  color: #2c3e50;
+  margin-bottom: 30px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.blog-carousel {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.blog-card {
+  width: 100%; /* Make the card full width on small screens */
+  max-width: 300px; /* Maintain max width for larger screens */
+  padding: 20px;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  display: flex;
+  cursor: pointer;
+  flex-direction: column;
+  text-align: left;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.blog-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+  background-color: rgba(245, 245, 245, 0.9);
+}
+
+.blog-title {
+  font-size: 1.75em;
+  color: #34495e;
+  margin-bottom: 10px;
+  font-weight: bold;
+  line-height: 1.3;
+}
+
+.blog-meta {
+  font-size: 0.85em;
+  color: #95a5a6;
+  display: flex;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+.blog-date {
+  font-style: italic;
+}
+
+.blog-author {
+  font-weight: bold;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.page-button {
+  background-color: rgba(255, 255, 255, 0.6);
+  border: none;
+  color: #e67e22;
+  font-size: 1em;
+  padding: 10px 20px;
+  margin: 0 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.page-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.page-button:hover {
+  background-color: #dcdcdc;
+}
+
+.page-info {
+  font-size: 1em;
+  color: #666;
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+  .blog-heading {
+    font-size: 2em;
+  }
+
+  .blog-card {
+    width: 90%; /* Adjust width for small screens */
+  }
+
+  .page-button {
+    padding: 8px 15px; /* Smaller padding on mobile */
+  }
 }

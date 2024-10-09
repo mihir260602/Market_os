@@ -39,7 +39,7 @@ function PostEditorPage() {
     const draftData = {
       title: postTitle,
       category,
-      tags: tags.split(",").map((tag) => tag.trim()),
+      tags: tags,
       content_body: postBody,
       banner_image: imageFile,
       meta_title: metaTitle,
@@ -63,7 +63,7 @@ function PostEditorPage() {
     const draftData = {
       title: postTitle,
       category,
-      tags: tags.split(",").map((tag) => tag.trim()),
+      tags: tags,
       content_body: postBody,
       banner_image: imageFile,
       meta_title: metaTitle,

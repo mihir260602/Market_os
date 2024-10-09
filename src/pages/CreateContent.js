@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import {
-  Button,
-  Typography,
-  Paper,
   Box,
+  Button,
   Divider,
+  Paper,
   TextField,
+  Typography,
 } from "@mui/material";
-import { styled, keyframes } from "@mui/system";
+import { keyframes, styled } from "@mui/system";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const OPENAI_API_URL = "https://api.openai.com/v1/chat/completions";
 const OPENAI_API_KEY = process.env.REACT_APP_OPENAI_API_KEY;
@@ -332,12 +332,74 @@ const Chatbot = () => {
     }
   };
 
+  // const handleTitleSelect = async (title) => {
+  //   setSelectedTitle(title);
+  //   setSummary("Generating content...");
+
+  //   try {
+  //     const response = await axios.post(
+  //       OPENAI_API_URL,
+  //       {
+  //         model: "gpt-3.5-turbo",
+  //         messages: [
+  //           {
+  //             role: "system",
+  //             content:
+  //               "`You are a skilled technical writer. Create a detailed article in about 250 words based on the user's selected title.`",
+  //           },
+  //           {
+  //             role: "user",
+  //             content: `Generate a detailed article in around 250 words detailed content based on the following title: ${title}.`,
+  //           },
+  //         ],
+  //         temperature: 0.7,
+  //         max_tokens: 1000,
+  //       },
+  //       {
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           Authorization: `Bearer ${OPENAI_API_KEY}`,
+  //         },
+  //       }
+  //     );
+
+  //     const generatedContent = response.data.choices[0].message.content;
+  //     setSummary(generatedContent);
+  //     // Add bot response to history
+  //     setHistory((prevHistory) => [
+  //       ...prevHistory,
+  //       { role: "bot", text: generatedContent },
+  //     ]);
+
+  //     // Print title and body to console
+  //     console.log("Title:", title);
+  //     console.log("Body:", generatedContent);
+
+  //     // Automatically save and redirect to the Post Editor page with title and content
+  //     handleSave(title, generatedContent);
+  //   } catch (error) {
+  //     console.error("Error while sending message to OpenAI:", error);
+  //     setSummary("There was an error generating the article.");
+  //   }
+  // };
+
+  // const handleSave = (title, content) => {
+  //   navigate("/post-editor", {
+  //     state: {
+  //       contentData: {
+  //         title: title, // Pass the selected title
+  //         body: content, // Pass the generated content
+  //       },
+  //     },
+  //   });
+  // };
+
   const handleTitleSelect = async (title) => {
     setSelectedTitle(title);
     setSummary("Generating content...");
-
+  
     try {
-      const response = await axios.post(
+      const contentResponse = await axios.post(
         OPENAI_API_URL,
         {
           model: "gpt-3.5-turbo",
@@ -345,11 +407,11 @@ const Chatbot = () => {
             {
               role: "system",
               content:
-                "`You are a skilled technical writer. Create a detailed article in about 250 words based on the user's selected title.`",
+                "You are a skilled technical writer. Create a detailed article in about 250 words based on the user's selected title.",
             },
             {
               role: "user",
-              content: `Generate a detailed article in around 250 words detailed content based on the following title: ${title}.`,
+              content: `Generate a detailed article in around 250 words based on the following title: ${title}.`,
             },
           ],
           temperature: 0.7,
@@ -362,33 +424,62 @@ const Chatbot = () => {
           },
         }
       );
-
-      const generatedContent = response.data.choices[0].message.content;
+  
+      const generatedContent = contentResponse.data.choices[0].message.content;
       setSummary(generatedContent);
+      
+      // Generate a one-word tag based on the content
+      const tagResponse = await axios.post(
+        OPENAI_API_URL,
+        {
+          model: "gpt-3.5-turbo",
+          messages: [
+            {
+              role: "system",
+              content:
+                "You are a skilled technical writer. Generate a one-word tag that summarizes the following content.",
+            },
+            {
+              role: "user",
+              content: `Provide a single-word tag for this content: ${generatedContent}`,
+            },
+          ],
+          temperature: 0.7,
+          max_tokens: 10,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${OPENAI_API_KEY}`,
+          },
+        }
+      );
+  
+      const generatedTag = tagResponse.data.choices[0].message.content.trim();
+      
       // Add bot response to history
       setHistory((prevHistory) => [
         ...prevHistory,
         { role: "bot", text: generatedContent },
       ]);
-
+      console.log(title);
+      console.log(generatedContent);
+      console.log(generatedTag);
       // Print title and body to console
-      console.log("Title:", title);
-      console.log("Body:", generatedContent);
-
-      // Automatically save and redirect to the Post Editor page with title and content
-      handleSave(title, generatedContent);
+      // Automatically save and redirect to the Post Editor page with title, content, and tag
+      handleSave(title, generatedContent, generatedTag);
     } catch (error) {
       console.error("Error while sending message to OpenAI:", error);
       setSummary("There was an error generating the article.");
     }
   };
-
-  const handleSave = (title, content) => {
+  const handleSave = (title, content, generatedTag) => {
     navigate("/post-editor", {
       state: {
         contentData: {
           title: title, // Pass the selected title
           body: content, // Pass the generated content
+          tag: generatedTag, // Pass the generated tag
         },
       },
     });
