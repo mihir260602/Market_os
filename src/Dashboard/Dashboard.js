@@ -63,7 +63,7 @@ const Layout = () => {
   const [lineGraphData, setLineGraphData] = useState([]);
   const [filter, setFilter] = useState("hour");
   const [pageViewData, setPageViewData] = useState([]);
-<<<<<<< HEAD
+
   // Default filter // State to hold OS data
 
   // ---------------------------
@@ -76,7 +76,7 @@ const Layout = () => {
     const headers = {
       Authorization: `Bearer ${process.env.REACT_APP_PERSONAL_API_KEY_NEW}`,
     };
-=======
+
   const [sortDirection, setSortDirection] = useState('asc');
 
   const [sortConfig, setSortConfig] = useState({
@@ -117,7 +117,7 @@ const fetchPageViewsForGraph = async () => {
   const headers = {
     Authorization: `Bearer ${process.env.REACT_APP_PERSONAL_API_KEY_NEW}`,
   };
->>>>>>> eea76a84705047f70701ac4b96d8a2ab049d3584
+
 
     // Function to process events and extract timestamps
     const processEvents = (events) => {
