@@ -63,6 +63,7 @@ const Layout = () => {
   const [lineGraphData, setLineGraphData] = useState([]);
   const [filter, setFilter] = useState("hour");
   const [pageViewData, setPageViewData] = useState([]);
+<<<<<<< HEAD
   // Default filter // State to hold OS data
 
   // ---------------------------
@@ -75,6 +76,48 @@ const Layout = () => {
     const headers = {
       Authorization: `Bearer ${process.env.REACT_APP_PERSONAL_API_KEY_NEW}`,
     };
+=======
+  const [sortDirection, setSortDirection] = useState('asc');
+
+  const [sortConfig, setSortConfig] = useState({
+    key: 'views',  // Default sorting by views
+    direction: 'asc', // Default ascending order
+  });
+  const handleSort = (field) => {
+    let sortedData = [...pathData];
+    const isAsc = sortConfig.key === field && sortConfig.direction === 'asc';
+
+    sortedData.sort((a, b) => {
+      if (isAsc) {
+        return a[field] - b[field];
+      } else {
+        return b[field] - a[field];
+      }
+    });
+    
+    setSortConfig({
+      key: field,
+      direction: isAsc ? 'desc' : 'asc',
+    });
+
+    setPathData(sortedData);
+  };
+  // const handleFilterChange = (newFilter) => {
+  //   setFilter(newFilter);
+  // };
+// Default filter // State to hold OS data
+
+// ---------------------------
+const fetchPageViewsForGraph = async () => {
+  let pageViewData = [];
+  let timeAggregatedViews = {};
+  let totalPageViews = 0;
+  let nextUrl =
+    "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=10000";
+  const headers = {
+    Authorization: `Bearer ${process.env.REACT_APP_PERSONAL_API_KEY_NEW}`,
+  };
+>>>>>>> eea76a84705047f70701ac4b96d8a2ab049d3584
 
     // Function to process events and extract timestamps
     const processEvents = (events) => {
@@ -161,7 +204,7 @@ const Layout = () => {
     try {
       // Fetch the first page of results
       const response = await axios.get(
-        "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=1000",
+        "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=10000",
         {
           headers: {
             Authorization: `Bearer ${process.env.REACT_APP_PERSONAL_API_KEY_NEW}`, // Replace with your actual API key
@@ -212,7 +255,7 @@ const Layout = () => {
   const fetchPageViews = async () => {
     let totalPageViews = 0;
     let nextUrl =
-      "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=1000";
+      "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=10000";
     const headers = {
       Authorization: `Bearer ${process.env.REACT_APP_PERSONAL_API_KEY_NEW}`,
     };
@@ -236,7 +279,7 @@ const Layout = () => {
   const fetchUniqueVisitors = async () => {
     let visitorSet = new Set();
     let nextUrl =
-      "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=1000";
+      "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=10000";
     const headers = {
       Authorization: `Bearer ${process.env.REACT_APP_PERSONAL_API_KEY_NEW}`,
     };
@@ -266,7 +309,7 @@ const Layout = () => {
   const fetchPathData = async () => {
     let pathDataObj = {};
     let nextUrl =
-      "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=1000";
+      "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=10000";
     const headers = {
       Authorization: `Bearer ${process.env.REACT_APP_PERSONAL_API_KEY_NEW}`,
     };
@@ -324,7 +367,7 @@ const Layout = () => {
     let osDataObj = {};
     let totalVisitors = 0;
     let nextUrl =
-      "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=1000";
+      "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=10000";
     const headers = {
       Authorization: `Bearer ${process.env.REACT_APP_PERSONAL_API_KEY_NEW}`,
     };
@@ -369,7 +412,7 @@ const Layout = () => {
   const fetchCityData = async () => {
     let cityDataObj = {};
     let nextUrl =
-      "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=1000";
+      "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=10000";
     const headers = {
       Authorization: `Bearer ${process.env.REACT_APP_PERSONAL_API_KEY_NEW}`,
     };
@@ -408,7 +451,7 @@ const Layout = () => {
   const fetchChannelData = async () => {
     let channelDataObj = {};
     let nextUrl =
-      "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=1000";
+      "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=10000";
     const headers = {
       Authorization: `Bearer ${process.env.REACT_APP_PERSONAL_API_KEY_NEW}`,
     };
@@ -476,7 +519,7 @@ const Layout = () => {
           <div className="analytics-container">
             <div className="analytics-card">
               <div className="card-content">
-                <h3>Total Page Views</h3>
+                <h3>Page Views</h3>
                 <p>{totalPageViews}</p>
               </div>
             </div>
@@ -558,12 +601,19 @@ const Layout = () => {
           <h3>Path Data</h3>
           <table>
             <thead>
-              <tr>
-                <th>Path</th>
-                <th>Visitors</th>
-                <th>Views</th>
-                <th>Bounce Rate</th>
-              </tr>
+            <tr>
+            <th>Path</th>
+            <th><button onClick={() => handleSort('Visitors')} className="sort-button">
+                {sortConfig.key === 'Visitors' && sortConfig.direction === 'asc' ? '↑' : '↓'}
+              </button>Visitors</th>
+            <th><button onClick={() => handleSort('Views')} className="sort-button">
+                {sortConfig.key === 'Views' && sortConfig.direction === 'asc' ? '↑' : '↓'}
+              </button>
+              Views
+              
+            </th>
+            <th>Bounce Rate</th>
+          </tr>
             </thead>
             <tbody>
               {pathData.map((data, index) => (

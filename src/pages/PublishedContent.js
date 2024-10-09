@@ -158,7 +158,7 @@ function PublishedContent() {
     {
       columns,
       data: contentList,
-      initialState: { pageIndex: 0, pageSize: 4 }, // Show 4 results at a time
+      initialState: { pageIndex: 0, pageSize: 5 }, // Show 4 results at a time
     },
     usePagination
   );

@@ -243,117 +243,113 @@ export const fetchContentList = async (options = {}) => {
 };
 
 // Update
-export const updateDraft = async (id, updatedContent) => {
-  try {
-    const token = localStorage.getItem("auth_token");
-
-    // Create a new FormData object for multipart form data
-    const formData = new FormData();
-
-    // Conditionally append fields to the formData
-    if (updatedContent.title) {
-      formData.append("title", updatedContent.title);
-    }
-    if (updatedContent.category) {
-      formData.append("category", updatedContent.category);
-    }
-    if (updatedContent.tags) {
-      formData.append("tags", JSON.stringify(updatedContent.tags)); // Stringify tags if it's an array
-    }
-    if (updatedContent.content_body) {
-      formData.append("content_body", updatedContent.content_body);
-    }
-    if (updatedContent.status) {
-      formData.append("status", updatedContent.status);
-    }
-    if (updatedContent.review_status) {
-      formData.append("review_status", updatedContent.review_status);
-    }
-
-    // Append files only if they are updated
-    if (updatedContent.banner_image) {
-      formData.append("banner_image", updatedContent.banner_image); // Banner image file
-    }
-
-    if (updatedContent.meta_title) {
-      formData.append("meta_title", updatedContent.meta_title);
-    }
-    if (updatedContent.meta_description) {
-      formData.append("meta_description", updatedContent.meta_description);
-    }
-    if (updatedContent.meta_keywords) {
-      formData.append("meta_keywords", updatedContent.meta_keywords);
-    }
-
-    // Configure request headers with JWT token
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        // Remove Content-Type; axios will set it automatically for FormData
-      },
-      withCredentials: true,
-    };
-
-    // Send PUT request to update the draft
-    const response = await axios.put(
-      `${getBaseUrl()}/content/${id}/`,
-      formData,
-      config
-    );
-
-    console.log(response.data);
-    return response.data; // Return the updated content data
-  } catch (error) {
-    console.error("Error updating draft:", error);
-    throw error; // Rethrow the error to handle it in the component
-  }
-};
-
-// export const updateDraft = async (draftId, draftData) => {
+// export const updateDraft = async (id, updatedContent) => {
 //   try {
-//     const token = getAuthToken();
-//     const response = await axios.put(
-//       `${getBaseUrl()}/content/${draftId}/`,
-//       draftData,
-//       {
-//         headers: {
-//           Authorization: `Bearer ${token}`,
-//           status: "published",
-//         },
-//       }
-//     );
-//     return response.data; // Return the updated draft data
-//   } catch (error) {
-//     console.error("Error updating draft:", error);
-//     throw error;
-//   }
-// };
+//     const token = localStorage.getItem("auth_token");
 
-// export const updateDraft = async (draftId, draftData) => {
-//   try {
-//     const token = getAuthToken();
+//     // Create a new FormData object for multipart form data
+//     const formData = new FormData();
+
+//     // Conditionally append fields to the formData
+//     if (updatedContent.title) {
+//       formData.append("title", updatedContent.title);
+//     }
+//     if (updatedContent.category) {
+//       formData.append("category", updatedContent.category);
+//     }
+//     if (updatedContent.tags) {
+//       formData.append("tags", JSON.stringify(updatedContent.tags)); // Stringify tags if it's an array
+//     }
+//     if (updatedContent.content_body) {
+//       formData.append("content_body", updatedContent.content_body);
+//     }
+//     if (updatedContent.status) {
+//       formData.append("status", updatedContent.status);
+//     }
+//     if (updatedContent.review_status) {
+//       formData.append("review_status", updatedContent.review_status);
+//     }
+
+//     // Append files only if they are updated
+//     if (updatedContent.banner_image) {
+//       formData.append("banner_image", updatedContent.banner_image); // Banner image file
+//     }
+
+//     if (updatedContent.meta_title) {
+//       formData.append("meta_title", updatedContent.meta_title);
+//     }
+//     if (updatedContent.meta_description) {
+//       formData.append("meta_description", updatedContent.meta_description);
+//     }
+//     if (updatedContent.meta_keywords) {
+//       formData.append("meta_keywords", updatedContent.meta_keywords);
+//     }
+
+//     // Configure request headers with JWT token
 //     const config = {
 //       headers: {
 //         Authorization: `Bearer ${token}`,
-//         "Content-Type": "application/json",
+//         // Remove Content-Type; axios will set it automatically for FormData
 //       },
+//       withCredentials: true,
 //     };
 
-//     // Ensure the "published" status is part of the request body, not headers
-//     draftData.status = "published";
-
+//     // Send PUT request to update the draft
 //     const response = await axios.put(
-//       `${getBaseUrl()}/content/${draftId}/`,
-//       draftData,
+//       `${getBaseUrl()}/content/${id}/`,
+//       formData,
 //       config
 //     );
 
+//     console.log(response.data);
+//     return response.data; // Return the updated content data
+//   } catch (error) {
+//     console.error("Error updating draft:", error);
+//     throw error; // Rethrow the error to handle it in the component
+//   }
+// };
+
+// export const updateDraft = async (draftId, draftData) => {
+//   try {
+//     const token = getAuthToken();
+//     const response = await axios.put(`${getBaseUrl()}/content/${draftId}/`, draftData, {
+//       headers: {
+//         "Authorization": `Bearer ${token}`,
+//         "status": "published"
+//       },
+//     });
 //     return response.data; // Return the updated draft data
 //   } catch (error) {
 //     console.error("Error updating draft:", error);
 //     throw error;
 //   }
 // };
+
+export const updateDraft = async (draftId, draftData) => {
+  try {
+    const token = getAuthToken();
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    };
+
+    // Ensure the "published" status is part of the request body, not headers
+    draftData.status = "published";
+
+    const response = await axios.put(
+      `${getBaseUrl()}/content/${draftId}/`,
+      draftData,
+      config
+    );
+
+    return response.data; // Return the updated draft data
+  } catch (error) {
+    console.error("Error updating draft:", error);
+    throw error;
+  }
+};
 
 export const fetchDraftById = async (draftId) => {
   try {
