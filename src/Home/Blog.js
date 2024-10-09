@@ -129,8 +129,8 @@ const Blog = () => {
   }, []);
 
   const navigateToPost = (blog) => {
-    const tags = Array.isArray(blog.tags) ? blog.tags.join(",") : blog.tags; 
-    navigate(`/post/${blog.id}/${tags}`, { state: { blog } });
+    const title = Array.isArray(blog.title) ? blog.title.join(",") : blog.title; 
+    navigate(`/post/${blog.id}/${title}`, { state: { blog } });
   };
 
   const totalPages = Math.ceil(blogData.length / blogsPerPage);
