@@ -1,4 +1,5 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import {
   Bar,
   BarChart,
@@ -68,9 +69,83 @@ const pieData = [
 const COLORS = ["#0088FE", "#FFBB28"];
 
 const ReportDashboard = () => {
+  const [topVisitors, setTopVisitors] = useState([]);
+
+  const fetchTopVisitors = async () => {
+    let visitorsData = {};
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Regex to check if `distinct_id` is an email
+    const headers = {
+      Authorization: `Bearer ${process.env.REACT_APP_PERSONAL_API_KEY_NEW}`, // Replace with your API key
+    };
+
+    const processEvents = (events) => {
+      events.forEach((event) => {
+        const distinctId = event.distinct_id;
+
+        // Only process if `distinct_id` looks like an email
+        if (emailRegex.test(distinctId)) {
+          if (visitorsData[distinctId]) {
+            visitorsData[distinctId] += 1; // Increment page views
+          } else {
+            visitorsData[distinctId] = 1; // Initialize with 1 page view
+          }
+        }
+      });
+    };
+
+    const fetchAllPages = async (url) => {
+      try {
+        const response = await axios.get(url, { headers });
+        processEvents(response.data.results);
+
+        if (response.data.next) {
+          await fetchAllPages(response.data.next); // Recursively fetch all pages
+        }
+      } catch (error) {
+        console.error("Error fetching visitors:", error);
+      }
+    };
+
+    // Start fetching the first page of data
+    const startUrl =
+      "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=1000";
+    await fetchAllPages(startUrl);
+
+    // Sort and get the top 10 visitors
+    const sortedVisitors = Object.entries(visitorsData)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 10); // Top 10
+
+    setTopVisitors(sortedVisitors);
+  };
+
+  useEffect(() => {
+    fetchTopVisitors();
+  }, []);
+
   return (
+    
     <div className="report-dashboard">
       <h2>Report Dashboard</h2>
+      <h3>Top 10 Visitors (Email IDs)</h3>
+      <table className="top-visitors-table">
+        <thead>
+          <tr>
+            <th>Email</th>
+            <th>Page Views</th>
+          </tr>
+        </thead>
+        <tbody>
+          {topVisitors.map(([email, views], index) => (
+            <tr key={index}>
+              <td>{email}</td>
+              <td>{views}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      
       <div className="report-cards">
         {sampleReports.map((report, index) => (
           <div

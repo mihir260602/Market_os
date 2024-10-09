@@ -64,6 +64,126 @@ const Layout = () => {
   const [filter, setFilter] = useState("hour");
   const [pageViewData, setPageViewData] = useState([]);
   const [sortDirection, setSortDirection] = useState("asc");
+  const [topVisitors, setTopVisitors] = useState([]);
+
+// --------------------------------------------------
+  // fetch top 10 visitors 
+  const fetchTop10Visitors = async () => {
+    let visitorsData = {};
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Regex to check if `distinct_id` is an email
+    const headers = {
+      Authorization: `Bearer ${process.env.REACT_APP_PERSONAL_API_KEY_NEW}`, // Replace with your API key
+    };
+
+    const processEvents = (events) => {
+      events.forEach((event) => {
+        const distinctId = event.distinct_id;
+
+        // Only process if `distinct_id` looks like an email
+        if (emailRegex.test(distinctId)) {
+          if (visitorsData[distinctId]) {
+            visitorsData[distinctId] += 1; // Increment page views
+          } else {
+            visitorsData[distinctId] = 1; // Initialize with 1 page view
+          }
+        }
+      });
+    };
+
+    const fetchAllPages = async (url) => {
+      try {
+        const response = await axios.get(url, { headers });
+        processEvents(response.data.results);
+
+        if (response.data.next) {
+          await fetchAllPages(response.data.next); // Recursively fetch all pages
+        }
+      } catch (error) {
+        console.error("Error fetching visitors:", error);
+      }
+    };
+
+    // Start fetching the first page of data
+    const startUrl =
+      "https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=1000";
+    await fetchAllPages(startUrl);
+
+    // Sort and get the top 10 visitors
+    const sortedVisitors = Object.entries(visitorsData)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 10); // Top 10
+
+    setTopVisitors(sortedVisitors);
+  };
+  // --------------------------------------------------------------------------------
+  const fetchTopVisitors = async () => {
+      try {
+          // Fetch the events from the PostHog API
+          const response = await axios.get("https://app.posthog.com/api/projects/95663/events/?event=$pageview&limit=1000&api_key=YOUR_API_KEY");
+          const responseJson = response.data;
+
+          // Regular expression to check if the distinct_id is an email
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+          // Initialize an object to track visitor metrics
+          let visitorMetrics = {};
+
+          // Loop through the results to gather metrics per visitor
+          if (responseJson.results) {
+              responseJson.results.forEach(event => {
+                  const distinctId = event.distinct_id; // Get the visitor's distinct ID
+
+                  // Check if the distinct ID is an email address
+                  if (emailRegex.test(distinctId)) {
+                      // Initialize metrics for this visitor if not already done
+                      if (!visitorMetrics[distinctId]) {
+                          visitorMetrics[distinctId] = {
+                              pageViews: 0,
+                              firstSeen: new Date(event.timestamp), // Initialize with the first event timestamp
+                          };
+                      }
+
+                      // Increment page views
+                      visitorMetrics[distinctId].pageViews += 1;
+
+                      // Check if this event is earlier than the recorded first seen date
+                      const eventDate = new Date(event.timestamp);
+                      if (eventDate < visitorMetrics[distinctId].firstSeen) {
+                          visitorMetrics[distinctId].firstSeen = eventDate; // Update first seen if this event is earlier
+                      }
+                  }
+              });
+          }
+
+          // Function to format date in 'YYYY-MM-DD'
+          function formatDate(date) {
+              return date.toISOString().split('T')[0]; // Extract date part (YYYY-MM-DD)
+          }
+
+          // Convert the object into an array of [distinct_id, metrics] pairs
+          let sortedVisitors = Object.entries(visitorMetrics).map(([id, metrics]) => {
+              const date = formatDate(metrics.firstSeen); // Format firstSeen to only date
+              return {
+                  email: id,
+                  pageViews: metrics.pageViews,
+                  firstSeenDate: date // Separate date only
+              };
+          });
+
+          // Sort the array by page views in descending order
+          sortedVisitors.sort((a, b) => b.pageViews - a.pageViews);
+
+          // Get the top 10 visitors
+          let top10Visitors = sortedVisitors.slice(0, 10);
+          setTopVisitors(top10Visitors); // Update the state with top visitors
+
+          // Log the top 10 visitors to the console for verification
+          console.log("Top 10 Visitors (Email IDs):", top10Visitors);
+
+      } catch (error) {
+          console.error("Error fetching events:", error);
+      }
+    };
 
   const [sortConfig, setSortConfig] = useState({
     key: "views", // Default sorting by views
@@ -483,6 +603,8 @@ const Layout = () => {
     fetchSessionData();
     // Fetch OS data
     fetchPageViewsForGraph();
+    fetchTopVisitors();
+    fetchTop10Visitors();
   }, [filter]);
 
   const handleFilterChange = (newFilter) => {
@@ -828,48 +950,30 @@ const Layout = () => {
         </div>
         <div class="lead-engagement-widget">
           {/* <!-- Top Performing Leads Table --> */}
+
           <div class="top-leads-table">
-            <h4>Top Performing Leads</h4>
-            <table>
-              <thead>
-                <tr>
-                  <th>Lead Name</th>
-                  <th>Company</th>
-                  <th>Engagement Score</th>
-                  <th>Activity Level</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>John Doe</td>
-                  <td>ABC Corp</td>
-                  <td>95%</td>
-                  <td>High</td>
-                </tr>
-                <tr>
-                  <td>Jane Smith</td>
-                  <td>XYZ Inc.</td>
-                  <td>92%</td>
-                  <td>Medium</td>
-                </tr>
-                <tr>
-                  <td>Michael Lee</td>
-                  <td>GlobalTech</td>
-                  <td>89%</td>
-                  <td>High</td>
-                </tr>
-                <tr>
-                  <td>Emily Davis</td>
-                  <td>MarketEdge</td>
-                  <td>87%</td>
-                  <td>Low</td>
-                </tr>
-              </tbody>
-            </table>
+          <h3>Top 10 Visitors (Email IDs)</h3>
+      <table className="top-visitors-table">
+        <thead>
+          <tr>
+            <th>Email</th>
+            <th>Page Views</th>
+          </tr>
+        </thead>
+        <tbody>
+          {topVisitors.map(([email, views], index) => (
+            <tr key={index}>
+              <td>{email}</td>
+              <td>{views}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
           </div>
         </div>
       </div>
     </div>
   );
 };
+
 export default Layout;

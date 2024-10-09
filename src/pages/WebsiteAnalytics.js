@@ -57,6 +57,9 @@ const Layout = () => {
   const [lineGraphData, setLineGraphData] = useState([]);
   const [filter, setFilter] = useState("hour"); // State to hold OS data
   const [sortDirection, setSortDirection] = useState('asc');
+  
+
+  
 
   const [sortConfig, setSortConfig] = useState({
     key: 'views',  // Default sorting by views
@@ -471,6 +474,7 @@ const getWeekNumber = (date) => {
     fetchChannelData();
     fetchSessionData();
     fetchPageViewsForGraph();
+    
   }, [filter]);
     // Fetch OS data
 
@@ -523,6 +527,7 @@ const reversedData = lineGraphData.slice().reverse();
               </div>
             </div>
           </div>
+
         </div>
         <div className="filter-dropdown">
         <label htmlFor="filter-select">Select Time Filter:</label>
