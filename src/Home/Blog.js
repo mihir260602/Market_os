@@ -27,8 +27,14 @@ const Blog = () => {
     fetchBlogs();
   }, []);
 
+  // const navigateToPost = (blog) => {
+  //   navigate(`/post/${blog.id}/${blog.tags}`, { state: { blog } }); // Navigate to the PostPage and pass the blog data
+  // };
+
   const navigateToPost = (blog) => {
-    navigate(`/post/${blog.id}`, { state: { blog } }); // Navigate to the PostPage and pass the blog data
+    // console.log(blog); // Log the blog object to check its structure
+    const tags = Array.isArray(blog.tags) ? blog.tags.join(",") : blog.tags; // Ensure it's an array
+    navigate(`/post/${blog.id}/${tags}`, { state: { blog } }); // Navigate to the PostPage and pass the blog data
   };
 
   const totalPages = Math.ceil(blogData.length / blogsPerPage);

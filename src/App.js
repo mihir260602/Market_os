@@ -48,9 +48,9 @@ function Layout({ children }) {
     posthog.capture("$pageview");
   }, [location]);
 
-  const hideSidebarAndHeader = ["/", "/Login", "/mform", "/contact"].includes(
-    location.pathname
-  );
+  const hideSidebarAndHeader =
+    ["/", "/Login", "/mform", "/contact"].includes(location.pathname) ||
+    location.pathname.startsWith("/post/");
 
   return (
     <div style={{ display: "flex", height: "100vh" }}>
@@ -109,7 +109,7 @@ function App() {
               path="/edit-unpublish-content/:id"
               element={<Editunpublishedcontent />}
             />
-            <Route path="/post/:id" element={<PostPage />} />
+            <Route path="/post/:id/:tags" element={<PostPage />} />
           </Routes>
         </Layout>
       </Router>
