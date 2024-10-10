@@ -39,6 +39,7 @@ import PostPage from "./Home/PostPage";
 import ContactForm from "./pages/ContactForm";
 import Postdata from '../src/Blogdata/Postdata';
 import Userdata from "../src/userdata/Userdata";
+import VisitorDetails from "./userdata/VisitorDetails";
 
 posthog.init(process.env.REACT_APP_POSTHOG_API_KEY, {
   api_host: "https://app.posthog.com",
@@ -46,13 +47,26 @@ posthog.init(process.env.REACT_APP_POSTHOG_API_KEY, {
 
 function Layout({ children }) {
   const location = useLocation();
+
   useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const email = params.get("email");
+  
+    if (email) {
+      posthog.identify(email, { email: email });
+      console.log(`User identified: ${email}`);
+    }
+  
     posthog.capture("$pageview");
+    console.log("Pageview event captured");
   }, [location]);
 
+  // useEffect(() => {
+  //   posthog.capture("$pageview");
+  // }, [location]);
+
   const hideSidebarAndHeader =
-    ["/", "/Login", "/mform", "/contact","/Postdata","/userdata"].includes(location.pathname) ||
-    location.pathname.startsWith("/post/");
+    ["/", "/Login", "/mform", "/contact","/Postdata","/userdata", "/post/"].includes(location.pathname);
 
   return (
     <div style={{ display: "flex", height: "100vh" }}>
@@ -78,6 +92,9 @@ function App() {
           <Routes>
           <Route path="/postdata" element={<Postdata />} />
             <Route path="/userdata" element={<Userdata />} />
+            {/* <Route path="/" element={<VisitorList />} /> List of all visitors */}
+        <Route path="/visitor/:visitorId" element={<VisitorDetails />} /> {/* Detailed data for specific visitor */}
+     
             <Route path="/" element={<Home />} />
             <Route path="/Login" element={<Login />} />
             <Route path="/mform" element={<MauticForm />} />
