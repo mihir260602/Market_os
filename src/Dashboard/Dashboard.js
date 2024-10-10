@@ -866,7 +866,7 @@ const Layout = () => {
               {/* <div className="card-icon">📈</div> */}
               <div className="card-content">
                 <h3>Total Campaigns</h3>
-                <p>50</p>
+                <p>5</p>
               </div>
             </div>
             <div className="analytics-card">
@@ -883,18 +883,12 @@ const Layout = () => {
                 <p>1,200</p>
               </div>
             </div>
-            <div className="analytics-card">
-              {/* <div className="card-icon">💵</div> */}
-              <div className="card-content">
-                <h3>Revenue</h3>
-                <p>$3,500</p>
-              </div>
-            </div>
+            
             <div className="analytics-card">
               {/* <div className="card-icon">👁️</div> */}
               <div className="card-content">
                 <h3>Analytics Views</h3>
-                <p>8,300</p>
+                <p>300</p>
               </div>
             </div>
           </div>
@@ -929,7 +923,7 @@ const Layout = () => {
               {/* <div className="card-icon"></div> */}
               <div className="card-content">
                 <h3>Leads Generated</h3>
-                <p>1,200</p>
+                <p>20</p>
               </div>
             </div>
             <div className="analytics-card">

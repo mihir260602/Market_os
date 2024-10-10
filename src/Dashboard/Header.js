@@ -35,12 +35,12 @@ const Header = () => {
           )}
         </div>
         <div className="custom-user-profile" onClick={toggleDropdown}>
-          <img
+          {/* <img
             alt="User Avatar"
             className="custom-avatar"
             src="https://media.licdn.com/dms/image/D5603AQHHtekOv-0uhQ/profile-displayphoto-shrink_200_200/0/1689660242798?e=2147483647&v=beta&t=8h8ex5-P1eoPjSD2chLERIfsD_crwDS2_WrpWiK97V0" // Replace with your actual image URL
-          />
-          <span className="custom-username">Neeraj Kumar</span>
+          /> */}
+          <span className="custom-username">Admin</span>
           <BsChevronDown className="custom-dropdown-icon" />
           {dropdownOpen && (
             <div className="custom-dropdown-menu">

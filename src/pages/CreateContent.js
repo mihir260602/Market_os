@@ -26,8 +26,7 @@ const fadeInRight = keyframes`
 
 const ChatContainer = styled(Paper)(() => ({
   maxWidth: "2000px",
-  marginLeft: "250px",
-  marginTop: "50px",
+  margin: "50px 30px 0 280px",
   padding: "40px",
   borderRadius: "12px",
   backgroundColor: "rgba(255, 255, 255, 0.85)", // Slight transparency for modern look

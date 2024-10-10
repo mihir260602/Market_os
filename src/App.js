@@ -22,6 +22,7 @@ import EmailAnalytics from "./pages/EmailAnalytics";
 import EmailTemplatesPage from "./pages/EmailTemplatesPage";
 import LeadActivity from "./pages/LeadActivity";
 import LeadAnalysis from "./pages/LeadAnalysis";
+import SegmentDetail from "./pages/SegmentDetail";
 import LeadScoring from "./pages/LeadScoring";
 import ReportDashboard from "./pages/ReportDashboard";
 import TaskManager from "./pages/TaskManager";
@@ -113,7 +114,7 @@ function App() {
           <Route path="/postdata" element={<Postdata />} />
             <Route path="/userdata" element={<Userdata />} />
             {/* <Route path="/" element={<VisitorList />} /> List of all visitors */}
-        <Route path="/visitor/:visitorId" element={<VisitorDetails />} /> {/* Detailed data for specific visitor */}
+            <Route path="/visitor/:visitorId" element={<VisitorDetails />} /> {/* Detailed data for specific visitor */}
      
             <Route path="/" element={<Home />} />
             <Route path="/Login" element={<Login />} />
@@ -126,6 +127,7 @@ function App() {
             <Route path="/task-manager" element={<TaskManager />} />
             <Route path="/email-templates" element={<EmailTemplatesPage />} />
             <Route path="/lead-analysis" element={<LeadAnalysis />} />
+            <Route path="/lead-analysis/:segmentId" element={<SegmentDetail />} />
             <Route path="/dashboard-content" element={<DashboardContent />} />
             <Route path="/campaign-manager" element={<CampaignManager />} />
             <Route path="/campaign-overview" element={<CampaignOverview />} />

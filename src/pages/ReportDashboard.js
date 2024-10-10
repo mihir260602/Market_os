@@ -160,7 +160,7 @@ const ReportDashboard = () => {
         ))}
       </div>
 
-      <h3>Lead Activity and Sales Over Time</h3>
+      {/* <h3>Lead Activity and Sales Over Time</h3>
       <ResponsiveContainer width="100%" height={300}>
         <BarChart data={chartData}>
           <CartesianGrid strokeDasharray="3 3" />
@@ -172,9 +172,9 @@ const ReportDashboard = () => {
           <Bar dataKey="sales" fill="#82ca9d" name="Sales" />
           <Bar dataKey="activities" fill="#ff7300" name="Activities" />
         </BarChart>
-      </ResponsiveContainer>
+      </ResponsiveContainer> */}
 
-      <h3>Lead Conversions and Sales Over Time</h3>
+      {/* <h3>Lead Conversions and Sales Over Time</h3>
       <ResponsiveContainer width="100%" height={300}>
         <LineChart data={chartData}>
           <CartesianGrid strokeDasharray="3 3" />
@@ -206,7 +206,7 @@ const ReportDashboard = () => {
           </Pie>
           <Tooltip />
         </PieChart>
-      </ResponsiveContainer>
+      </ResponsiveContainer> */}
     </div>
   );
 };

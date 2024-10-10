@@ -102,30 +102,28 @@ const Sidebar = () => {
             <li>
               <a href="/userdata">Visiter Data</a>
             </li>
-            <li>
+            {/* <li>
               <a href="/lead-activity">Lead Activity Timeline</a>
-            </li>
+            </li> */}
             {/* <li>
               <a href="/sales-pipeline">Sales Pipeline</a>
             </li> */}
             <li>
-              <a href="/lead-analysis">Lead Analytics</a>
+              <a href="/lead-analysis">Lead Segmentation</a>
             </li>
-            <li>
+            {/* <li>
               <a href="/lead-scoring">Lead Scoring Settings</a>
-            </li>
-            <li>
+            </li> */}
+            {/* <li>
               <a href="/task-manager">Task Manager</a>
             </li>
             <li>
               <a href="/campaign-manager">Campaign Manager</a>
-            </li>
+            </li> */}
           </ul>
         </li>
 
-        <li>
-          <a href="/tools">Tools</a>
-        </li>
+
       </ul>
       <hr className="sidebar-divider" />
       <div className="quick-action-panel">
