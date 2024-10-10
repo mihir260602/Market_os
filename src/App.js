@@ -37,6 +37,8 @@ import Unpublishedcontent from "./pages/UnpublishedContent";
 import Tickets from "./Tickets/Tickets";
 import PostPage from "./Home/PostPage";
 import ContactForm from "./pages/ContactForm";
+import Postdata from '../src/Blogdata/Postdata';
+import Userdata from "../src/userdata/Userdata";
 
 posthog.init(process.env.REACT_APP_POSTHOG_API_KEY, {
   api_host: "https://app.posthog.com",
@@ -49,7 +51,7 @@ function Layout({ children }) {
   }, [location]);
 
   const hideSidebarAndHeader =
-    ["/", "/Login", "/mform", "/contact"].includes(location.pathname) ||
+    ["/", "/Login", "/mform", "/contact","/Postdata"].includes(location.pathname) ||
     location.pathname.startsWith("/post/");
 
   return (
@@ -74,6 +76,8 @@ function App() {
       <Router>
         <Layout>
           <Routes>
+          <Route path="/postdata" element={<Postdata />} />
+            <Route path="/userdata" element={<Userdata />} />
             <Route path="/" element={<Home />} />
             <Route path="/Login" element={<Login />} />
             <Route path="/mform" element={<MauticForm />} />

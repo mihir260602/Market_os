@@ -109,7 +109,7 @@ const Blog = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const blogsPerPage = 5;
+  const blogsPerPage = 3;
   const navigate = useNavigate(); 
 
   useEffect(() => {
