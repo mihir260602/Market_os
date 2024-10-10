@@ -1,8 +1,41 @@
 import React, { useState, useEffect } from "react";
 import "./CampaignOverview.css";
-import { Bar } from "react-chartjs-2";
+import { Bar } from "react-chartjs-2"; // Assuming you will use Chart.js for visualizations
 import { Line } from "react-chartjs-2";
-import { getCampaigns } from "../api/mauticService";
+import axios from "axios";
+// Sample data for campaigns
+const campaignsData = [
+  {
+    id: 1,
+    title: "Holiday Sale Campaign",
+    status: "completed",
+    totalSent: 10000,
+    opens: 6500,
+    clicks: 1200,
+    conversions: 300,
+    engagementTime: "4",
+  },
+  {
+    id: 2,
+    title: "Summer Promo Campaign",
+    status: "active",
+    totalSent: 8000,
+    opens: 5200,
+    clicks: 800,
+    conversions: 200,
+    engagementTime: "3",
+  },
+  {
+    id: 3,
+    title: "Winter Clearance Campaign",
+    status: "paused",
+    totalSent: 5000,
+    opens: 2500,
+    clicks: 500,
+    conversions: 100,
+    engagementTime: "2",
+  },
+];
 // Sample data for trend line graph
 const trendData = {
   labels: ["Sep 1", "Sep 2", "Sep 3", "Sep 4", "Sep 5"],
@@ -60,27 +93,30 @@ const heatmapData = [
 ];
 
 const CampaignOverview = () => {
-  const [filteredCampaigns, setFilteredCampaigns] = useState([]);
+  const [campaigns, setCampaigns] = useState([]); // State to store campaigns from API
+  const [filteredCampaigns, setFilteredCampaigns] = useState([]); // Filtered campaigns
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [selectedStatus, setSelectedStatus] = useState("");
-
-  const fetchCampaignsData = async () => {
-    try {
-      const fetchedCampaigns = await getCampaigns();
-      setFilteredCampaigns(fetchedCampaigns);
-    } catch (error) {
-      console.error("Error fetching campaigns:", error);
-    }
-  };
-
   useEffect(() => {
-    fetchCampaignsData();
+    const fetchCampaigns = async () => {
+      try {
+        const response = await axios.get(
+          "http://127.0.0.1:8000/mautic/campaigns"
+        ); // Replace with your API URL
+        console.log(response.data);
+        setCampaigns(response.data); // Store the fetched data
+        setFilteredCampaigns(response.data); // Initially set the filtered campaigns to all campaigns
+      } catch (error) {
+        console.error("Error fetching the campaigns", error);
+      }
+    };
+
+    fetchCampaigns();
   }, []);
 
-  const totalCampaigns = filteredCampaigns.length;
   const handleFilter = () => {
-    let filtered = filteredCampaigns;
+    let filtered = campaignsData;
 
     if (startDate) {
       filtered = filtered.filter(
@@ -105,150 +141,158 @@ const CampaignOverview = () => {
 
   const handleClick = (campaign) => {
     alert(
-      `Campaign: ${campaign.title}\nStatus: ${
-        campaign.isPublished ? "Published" : "Not Published"
-      }\nTotal Sent: ${totalCampaigns}`
+      `Campaign: ${campaign.title}\nStatus: ${campaign.status}\nTotal Sent: ${campaign.totalSent}`
     );
   };
 
   return (
-    <div className="campaign-overview">
-      <h2 className="campaign-heading">Campaign Overview</h2>
+    <>
+      <div className="campaign-overview">
+        <h2 className="campaign-heading">Campaign Overview</h2>
 
-      <div className="key-metrics">
-        {/* Campaign Performance Summary */}
-        <div className="metric-card">
-          <i className="fas fa-chart-line"></i>
-          <div className="metric-value">{totalCampaigns}</div>
-          <div className="metric-title">Total Sent</div>
-          <div className="metric-description">
-            Opens:{" "}
-            <strong>
+        <div className="key-metrics">
+          {/* Campaign Performance Summary */}
+          <div className="metric-card">
+            <i className="fas fa-chart-line"></i>{" "}
+            {/* Icon for Campaign Performance */}
+            <div className="metric-value">
               {filteredCampaigns.reduce(
-                (acc, campaign) => acc + campaign.opens,
+                (acc, campaign) => acc + campaign.totalSent,
                 0
               )}
-            </strong>
-            <br />
-            Clicks:{" "}
-            <strong>
-              {filteredCampaigns.reduce(
-                (acc, campaign) => acc + campaign.clicks,
-                0
-              )}
-            </strong>
-            <br />
-            Conversions:{" "}
-            <strong>
-              {filteredCampaigns.reduce(
-                (acc, campaign) => acc + campaign.conversions,
-                0
-              )}
-            </strong>
-          </div>
-        </div>
-
-        {/* Engagement Metrics */}
-        <div className="metric-card">
-          <i className="fas fa-users"></i>
-          <div className="metric-value">
-            {filteredCampaigns.length > 0
-              ? (
-                  filteredCampaigns.reduce(
-                    (acc, campaign) => acc + parseInt(campaign.engagementTime),
-                    0
-                  ) / filteredCampaigns.length
-                ).toFixed(2)
-              : 0}{" "}
-            minutes
-          </div>
-          <div className="metric-title">Average Time Reading</div>
-          <div className="metric-description">
-            Average time spent per campaign.
-          </div>
-        </div>
-      </div>
-
-      <div className="data-visualizations">
-        <h3 className="chart-heading">Data Visualizations</h3>
-        <div className="charts-grid">
-          <div className="chart-container heatmap">
-            <h4>Heatmap</h4>
-            <Bar
-              data={{
-                labels: heatmapData.map((data) => data.hour),
-                datasets: [
-                  {
-                    label: "User Engagement",
-                    data: heatmapData.map((data) => data.activity),
-                    backgroundColor: "rgba(75, 192, 192, 0.6)",
-                  },
-                ],
-              }}
-              options={{
-                maintainAspectRatio: false,
-                scales: {
-                  y: {
-                    beginAtZero: true,
-                  },
-                },
-              }}
-            />
-          </div>
-
-          <div className="chart-container trendline">
-            <h4>Trend Line Graph</h4>
-            <Line data={trendData} options={{ maintainAspectRatio: false }} />
-          </div>
-        </div>
-      </div>
-
-      <div className="filter-options">
-        <h3 className="filter-heading">Filter Options</h3>
-        <div className="filter-inputs">
-          <input
-            type="date"
-            className="filter-input"
-            onChange={(e) => setStartDate(e.target.value)}
-          />
-          <input
-            type="date"
-            className="filter-input"
-            onChange={(e) => setEndDate(e.target.value)}
-          />
-          <select
-            className="filter-select"
-            onChange={(e) => setSelectedStatus(e.target.value)}
-          >
-            <option value="">Select Status</option>
-            <option value="published">Published</option>
-            <option value="notpublished">Not Published</option>
-          </select>
-          <button className="filter-button" onClick={handleFilter}>
-            Filter
-          </button>
-        </div>
-      </div>
-
-      <div className="campaign-status">
-        <h3 className="campaign-status-heading">Campaign Status List</h3>
-        <ul>
-          {filteredCampaigns.map((campaign) => (
-            <li
-              key={campaign.id}
-              className={`campaign-item ${campaign.status}`}
-              onClick={() => handleClick(campaign)}
-            >
-              {campaign.name} -{" "}
+            </div>
+            <div className="metric-title">Total Sent</div>
+            <div className="metric-description">
+              Opens:{" "}
               <strong>
-                {" "}
-                {campaign.isPublished ? "Published" : "Not Published"}
+                {filteredCampaigns.reduce(
+                  (acc, campaign) => acc + campaign.opens,
+                  0
+                )}
               </strong>
-            </li>
-          ))}
-        </ul>
+              <br />
+              Clicks:{" "}
+              <strong>
+                {filteredCampaigns.reduce(
+                  (acc, campaign) => acc + campaign.clicks,
+                  0
+                )}
+              </strong>
+              <br />
+              Conversions:{" "}
+              <strong>
+                {filteredCampaigns.reduce(
+                  (acc, campaign) => acc + campaign.conversions,
+                  0
+                )}
+              </strong>
+            </div>
+          </div>
+
+          {/* Engagement Metrics */}
+          <div className="metric-card">
+            <i className="fas fa-users"></i> {/* Icon for Engagement Metrics */}
+            <div className="metric-value">
+              {filteredCampaigns.length > 0
+                ? (
+                    filteredCampaigns.reduce(
+                      (acc, campaign) =>
+                        acc + parseInt(campaign.engagementTime),
+                      0
+                    ) / filteredCampaigns.length
+                  ).toFixed(2)
+                : 0}{" "}
+              minutes
+            </div>
+            <div className="metric-title">Average Time Reading</div>
+            <div className="metric-description">
+              Average time spent per campaign.
+            </div>
+          </div>
+        </div>
+
+        <div className="data-visualizations">
+          <h3 className="chart-heading">Data Visualizations</h3>
+          <div className="charts-grid">
+            <div className="chart-container heatmap">
+              <h4>Heatmap</h4>
+              <Bar
+                data={{
+                  labels: heatmapData.map((data) => data.hour),
+                  datasets: [
+                    {
+                      label: "User Engagement",
+                      data: heatmapData.map((data) => data.activity),
+                      backgroundColor: "rgba(75, 192, 192, 0.6)",
+                    },
+                  ],
+                }}
+                options={{
+                  maintainAspectRatio: false,
+                  scales: {
+                    y: {
+                      beginAtZero: true,
+                    },
+                  },
+                }}
+              />
+            </div>
+
+            <div className="chart-container trendline">
+              <h4>Trend Line Graph</h4>
+              <Line data={trendData} options={{ maintainAspectRatio: false }} />
+            </div>
+          </div>
+        </div>
+
+        <div className="filter-options">
+          <h3 className="filter-heading">Filter Options</h3>
+          <div className="filter-inputs">
+            <input
+              type="date"
+              className="filter-input"
+              onChange={(e) => setStartDate(e.target.value)}
+            />
+            <input
+              type="date"
+              className="filter-input"
+              onChange={(e) => setEndDate(e.target.value)}
+            />
+            <select
+              className="filter-select"
+              onChange={(e) => setSelectedStatus(e.target.value)}
+            >
+              <option value="">Select Status</option>
+              <option value="active">Active</option>
+              <option value="paused">Paused</option>
+              <option value="completed">Completed</option>
+              <option value="deleted">Deleted</option>
+            </select>
+            <button className="filter-button" onClick={handleFilter}>
+              Filter
+            </button>
+          </div>
+        </div>
+
+        <div className="campaign-status">
+          <h3 className="campaign-status-heading">Campaign Status List</h3>
+          <ul>
+            {filteredCampaigns.map((campaign) => (
+              <li
+                key={campaign.id}
+                className={`campaign-item ${
+                  campaign.isPublished ? "published" : "draft"
+                }`}
+                onClick={() => handleClick(campaign)}
+              >
+                {campaign.name} -{" "}
+                <strong>{campaign.isPublished ? "Published" : "Draft"}</strong>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

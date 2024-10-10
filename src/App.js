@@ -51,7 +51,7 @@ function Layout({ children }) {
   }, [location]);
 
   const hideSidebarAndHeader =
-    ["/", "/Login", "/mform", "/contact","/Postdata"].includes(location.pathname) ||
+    ["/", "/Login", "/mform", "/contact","/Postdata","/userdata"].includes(location.pathname) ||
     location.pathname.startsWith("/post/");
 
   return (

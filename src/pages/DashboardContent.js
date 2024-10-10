@@ -1,34 +1,45 @@
 import React, { useEffect, useState } from "react";
 import { Box, Typography, Grid, Card, CardContent } from "@mui/material";
+import axios from "axios"; // Import Axios for API calls
 import OpenRatesChart from "./OpenRatesChart";
 import ClickRatesChart from "./ClickRatesChart";
 import SubscriberDemographics from "./SubscriberDemographics";
 import RecentCampaignsTable from "./RecentCampaignsTable";
-import { getCampaigns } from "../api/mauticService"; // Import the service function
 import "./DashboardContent.css"; // Import CSS styles
 
 const DashboardContent = () => {
-  const [campaigns, setCampaigns] = useState([]);
+  // State for storing the total number of active campaigns
+  const [campaigns, setCampaigns] = useState([]); // Empty array as default state
 
-  const fetchCampaignsData = async () => {
+  // Function to fetch the campaigns from the API
+  const fetchCampaigns = async () => {
     try {
-      const fetchedCampaigns = await getCampaigns();
-      setCampaigns(fetchedCampaigns);
+      const response = await axios.get(
+        "http://127.0.0.1:8000/mautic/campaigns"
+      );
+      console.log("API Response:", response);
+
+      // Extract the campaigns from response.data object
+      const campaignsObject = response.data; // This is the object with keys like 2, 3, etc.
+      const fetchedCampaigns = Object.values(campaignsObject); // Convert the object to an array of campaigns
+
+      console.log("Fetched Campaigns:", fetchedCampaigns); // Log the campaigns array
+      setCampaigns(fetchedCampaigns); // Update the state with fetched campaigns
     } catch (error) {
       console.error("Error fetching campaigns:", error);
     }
   };
 
+  // Fetch campaigns when the component mounts
   useEffect(() => {
-    fetchCampaignsData();
+    fetchCampaigns(); // Use the correct function name
   }, []);
-
   const totalCampaigns = campaigns.length;
-
   return (
     <>
-      {/* Dashboard Heading */}
+      {/* <SideNav /> */}
       <Box className="dashboard-container">
+        {/* Dashboard Heading */}
         <Typography variant="h3" className="dashboard-heading" gutterBottom>
           Dashboard
         </Typography>
@@ -106,6 +117,7 @@ const DashboardContent = () => {
             Data Visualizations
           </Typography>
           <Grid container spacing={3} className="charts-grid">
+            {/* Each chart in a separate grid item for full width */}
             <Grid item xs={12}>
               <OpenRatesChart />
             </Grid>
@@ -123,8 +135,7 @@ const DashboardContent = () => {
           <Typography variant="h4" className="recent-campaigns-heading">
             Recent Campaigns
           </Typography>
-          <RecentCampaignsTable campaigns={campaigns} />{" "}
-          {/* Pass campaigns to the table */}
+          <RecentCampaignsTable />
         </section>
       </Box>
     </>
