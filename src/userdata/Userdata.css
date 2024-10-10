@@ -1,0 +1,19 @@
+
+.user-data-outer-container {
+    width: 100%;
+    padding: 20px;
+    height: 100%;
+    display: flex;
+    justify-content: right;
+    align-items: center; /* Align content to the right */
+    
+}
+
+.user-data-table-container {
+    width: 80%;
+    background-color: #f0f0f0; /* Light background for the table */
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    margin-right: 20px;
+}

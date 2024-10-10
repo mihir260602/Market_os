@@ -49,16 +49,35 @@ function Layout({ children }) {
   const location = useLocation();
 
   useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const email = params.get("email");
+    // check if user  is accessing following pages "/", "/Login", "/mform", "/contact", "/post/ apply   
+  //   const params = new URLSearchParams(location.search);
+  //   const email = params.get("email");
   
-    if (email) {
-      posthog.identify(email, { email: email });
-      console.log(`User identified: ${email}`);
+  //   if (email) {
+  //     posthog.identify(email, { email: email });
+  //     console.log(`User identified: ${email}`);
+  //   }
+  
+  //   posthog.capture("$pageview");
+  //   console.log("Pageview event captured");
+  // }, [location]);
+  const trackedPaths = ["/", "/Login", "/mform", "/contact", "/post/"];
+    
+    // Check if the current route is one of the tracked paths
+    if (trackedPaths.includes(location.pathname)) {
+      const params = new URLSearchParams(location.search);
+      const email = params.get("email");
+
+      // If email parameter exists, identify the user
+      if (email) {
+        posthog.identify(email, { email: email });
+        console.log(`User identified: ${email}`);
+      }
+
+      // Capture a pageview event for these tracked paths
+      posthog.capture("$pageview");
+      console.log("Pageview event captured for:", location.pathname);
     }
-  
-    posthog.capture("$pageview");
-    console.log("Pageview event captured");
   }, [location]);
 
   // useEffect(() => {
@@ -66,7 +85,8 @@ function Layout({ children }) {
   // }, [location]);
 
   const hideSidebarAndHeader =
-    ["/", "/Login", "/mform", "/contact","/Postdata","/userdata", "/post/"].includes(location.pathname);
+    ["/", "/Login", "/mform", "/contact"].includes(location.pathname)||
+    location.pathname.startsWith("/post/");
 
   return (
     <div style={{ display: "flex", height: "100vh" }}>
@@ -130,7 +150,7 @@ function App() {
               path="/edit-unpublish-content/:id"
               element={<Editunpublishedcontent />}
             />
-            <Route path="/post/:id/:tags" element={<PostPage />} />
+            <Route path="/post/:id/:title" element={<PostPage />} />
           </Routes>
         </Layout>
       </Router>

@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams , useNavigate } from 'react-router-dom';
+import './VisitorDetails.css';
 
 const VisitorDetails = () => {
     const { visitorId } = useParams(); // Get visitorId from URL params
     const [userData, setUserData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -62,28 +64,36 @@ const VisitorDetails = () => {
         fetchUserData();
     }, [visitorId]);
 
-    if (loading) return <div>Loading...</div>;
-    if (error) return <div>Error fetching data: {error.message}</div>;
+    if (loading) return <div className="visitor-details-loading">Loading...</div>;
+    if (error) return <div className="visitor-details-error">Error fetching data: {error.message}</div>;
 
     return (
-        <div>
-            <h1>User Data for {visitorId}</h1>
-            <h2>Total Views: {userData.totalViews}</h2>
-            <h2>Total Sessions: {userData.totalSessions}</h2>
-
-            <h3>Last 20 Paths Visited:</h3>
-            <ul>
-                {userData.last20PathsVisited.map((path, index) => (
-                    <li key={index}>{path}</li>
-                ))}
-            </ul>
-
-            <h3>All Paths Visited:</h3>
-            <ul>
-                {Object.entries(userData.pathsVisited).map(([path, count]) => (
-                    <li key={path}>{path}: {count} times</li>
-                ))}
-            </ul>
+        <div className="visitor-details-container-out">
+        <div className="visitor-details-container"><button className="back-button" onClick={() => navigate(-1)}>
+                &#8592; {/* Back arrow icon */}
+            </button>
+            <h1 className="visitor-details-heading">User Data for {visitorId}</h1>
+            <h2 className="visitor-details-subheading">Total Views: {userData.totalViews}</h2>
+            <h2 className="visitor-details-subheading">Total Sessions: {userData.totalSessions}</h2>
+            <div className="visitor-details-container-Last-20">
+                <div>
+                    <h3 className="visitor-details-section-heading">Last 20 Paths Visited:</h3>
+                    <ul className="visitor-details-list">
+                        {userData.last20PathsVisited.map((path, index) => (
+                            <li key={index} className="visitor-details-list-item">{path}</li>
+                        ))}
+                    </ul>
+                </div>
+                <div>
+                    <h3 className="visitor-details-section-heading">All Paths Visited:</h3>
+                    <ul className="visitor-details-list">
+                        {Object.entries(userData.pathsVisited).map(([path, count]) => (
+                            <li key={path} className="visitor-details-list-item">{path}: {count} times</li>
+                        ))}
+                    </ul>
+                </div>
+            </div>
+        </div>
         </div>
     );
 };

@@ -50,6 +50,10 @@ const Sidebar = () => {
             <li>
               <a href="/website-analytics">CMS Analytics</a>
             </li>
+            <li>
+              <a href="/postdata">Post Analytics</a>
+            </li>
+            
           </ul>
         </li>
 
@@ -68,15 +72,15 @@ const Sidebar = () => {
             <li>
               <a href="/campaign-overview">Campaign Overview</a>
             </li>
-            <li>
+            {/* <li>
               <a href="/campaign-builder">Campaign Builder</a>
-            </li>
+            </li> */}
             <li>
               <a href="/audience-segmentation">Audience Segmentation</a>
             </li>
-            <li>
+            {/* <li>
               <a href="/email-templates">Email Templates</a>
-            </li>
+            </li> */}
           </ul>
         </li>
 
@@ -94,6 +98,9 @@ const Sidebar = () => {
             </li>
             <li>
               <a href="/contact-list">Contact List</a>
+            </li>
+            <li>
+              <a href="/userdata">Visiter Data</a>
             </li>
             <li>
               <a href="/lead-activity">Lead Activity Timeline</a>

@@ -237,6 +237,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import './Userdata.css';
 
 const VisitorList = () => {
     const [visitorData, setVisitorData] = useState([]);
@@ -319,7 +320,8 @@ const VisitorList = () => {
     if (error) return <div>Error fetching data: {error.message}</div>;
 
     return (
-        <div>
+            <div className="user-data-outer-container">
+            <div className="user-data-table-container ">
             <h1>Visitor Data</h1>
             <table>
                 <thead>
@@ -344,6 +346,8 @@ const VisitorList = () => {
                 </tbody>
             </table>
         </div>
+        </div>
+        
     );
 };
 

@@ -15,7 +15,7 @@ const DashboardContent = () => {
   const fetchCampaigns = async () => {
     try {
       const response = await axios.get(
-        "http://127.0.0.1:8000/mautic/campaigns"
+        "http://165.22.11.185:8000/mautic/campaigns"
       );
       console.log("API Response:", response);
 
@@ -135,7 +135,8 @@ const DashboardContent = () => {
           <Typography variant="h4" className="recent-campaigns-heading">
             Recent Campaigns
           </Typography>
-          <RecentCampaignsTable />
+          <RecentCampaignsTable campaigns={campaigns} />{" "}
+          {/* Pass campaigns here */}
         </section>
       </Box>
     </>

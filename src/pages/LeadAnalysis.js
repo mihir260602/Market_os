@@ -82,7 +82,7 @@ const LeadAnalysis = () => {
         ))}
       </div>
 
-      <h3>Leads by Region</h3>
+      {/* <h3>Leads by Region</h3>
       <ResponsiveContainer width="100%" height={300}>
         <BarChart data={regionData}>
           <CartesianGrid strokeDasharray="3 3" />
@@ -93,9 +93,9 @@ const LeadAnalysis = () => {
           <Bar dataKey="leads" fill="#8884d8" name="Total Leads" />
           <Bar dataKey="conversions" fill="#82ca9d" name="Conversions" />
         </BarChart>
-      </ResponsiveContainer>
+      </ResponsiveContainer> */}
 
-      <h3>Leads by User</h3>
+      {/* <h3>Leads by User</h3>
       <div className="user-analysis">
         {Object.entries(userAnalysis).map(([user, metrics], index) => (
           <div key={index} className="user-card">
@@ -104,7 +104,7 @@ const LeadAnalysis = () => {
             <p>Conversions: {metrics.conversions}</p>
           </div>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };

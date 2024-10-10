@@ -1,0 +1,169 @@
+/* Main container styling */
+.visitor-details-container-out{
+display: flex;
+justify-content: right;
+align-items: center;
+height: 100%;
+width: 100%;
+}
+
+.visitor-details-container {
+    margin-right: 50px;
+    padding: 30px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #ffffff; /* Pure white background for a clean look */
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    color: #333; /* Slightly darker gray for main text color */
+}
+
+/* Heading styles */
+.visitor-details-heading {
+    font-size: 30px;
+    margin-bottom: 25px;
+    color: #091057; /* Dark blue for heading */
+    text-align: center;
+    font-weight: 600; /* Bold heading for formality */
+}
+
+.visitor-details-subheading {
+    font-size: 22px;
+    margin-bottom: 20px;
+    color: #333; /* Dark gray for subheading */
+    font-weight: 500;
+    border-bottom: 2px solid #091057; /* Add underline effect */
+    padding-bottom: 5px; /* Space between text and underline */
+}
+
+/* Section heading */
+.visitor-details-section-heading {
+    font-size: 20px;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    color: #091057;
+    font-weight: 500; /* Medium weight for section headings */
+    border-bottom: 1px solid #ddd; /* Underline for section heading */
+    padding-bottom: 5px;
+}
+
+/* List styles */
+.visitor-details-list {
+    padding-left: 4px;
+    margin-top: 4px;
+    list-style-type: none; /* Remove default bullet points */
+}
+
+.visitor-details-container-Last-20 {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px; /* Add space between the two sections */
+    margin-top: 20px;
+}
+
+.visitor-details-container-Last-20 > div{
+    background-color: #f8f8f8;
+    width: 48%;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+}
+.visitor-details-container-Last-20 > div > ul {
+    flex: 1; /* Make both sections equal in width */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    overflow-y: auto; /* Enable vertical scrolling */
+    max-height: 400px; /* Limit the height to make it scrollable */
+    color: #333;
+}
+.visitor-details-container-Last-20 > div > ul::-webkit-scrollbar {
+    width: 8px;
+}
+.visitor-details-container-Last-20 > div > ul::-webkit-scrollbar-thumb {
+    background-color: #fccba6;
+    border-radius: 4px;
+}
+
+.visitor-details-list-item {
+    margin-bottom: 4px;
+    font-size: 16px;
+    color: #333;
+    padding: 4px 8px; /* Add padding inside the list items */
+    display: flex; /* Flexbox for alignment */
+    align-items: center;
+    list-style-type: none;
+    word-wrap: break-word; /* Allow text to wrap to the next line */
+    white-space: normal; /* Ensure long URLs or text wrap correctly */
+    overflow: hidden;
+}
+
+
+
+/* Loading and error messages */
+.visitor-details-loading, .visitor-details-error {
+    font-size: 18px;
+    color: #777;
+    text-align: center;
+    margin-top: 20px;
+}
+.back-button {
+    font-size: 40px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: #091057; /* Dark blue color for the back button */
+    font-weight: bold;
+}
+.back-button:hover {
+    color: #ff5722; /* Change color on hover */
+}
+
+/* Responsive Design for Mobile and Tablet */
+@media (max-width: 1024px) {
+    .visitor-details-container {
+        padding: 20px;
+        max-width: 95%;
+    }
+
+    .visitor-details-heading {
+        font-size: 26px;
+    }
+
+    .visitor-details-subheading {
+        font-size: 20px;
+    }
+
+    .visitor-details-section-heading {
+        font-size: 18px;
+    }
+
+    .visitor-details-list-item {
+        font-size: 14px;
+        padding: 8px 12px;
+    }
+}
+
+@media (max-width: 768px) {
+    .visitor-details-container {
+        padding: 15px;
+        max-width: 100%;
+    }
+
+    .visitor-details-heading {
+        font-size: 24px;
+    }
+
+    .visitor-details-subheading {
+        font-size: 18px;
+    }
+
+    .visitor-details-section-heading {
+        font-size: 16px;
+    }
+
+    .visitor-details-list-item {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+}
