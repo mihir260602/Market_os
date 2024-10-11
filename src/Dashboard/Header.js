@@ -13,13 +13,31 @@ const Header = () => {
     setDropdownOpen(!dropdownOpen);
   };
 
+  // const handleLogout = () => {
+  //   // Remove the auth token from localStorage
+  //   localStorage.removeItem("auth_token");
+
+  //   // Optionally, navigate to the login page or home page
+  //   navigate("/"); // Redirect to login page after logout
+  // };
+
+
+
+
+  // -------------new added code-------------
   const handleLogout = () => {
     // Remove the auth token from localStorage
     localStorage.removeItem("auth_token");
+    localStorage.removeItem("auth_token");
+    localStorage.removeItem("refresh_token");
+    if (window.refreshTimeout) {
+      clearTimeout(window.refreshTimeout);
+    }
 
     // Optionally, navigate to the login page or home page
     navigate("/"); // Redirect to login page after logout
   };
+
 
   return (
     <div className="custom-header">

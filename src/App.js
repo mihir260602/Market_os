@@ -1,11 +1,14 @@
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import posthog from "posthog-js";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import Modal from "@mui/material/Modal";
+import Button from "@mui/material/Button";
 import {
   Route,
   BrowserRouter as Router,
   Routes,
   useLocation,
+  Navigate
 } from "react-router-dom";
 import Dashboard from "./Dashboard/Dashboard"; // Import Dashboard from the first file
 import Header from "./Dashboard/Header";
@@ -45,6 +48,63 @@ import VisitorDetails from "./userdata/VisitorDetails";
 posthog.init(process.env.REACT_APP_POSTHOG_API_KEY, {
   api_host: "https://app.posthog.com",
 });
+
+// ---------------new added code--------------
+function LoggedOutModal({ open, handleClose }) {
+  return (
+    <Modal open={open} onClose={handleClose}>
+      <div
+        style={{
+          padding: "20px",
+          background: "white",
+          margin: "10% auto",
+          width: "300px",
+          textAlign: "center",
+        }}
+      >
+        <h3>You are logged out!</h3>
+        <p>Please login to access this content.</p>
+        <Button variant="contained" color="primary" onClick={handleClose}>
+          Close
+        </Button>
+      </div>
+    </Modal>
+  );
+}
+
+// Function to check for auth token
+const isAuthenticated = () => {
+  return !!localStorage.getItem("auth_token");
+};
+
+// ProtectedRoute component
+// ProtectedRoute component
+const ProtectedRoute = ({ element }) => {
+  const [modalOpen, setModalOpen] = useState(false);
+
+  useEffect(() => {
+    if (!isAuthenticated()) {
+      setModalOpen(true);
+    }
+  }, []); // Empty dependency array ensures this runs only once after mount
+
+  if (!isAuthenticated()) {
+    return <Navigate to="/login" />;
+  }
+
+  return (
+    <>
+      {element}
+      <LoggedOutModal
+        open={modalOpen}
+        handleClose={() => setModalOpen(false)}
+      />
+    </>
+  );
+};
+
+
+// ---------------------------------------------------
 
 function Layout({ children }) {
   const location = useLocation();
