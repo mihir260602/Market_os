@@ -206,50 +206,86 @@ import Postdata from '../src/Blogdata/Postdata';
 import Userdata from "../src/userdata/Userdata";
 import VisitorDetails from "./userdata/VisitorDetails";
 
+
 // Initialize PostHog
 posthog.init(process.env.REACT_APP_POSTHOG_API_KEY, {
   api_host: "https://app.posthog.com",
+  persistence: "cookie", // Use cookie persistence to track users across sessions
+  loaded: () => {
+    console.log("PostHog SDK loaded successfully");
+  },
+  debug: true, // Enable debug mode for detailed logs
 });
+
+// Function to store PostHog user data in both localStorage and sessionStorage
+const storePostHogUserData = (email) => {
+  const posthogId = posthog.get_distinct_id(); // Get the current PostHog distinct ID
+
+  if (posthogId) {
+    // Construct the object with user data
+    const userData = {
+      is_identified: !!email, // Check if email exists for identification status
+      name: email || "Anonymous", // Store the email or "Anonymous"
+      distinct_ids: [email || "Anonymous", posthogId], // Include email (if available) and PostHog distinct ID
+    };
+
+    // Store the user data in both localStorage and sessionStorage
+    localStorage.setItem("posthog_user", JSON.stringify(userData));
+    sessionStorage.setItem("posthog_user", JSON.stringify(userData));
+    console.log(`PostHog user data stored in both storages:`, userData);
+  } else {
+    console.error("No PostHog distinct ID found for this session.");
+  }
+};
+
+// Function to capture custom events with additional properties
+const trackCustomEvent = (eventName, properties = {}) => {
+  if (posthog) {
+    posthog.capture(eventName, properties); // Capture custom events with properties
+    console.log(`Captured event: ${eventName}`, properties); // Log for debugging
+  } else {
+    console.error("PostHog is not initialized, unable to capture event.");
+  }
+};
 
 function Layout({ children }) {
   const location = useLocation();
 
   useEffect(() => {
-    // Leadfeeder tracking script
-    (function(ss, ex) {
-      window.ldfdr = window.ldfdr || function() {
-        (ldfdr._q = ldfdr._q || []).push([].slice.call(arguments));
-      };
-      (function(d, s) {
-        const fs = d.getElementsByTagName(s)[0];
-        function ce(src) {
-          const cs = d.createElement(s);
-          cs.src = src;
-          cs.async = 1;
-          fs.parentNode.insertBefore(cs, fs);
-        }
-        ce('https://sc.lfeeder.com/lftracker_v1_' + ss + (ex ? '_' + ex : '') + '.js');
-      })(document, 'script');
-    })('ywVkO4XqqMdaZ6Bj'); // Your Leadfeeder ID here
-
+    // Define paths that are tracked
     const trackedPaths = ["/", "/Login", "/mform", "/contact", "/post/"];
-    
+
     // Check if the current route is one of the tracked paths
     if (trackedPaths.includes(location.pathname)) {
       const params = new URLSearchParams(location.search);
-      const email = params.get("email");
+      const email = params.get("email"); // Retrieve email parameter from URL query string
 
-      // If email parameter exists, identify the user
-      if (email) {
-        posthog.identify(email, { email: email });
-        console.log(`User identified: ${email}`);
+      // If email parameter exists, identify the user using PostHog
+      if (email && posthog) {
+        const storedUserData = JSON.parse(sessionStorage.getItem("posthog_user"));
+
+        // Check if user is not already identified or if email has changed
+        if (!storedUserData || storedUserData.name !== email) {
+          posthog.identify(email, { email: email });
+          console.log(`User identified: ${email}`);
+
+          // Store the PostHog user data (email and distinct ID) in both storages
+          storePostHogUserData(email);
+        } else {
+          console.log("User already identified in session, skipping identification.");
+        }
+      } else {
+        // If no email in query, still store PostHog ID anonymously
+        storePostHogUserData(null); // Null email to store anonymous session
       }
 
-      // Capture a pageview event for these tracked paths
-      posthog.capture("$pageview");
+      // Capture a pageview event with custom properties, like page URL
+      trackCustomEvent("$pageview", { page: location.pathname });
       console.log("Pageview event captured for:", location.pathname);
     }
+
   }, [location]);
+
 
   const hideSidebarAndHeader =
     ["/", "/Login", "/mform", "/contact"].includes(location.pathname) ||
