@@ -252,6 +252,23 @@ function Layout({ children }) {
   const location = useLocation();
 
   useEffect(() => {
+    // Leadfeeder tracking script
+    // (function(ss, ex) {
+    //   window.ldfdr = window.ldfdr || function() {
+    //     (ldfdr._q = ldfdr._q || []).push([].slice.call(arguments));
+    //   };
+    //   (function(d, s) {
+    //     const fs = d.getElementsByTagName(s)[0];
+    //     function ce(src) {
+    //       const cs = d.createElement(s);
+    //       cs.src = src;
+    //       cs.async = 1;
+    //       fs.parentNode.insertBefore(cs, fs);
+    //     }
+    //     ce('https://sc.lfeeder.com/lftracker_v1_' + ss + (ex ? '_' + ex : '') + '.js');
+    //   })(document, 'script');
+    // })('ywVkO4XqqMdaZ6Bj'); // Your Leadfeeder ID here
+
     // Define paths that are tracked
     const trackedPaths = ["/", "/Login", "/mform", "/contact", "/post/"];
 

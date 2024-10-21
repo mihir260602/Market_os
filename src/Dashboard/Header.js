@@ -12,15 +12,13 @@ const Header = () => {
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
   };
-
   const handleLogout = () => {
     // Remove the auth token from localStorage
     localStorage.removeItem("auth_token");
-
-    // Optionally, navigate to the login page or home page
-    navigate("/"); // Redirect to login page after logout
+  
+    // Navigate to the specified URL after logout
+    window.location.href = "https://prakarshhh.github.io/MarketOS/"; // Redirect to login page after logout
   };
-
   return (
     <div className="custom-header">
       <div className="custom-header-title">Valuebound</div>
