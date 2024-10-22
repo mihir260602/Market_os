@@ -11,7 +11,7 @@ function PostEditorPage() {
 
   const [postTitle, setPostTitle] = useState(contentData?.title || "");
   const [postBody, setPostBody] = useState(contentData?.body || "");
-  const [contentType, setContentType] = useState(contentData?.content_type || 1); // Default to Blog (1)
+  const [contentType, setContentType] = useState(contentData?.content_type || 1);
   const [category, setCategory] = useState(contentData?.category || "Business");
   const [tags, setTags] = useState(contentData?.tags || "");
   const [imageFile, setImageFile] = useState(null);
@@ -46,7 +46,7 @@ function PostEditorPage() {
       meta_title: metaTitle,
       meta_description: metaDescription,
       meta_keywords: metaKeywords,
-      content_type: contentType,  // Pass the content type to the backend (1 for Blog, 2 for Case Study)
+      content_type_id: contentType,  // Pass the content type to the backend (1 for Blog, 2 for Case Study)
     };
 
     try {
@@ -70,7 +70,7 @@ function PostEditorPage() {
       meta_description: metaDescription,
       meta_keywords: metaKeywords,
       review_status: "in_review",
-      content_type: contentType, // Pass the content type to the backend
+      content_type_id: contentType, // Pass the content type to the backend
     };
 
     try {

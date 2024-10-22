@@ -10,13 +10,14 @@ const getAuthToken = () => {
 };
 
 export const saveDraft = async (draftData) => {
+  console.log("d data", draftData)
   try {
     // Retrieve the JWT token from localStorage
     const token = localStorage.getItem("auth_token"); // Ensure this is the correct token retrieval method
 
     // Create a new FormData object
     const formData = new FormData();
-
+    
     // Append all fields to the formData, including the file
     formData.append("title", draftData.title);
     formData.append("category", draftData.category);
@@ -26,6 +27,7 @@ export const saveDraft = async (draftData) => {
     formData.append("meta_title", draftData.meta_title); // File object
     formData.append("meta_description", draftData.meta_description); // File object
     formData.append("meta_keywords", draftData.meta_keywords); // File object
+    formData.append("content_type_id", draftData.content_type_id);
 
     // Set the headers for the request, specifically 'multipart/form-data'
     const config = {
@@ -35,7 +37,7 @@ export const saveDraft = async (draftData) => {
       },
       withCredentials: true, // Include credentials if required
     };
-
+    console.log("fdata", formData)
     // Send the POST request using axios
     const response = await axios.post(
       `${getBaseUrl()}/content/create/`,
@@ -128,6 +130,7 @@ export const deleteContent = async (contentId) => {
 // };
 
 export const saveDraftAndSendForReview = async (draftData) => {
+  console.log("d data",draftData)
   try {
     // Retrieve the JWT token from localStorage
     const token = localStorage.getItem("auth_token"); // Ensure this is the correct token retrieval method
@@ -145,6 +148,7 @@ export const saveDraftAndSendForReview = async (draftData) => {
     formData.append("meta_description", draftData.meta_description); // File object
     formData.append("meta_keywords", draftData.meta_keywords); // File object
     formData.append("review_status", draftData.review_status); // File object
+    formData.append("content_type_id", draftData.content_type_id);
 
     // Set the headers for the request, specifically 'multipart/form-data'
     const config = {
@@ -154,6 +158,8 @@ export const saveDraftAndSendForReview = async (draftData) => {
       },
       withCredentials: true, // Include credentials if required
     };
+
+    console.log("f data",formData)
 
     // Send the POST request using axios
     const response = await axios.post(
