@@ -17,7 +17,7 @@ const Header = () => {
     localStorage.removeItem("auth_token");
   
     // Navigate to the specified URL after logout
-    window.location.href = "https://prakarshhh.github.io/MarketOS/"; // Redirect to login page after logout
+    window.location.href = "http://172.105.47.241:3001/MarketOS/"; // Redirect to login page after logout
   };
   return (
     <div className="custom-header">
