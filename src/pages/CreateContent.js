@@ -98,7 +98,7 @@ const Chatbot = () => {
       options: [
         { text: "Basic page", next: "not_in_service" },
         { text: "Blog", next: "blog_options" },
-        { text: "Case Study", next: "not_in_service" },
+        { text: "Case Study", next: "case_study" },
         { text: "Clients", next: "not_in_service" },
         { text: "Ebook", next: "not_in_service" },
         { text: "Jobs", next: "not_in_service" },
@@ -112,6 +112,10 @@ const Chatbot = () => {
         { text: "Webinars", next: "not_in_service" },
         { text: "Whitepaper", next: "not_in_service" },
       ],
+    },
+    case_study: {
+      question: "Redirecting to the Case Study Editor...",
+      options: [],
     },
     blog_options: {
       question: "Please select a blog field:",
@@ -230,7 +234,17 @@ const Chatbot = () => {
     ]);
     setUserChoices((prevChoices) => [...prevChoices, optionText]);
 
-    if (nextState === "not_in_service") {
+    if (nextState === "case_study") {
+      navigate("/post-editor", {
+        state: {
+          contentData: {
+            title: "Case Study", // Pre-fill with a default title for case study
+            body: "", // Leave empty to fill in the editor
+            tag: "Case Study", // Pre-fill with a default tag
+          },
+        },
+      });
+    } else if (nextState === "not_in_service") {
       // Show "service not available" message and immediately show root options again
       setHistory((prevHistory) => [
         ...prevHistory,
@@ -330,68 +344,6 @@ const Chatbot = () => {
       setSummary("There was an error generating the titles.");
     }
   };
-
-  // const handleTitleSelect = async (title) => {
-  //   setSelectedTitle(title);
-  //   setSummary("Generating content...");
-
-  //   try {
-  //     const response = await axios.post(
-  //       OPENAI_API_URL,
-  //       {
-  //         model: "gpt-3.5-turbo",
-  //         messages: [
-  //           {
-  //             role: "system",
-  //             content:
-  //               "`You are a skilled technical writer. Create a detailed article in about 250 words based on the user's selected title.`",
-  //           },
-  //           {
-  //             role: "user",
-  //             content: `Generate a detailed article in around 250 words detailed content based on the following title: ${title}.`,
-  //           },
-  //         ],
-  //         temperature: 0.7,
-  //         max_tokens: 1000,
-  //       },
-  //       {
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //           Authorization: `Bearer ${OPENAI_API_KEY}`,
-  //         },
-  //       }
-  //     );
-
-  //     const generatedContent = response.data.choices[0].message.content;
-  //     setSummary(generatedContent);
-  //     // Add bot response to history
-  //     setHistory((prevHistory) => [
-  //       ...prevHistory,
-  //       { role: "bot", text: generatedContent },
-  //     ]);
-
-  //     // Print title and body to console
-  //     console.log("Title:", title);
-  //     console.log("Body:", generatedContent);
-
-  //     // Automatically save and redirect to the Post Editor page with title and content
-  //     handleSave(title, generatedContent);
-  //   } catch (error) {
-  //     console.error("Error while sending message to OpenAI:", error);
-  //     setSummary("There was an error generating the article.");
-  //   }
-  // };
-
-  // const handleSave = (title, content) => {
-  //   navigate("/post-editor", {
-  //     state: {
-  //       contentData: {
-  //         title: title, // Pass the selected title
-  //         body: content, // Pass the generated content
-  //       },
-  //     },
-  //   });
-  // };
 
   const handleTitleSelect = async (title) => {
     setSelectedTitle(title);

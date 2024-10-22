@@ -270,7 +270,7 @@ function Layout({ children }) {
     // })('ywVkO4XqqMdaZ6Bj'); // Your Leadfeeder ID here
 
     // Define paths that are tracked
-    const trackedPaths = ["/", "/Login", "/mform", "/contact", "/post/"];
+    const trackedPaths = ["/Login"];
 
     // Check if the current route is one of the tracked paths
     if (trackedPaths.includes(location.pathname)) {

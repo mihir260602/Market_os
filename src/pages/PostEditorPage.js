@@ -11,6 +11,7 @@ function PostEditorPage() {
 
   const [postTitle, setPostTitle] = useState(contentData?.title || "");
   const [postBody, setPostBody] = useState(contentData?.body || "");
+  const [contentType, setContentType] = useState(contentData?.content_type || 1); // Default to Blog (1)
   const [category, setCategory] = useState(contentData?.category || "Business");
   const [tags, setTags] = useState(contentData?.tags || "");
   const [imageFile, setImageFile] = useState(null);
@@ -45,9 +46,8 @@ function PostEditorPage() {
       meta_title: metaTitle,
       meta_description: metaDescription,
       meta_keywords: metaKeywords,
+      content_type: contentType,  // Pass the content type to the backend (1 for Blog, 2 for Case Study)
     };
-
-    // console.log("IMAge ", draftData.banner_image);
 
     try {
       const response = await saveDraft(draftData);
@@ -70,6 +70,7 @@ function PostEditorPage() {
       meta_description: metaDescription,
       meta_keywords: metaKeywords,
       review_status: "in_review",
+      content_type: contentType, // Pass the content type to the backend
     };
 
     try {
@@ -125,6 +126,20 @@ function PostEditorPage() {
               <option value="Finance">Finance</option>
             </select>
           </div>
+
+          {/* Content Type Selector */}
+          <div style={styles.formGroup}>
+            <label style={styles.label}>Content Type</label>
+            <select
+              value={contentType}
+              onChange={(e) => setContentType(e.target.value === "1" ? 1 : 2)} // 1 for Blog, 2 for Case Study
+              style={styles.input}
+            >
+              <option value="1">Blog</option>
+              <option value="2">Case Study</option>
+            </select>
+          </div>
+
 
           <div style={styles.formGroup}>
             <label style={styles.label}>Tags</label>

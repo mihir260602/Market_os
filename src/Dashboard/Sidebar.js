@@ -35,7 +35,7 @@ const Sidebar = () => {
             }`}
           >
             <li>
-              <a href="/create-page">Create Blog</a>
+              <a href="/create-page">Create Content</a>
             </li>
             <li>
               <a href="/unpublished-content">Unpublished Content</a>
